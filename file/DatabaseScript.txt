@@ -1,0 +1,1320 @@
+
+USE [WBRMSystem]
+GO
+/****** Object:  Table [dbo].[Item_History]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Item_History](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Item] [int] NULL,
+	[Str_Code] [varchar](500) NULL,
+	[Action] [varchar](50) NULL,
+	[Action_History_Desc] [varchar](50) NULL,
+	[Action_Date] [datetime] NULL,
+	[Done_By] [varchar](50) NULL,
+	[Borrowed_Date] [datetime] NULL,
+	[Borrowed_By] [varchar](50) NULL,
+	[Released_Date] [datetime] NULL,
+	[Released_To] [varchar](50) NULL,
+	[Condition_Before_Released] [varchar](50) NULL,
+	[Remarks_Before_Released] [varchar](150) NULL,
+	[Expected_Date_Of_Return] [datetime] NULL,
+	[Returned_Date] [varchar](50) NULL,
+	[Condition_After_Returned] [varchar](50) NULL,
+	[Remarks_After_Returned] [varchar](150) NULL,
+	[Is_Current_Borrowed_Trans] [bit] NULL,
+	[Is_Current_Released_Trans] [bit] NULL,
+	[Is_Current_Returned_Trans] [bit] NULL,
+ CONSTRAINT [PK_Item_History] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Ids_Item_His_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+  CREATE VIEW [dbo].[Ids_Item_His_vw]
+  AS
+  SELECT Id_Item
+    FROM WBRMSystem.dbo.Item_History
+  GROUP BY Id_Item
+GO
+/****** Object:  View [dbo].[Last_Verify_Item_Hist]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[Last_Verify_Item_Hist]
+AS
+SELECT TOP(1)
+      IV.[Id_Item]
+      ,IH.[Str_Code]
+      ,IH.[Action]
+      ,IH.[Action_History_Desc]
+      ,IH.[Action_Date]
+      ,IH.[Done_By]
+      ,IH.[Borrowed_Date]
+      ,IH.[Borrowed_By]
+      ,IH.[Released_Date]
+      ,IH.[Released_To]
+      ,IH.[Condition_Before_Released]
+      ,IH.[Remarks_Before_Released]
+	  ,IH.[Expected_Date_Of_Return]
+      ,IH.[Returned_Date]
+      ,IH.[Condition_After_Returned]
+      ,IH.[Remarks_After_Returned]
+      ,IH.[Is_Current_Borrowed_Trans]
+      ,IH.[Is_Current_Released_Trans]
+      ,IH.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Ids_Item_His_vw] IV
+  left JOIN WBRMSystem.dbo.Item_History IH on IV.Id_Item = IH.Id_Item
+  WHERE IH.[Action] like'%Verify'
+  ORDER BY IH.Id desc
+GO
+/****** Object:  View [dbo].[Last_Borrow_Item_Hist]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[Last_Borrow_Item_Hist]
+AS
+SELECT TOP(1)
+      IV.[Id_Item]
+      ,IH.[Str_Code]
+      ,IH.[Action]
+      ,IH.[Action_History_Desc]
+      ,IH.[Action_Date]
+      ,IH.[Done_By]
+      ,IH.[Borrowed_Date]
+      ,IH.[Borrowed_By]
+      ,IH.[Released_Date]
+      ,IH.[Released_To]
+      ,IH.[Condition_Before_Released]
+      ,IH.[Remarks_Before_Released]
+	  ,IH.[Expected_Date_Of_Return]
+      ,IH.[Returned_Date]
+      ,IH.[Condition_After_Returned]
+      ,IH.[Remarks_After_Returned]
+      ,IH.[Is_Current_Borrowed_Trans]
+      ,IH.[Is_Current_Released_Trans]
+      ,IH.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Ids_Item_His_vw] IV
+  left JOIN WBRMSystem.dbo.Item_History IH on IV.Id_Item = IH.Id_Item
+  WHERE IH.[Action] like'%Borrow'
+  ORDER BY IH.Id desc
+GO
+/****** Object:  View [dbo].[Last_Release_Item_Hist]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[Last_Release_Item_Hist]
+AS
+SELECT TOP(1)
+      IV.[Id_Item]
+      ,IH.[Str_Code]
+      ,IH.[Action]
+      ,IH.[Action_History_Desc]
+      ,IH.[Action_Date]
+      ,IH.[Done_By]
+      ,IH.[Borrowed_Date]
+      ,IH.[Borrowed_By]
+      ,IH.[Released_Date]
+      ,IH.[Released_To]
+      ,IH.[Condition_Before_Released]
+      ,IH.[Remarks_Before_Released]
+	  ,IH.[Expected_Date_Of_Return]
+      ,IH.[Returned_Date]
+      ,IH.[Condition_After_Returned]
+      ,IH.[Remarks_After_Returned]
+      ,IH.[Is_Current_Borrowed_Trans]
+      ,IH.[Is_Current_Released_Trans]
+      ,IH.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Ids_Item_His_vw] IV
+  left JOIN WBRMSystem.dbo.Item_History IH on IV.Id_Item = IH.Id_Item
+  WHERE IH.[Action] like'%Release'
+  ORDER BY IH.Id desc
+GO
+/****** Object:  View [dbo].[Last_Return_Item_Hist]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[Last_Return_Item_Hist]
+AS
+SELECT TOP(1)
+      IV.[Id_Item]
+      ,IH.[Str_Code]
+      ,IH.[Action]
+      ,IH.[Action_History_Desc]
+      ,IH.[Action_Date]
+      ,IH.[Done_By]
+      ,IH.[Borrowed_Date]
+      ,IH.[Borrowed_By]
+      ,IH.[Released_Date]
+      ,IH.[Released_To]
+      ,IH.[Condition_Before_Released]
+      ,IH.[Remarks_Before_Released]
+	  ,IH.[Expected_Date_Of_Return]
+      ,IH.[Returned_Date]
+      ,IH.[Condition_After_Returned]
+      ,IH.[Remarks_After_Returned]
+      ,IH.[Is_Current_Borrowed_Trans]
+      ,IH.[Is_Current_Released_Trans]
+      ,IH.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Ids_Item_His_vw] IV
+  left JOIN WBRMSystem.dbo.Item_History IH on IV.Id_Item = IH.Id_Item
+  WHERE IH.[Action] like'%Return'
+  ORDER BY IH.Id desc
+GO
+/****** Object:  Table [dbo].[Item]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Item](
+	[Id_Item] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Category] [int] NULL,
+	[Category] [varchar](50) NULL,
+	[Id_SubCategory] [int] NULL,
+	[SubCategory] [varchar](50) NULL,
+	[Id_Barcode] [int] NULL,
+	[Str_Code] [varchar](500) NULL,
+	[Str_Code_Display] [varchar](50) NULL,
+	[Item_Name] [varchar](50) NULL,
+	[Brand_Model] [varchar](50) NULL,
+	[Year_Acquired] [varchar](50) NULL,
+	[Custodian] [varchar](50) NULL,
+	[Price] [money] NULL,
+	[Serial_Number] [varchar](50) NULL,
+	[On_Hold_Period] [int] NULL,
+	[Remarks] [varchar](50) NULL,
+	[Room_No] [varchar](50) NULL,
+	[Id_Condition] [int] NULL,
+	[Condition] [varchar](50) NULL,
+	[Id_Status] [int] NULL,
+	[Status] [varchar](50) NULL,
+	[Date_Added] [datetime] NULL,
+	[Date_Acquisition] [datetime] NULL,
+	[Is_Assign] [bit] NULL,
+	[Is_Verify] [bit] NULL,
+	[Is_Generated_Barcode] [bit] NULL,
+ CONSTRAINT [PK_Item] PRIMARY KEY CLUSTERED 
+(
+	[Id_Item] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[rooms_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[rooms_vw]
+  AS
+  SELECT ISNULL(0,-999) MyPrimaryID,Room_No, ROW_NUMBER() OVER (ORDER BY Room_No) AS RowNum FROM
+    (SELECT DISTINCT  Room_No FROM [WBRMSystem].[dbo].[Item]) Base
+GO
+/****** Object:  View [dbo].[item_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+CREATE VIEW [dbo].[item_vw]
+AS
+SELECT 
+       [Id_Item]
+      ,[Id_Category]
+      ,[Category]
+      ,[Id_SubCategory]
+      ,[SubCategory]
+      ,[Id_Barcode]
+      ,[Str_Code]
+      ,[Str_Code_Display]
+      ,[Item_Name]
+      ,[Brand_Model]
+      ,[Year_Acquired]
+      ,[Custodian]
+      ,[Price]
+      ,[Serial_Number]
+      ,[On_Hold_Period]
+      ,[Remarks]
+      ,[Room_No]
+      ,[Id_Condition]
+      ,[Condition]
+      ,[Id_Status]
+      ,[Status]
+	  ,FORMAT([Date_Added], 'MM/dd/yyyy') as Date_Added
+      ,FORMAT([Date_Acquisition], 'MM/dd/yyyy') as Date_Acquisition
+      ,[Is_Assign]
+      ,[Is_Verify]
+  FROM [WBRMSystem].[dbo].[Item]
+GO
+/****** Object:  View [dbo].[borrowed_items_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE VIEW [dbo].[borrowed_items_vw]
+As
+SELECT 
+	  i.*
+      ,lvih.[Action]
+      ,lvih.[Action_History_Desc]
+      ,lvih.[Action_Date]
+      ,lvih.[Done_By]
+      ,lvih.[Borrowed_Date]
+      ,lvih.[Borrowed_By]
+      ,FORMAT(lvih.[Released_Date], 'MM/dd/yyyy') as Released_Date
+      ,lvih.[Released_To]
+      ,lvih.[Condition_Before_Released]
+      ,lvih.[Remarks_Before_Released]
+	  ,FORMAT(lvih.[Expected_Date_Of_Return], 'MM/dd/yyyy') as Expected_Date_Of_Return
+      ,lvih.[Returned_Date]
+      ,lvih.[Condition_After_Returned]
+      ,lvih.[Remarks_After_Returned]
+      ,lvih.[Is_Current_Borrowed_Trans]
+      ,lvih.[Is_Current_Released_Trans]
+      ,lvih.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Item] i
+  left join WBRMSystem.dbo.Last_Release_Item_Hist lvih on lvih.Id_Item = i.Id_Item
+  where [Status] like '%Borrowed'
+GO
+/****** Object:  View [dbo].[damaged_items_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[damaged_items_vw]
+As
+SELECT 
+	   i.*
+      ,lvih.[Action]
+      ,lvih.[Action_History_Desc]
+      ,lvih.[Action_Date]
+      ,lvih.[Done_By]
+      ,lvih.[Borrowed_Date]
+      ,lvih.[Borrowed_By]
+      ,FORMAT(lvih.[Released_Date], 'MM/dd/yyyy') as Released_Date
+      ,lvih.[Released_To]
+      ,lvih.[Condition_Before_Released]
+      ,lvih.[Remarks_Before_Released]
+	  ,lvih.[Expected_Date_Of_Return]
+      ,lvih.[Returned_Date]
+      ,lvih.[Condition_After_Returned]
+      ,lvih.[Remarks_After_Returned]
+      ,lvih.[Is_Current_Borrowed_Trans]
+      ,lvih.[Is_Current_Released_Trans]
+      ,lvih.[Is_Current_Returned_Trans]
+  FROM [WBRMSystem].[dbo].[Item] i
+  left join WBRMSystem.dbo.Last_Release_Item_Hist lvih on lvih.Id_Item = i.Id_Item
+
+  where [Condition] like '%Damaged'
+GO
+/****** Object:  View [dbo].[Item_Name_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Item_Name_vw]
+As
+SELECT 
+      Id_Item,
+      Item_Name
+  FROM [WBRMSystem].[dbo].[Item]
+WHERE Item_Name IS NOT NULL and Item_Name != '' and Item_Name != 'None'
+--Group by Item_Name
+
+  
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[ID_Role] [int] IDENTITY(1,1) NOT NULL,
+	[Role_Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[ID_Role] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Number] [varchar](50) NOT NULL,
+	[Username] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Is_Active] [bit] NOT NULL,
+	[ID_Role] [int] NOT NULL,
+	[Status] [varchar](50) NULL,
+	[RF] [varchar](100) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Faculty]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Faculty](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Number] [varchar](50) NOT NULL,
+	[First_Name] [varchar](50) NOT NULL,
+	[Last_Name] [varchar](50) NOT NULL,
+	[Middle_Name] [varchar](50) NULL,
+	[Email_Add] [varchar](50) NULL,
+	[Address] [varchar](100) NULL,
+	[Contact_No] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Faculty] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Student]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Student](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Number] [varchar](50) NOT NULL,
+	[First_Name] [varchar](50) NOT NULL,
+	[Last_Name] [varchar](50) NOT NULL,
+	[Middle_Name] [varchar](50) NULL,
+	[CourseAndYear] [varchar](50) NULL,
+	[Email_Add] [varchar](50) NULL,
+	[Address] [varchar](50) NULL,
+	[Contact_No] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[User_Details_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE view [dbo].[User_Details_vw]
+ AS
+    --   IF OBJECT_ID('tempdb..#TempTableUser') IS NOT NULL DROP Table #TempTableUser
+	   --CREATE TABLE #TempTableUser(ID_Number int ,Username varchar(500),Password varchar(50),Is_Active bit ,ID_Role int 
+	   --,First_Name varchar(50),Last_Name varchar(50) ,Middle_Name varchar(50),CourseAndYear varchar(50),Email_Add varchar(50) ,Address varchar(100),Contact_No varchar(50))
+	   --INSERT INTO #TempTableUser (ID_Number,Username, Password, Is_Active,ID_Role 
+	   --,First_Name,Last_Name,Middle_Name,CourseAndYear,Email_Add,Address,Contact_No) 
+		 SELECT 
+		       u.[Id]
+			  ,u.[ID_Number]
+			  ,u.[Username]
+			  ,u.[Password]
+			  ,u.[Is_Active]
+			  ,u.[ID_Role]
+			  ,u.[Status]
+			  ,u.[RF]
+			  ,s.[First_Name]
+			  ,s.[Last_Name]
+			  ,s.[Middle_Name]
+			  ,s.[CourseAndYear]
+			  ,s.[Email_Add]
+			  ,s.[Address]
+			  ,s.[Contact_No]
+              ,r.Role_Name
+		 FROM [User] u
+		 LEFT JOIN [Student] s on s.ID_Number = u.ID_Number
+		 LEFT JOIN [Role] r on r.ID_Role = u.ID_Role
+		 WHERE u.ID_Role = 4
+
+		--INSERT INTO #TempTableUser (ID_Number,Username, Password, Is_Active,ID_Role 
+	    --,First_Name,Last_Name,Middle_Name,CourseAndYear,Email_Add,Address,Contact_No) 
+	     UNION ALL
+		SELECT 
+		     u.[Id]
+			,u.[ID_Number]
+			,u.[Username]
+			,u.[Password]
+			,u.[Is_Active]
+			,u.[ID_Role]
+			,u.[Status]
+			,u.[RF]
+			,f.[First_Name]
+			,f.[Last_Name]
+			,f.[Middle_Name]
+			,'' as CourseAndYear
+			,f.[Email_Add]
+			,f.[Address]
+			,f.[Contact_No]
+            ,r.Role_Name
+		FROM [User] u
+		LEFT JOIN [Faculty] f on f.ID_Number = u.ID_Number
+		LEFT JOIN [Role] r on r.ID_Role = u.ID_Role
+		WHERE u.ID_Role != 4
+
+		--SELECT * FROM #TempTableUser
+GO
+/****** Object:  Table [dbo].[Cart]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cart](
+	[Id_Cart] [int] IDENTITY(1,1) NOT NULL,
+	[Requestor_Name] [varchar](50) NULL,
+	[Id_Number] [varchar](50) NULL,
+	[Secret_Code] [varchar](250) NULL,
+ CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED 
+(
+	[Id_Cart] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Transaction]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transaction](
+	[Id_Transaction] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Number] [varchar](50) NOT NULL,
+	[Transaction_Type] [varchar](50) NULL,
+	[Purpose] [varchar](50) NULL,
+	[Transaction_Date] [datetime] NULL,
+	[Start_Date] [datetime] NULL,
+	[End_Date] [datetime] NULL,
+	[Status] [varchar](50) NULL,
+	[Is_Approved] [bit] NULL,
+	[Approved_Date] [datetime] NULL,
+	[Approved_By] [varchar](50) NULL,
+	[Secret_Code] [varchar](250) NULL,
+ CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
+(
+	[Id_Transaction] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Request]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Request](
+	[Id_Request] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Transaction] [int] NOT NULL,
+	[Id_Cart] [int] NOT NULL,
+	[Date_Want_To_Receive] [datetime] NULL,
+	[Date_Expected_Return] [datetime] NULL,
+	[Purpose] [varchar](50) NULL,
+	[Status] [varchar](50) NULL,
+ CONSTRAINT [PK_Request] PRIMARY KEY CLUSTERED 
+(
+	[Id_Request] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Request_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[Request_vw]
+  AS
+ SELECT 
+       r.[Id_Request]
+      ,r.[Id_Transaction]
+      ,r.[Id_Cart]
+      ,FORMAT(r.[Date_Want_To_Receive],'MM/dd/yyyy') as Date_Want_To_Receive
+      ,FORMAT(r.[Date_Expected_Return],'MM/dd/yyyy') as Date_Expected_Return
+      ,r.[Purpose]
+	  ,r.[Status]
+	  ,t.Transaction_Date
+	  ,FORMAT(t.Transaction_Date,'MM/dd/yyyy') as formatted_transac_date
+	  ,c.[Requestor_Name]
+      ,c.[Id_Number]
+      ,c.[Secret_Code]
+	  ,uv.Last_Name +', '+uv.First_Name as Requestor_Full_Name
+	  ,uv.Role_Name as User_Type
+ FROM Request r
+ LEFT JOIN [Transaction] t on t.Id_Transaction = r.Id_Transaction
+ LEFT JOIN [Cart] c on c.Id_Cart = r.Id_Cart
+ LEFT JOIN User_Details_vw uv on uv.ID_Number = c.Id_Number
+
+GO
+/****** Object:  Table [dbo].[Cart_Item]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cart_Item](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Item] [int] NULL,
+	[Str_Code] [varchar](500) NULL,
+	[Id_Cart] [int] NOT NULL,
+	[Item_Name] [varchar](50) NULL,
+	[Codition_Before_Released] [varchar](50) NULL,
+	[Remarks_for_Released] [varchar](50) NULL,
+	[Date_Released] [datetime] NULL,
+	[Is_Returned] [bit] NULL,
+	[Date_Returned] [datetime] NULL,
+	[Codition_After_Returned] [varchar](50) NULL,
+	[Remarks_for_Retrun] [varchar](50) NULL,
+	[Status] [varchar](50) NULL,
+	[Remarks_for_Declined] [varchar](50) NULL,
+	[Date_Declined] [datetime] NULL,
+	[Date_Approved] [datetime] NULL,
+ CONSTRAINT [PK_Cart_Item] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Cart_Items_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[Cart_Items_vw]
+  AS
+ SELECT 
+       CI.Id
+	  ,CI.Id_Item
+	  ,CI.[Str_Code]
+      ,CI.[Id_Cart]
+      ,CI.[Item_Name]
+      ,CI.[Codition_Before_Released]
+      ,CI.[Remarks_for_Released]
+      ,CI.[Is_Returned]
+	  ,ISNULL(NULL,FORMAT(CI.[Date_Returned],'MM/dd/yyyy'))as Date_Returned
+      ,CI.[Codition_After_Returned]
+      ,CI.[Remarks_for_Retrun]
+	  ,CI.[Status]
+	  ,CI.[Remarks_for_Declined]
+	  ,ISNULL(NULL,FORMAT(CI.[Date_Released],'MM/dd/yyyy')) as Date_Released
+	  ,ISNULL(NULL,FORMAT(CI.[Date_Declined],'MM/dd/yyyy')) as Date_Declined
+	  ,ISNULL(NULL,FORMAT(CI.[Date_Approved],'MM/dd/yyyy')) as Date_Approved
+	  ,ISNULL(NULL,FORMAT(R.[Date_Want_To_Receive],'MM/dd/yyyy'))as Date_Want_To_Receive
+      ,ISNULL(NULL,FORMAT(R.[Date_Expected_Return],'MM/dd/yyyy'))as Date_Expected_Return
+      ,R.[Purpose]
+ FROM Cart_Item CI
+  LEFT JOIN Request R on R.Id_Cart = CI.Id_Cart
+GO
+/****** Object:  View [dbo].[added_today_vw]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+CREATE VIEW [dbo].[added_today_vw]
+AS
+SELECT 
+       [Id_Item]
+      ,[Id_Category]
+      ,[Category]
+      ,[Id_SubCategory]
+      ,[SubCategory]
+      ,[Id_Barcode]
+      ,[Str_Code]
+      ,[Str_Code_Display]
+      ,[Item_Name]
+      ,[Brand_Model]
+      ,[Year_Acquired]
+      ,[Custodian]
+      ,[Price]
+      ,[Serial_Number]
+      ,[On_Hold_Period]
+      ,[Remarks]
+      ,[Room_No]
+      ,[Id_Condition]
+      ,[Condition]
+      ,[Id_Status]
+      ,[Status]
+	  ,FORMAT([Date_Added], 'MM/dd/yyyy') as Date_Added
+      ,FORMAT([Date_Acquisition], 'MM/dd/yyyy') as Date_Acquisition
+      ,[Is_Assign]
+      ,[Is_Verify]
+  FROM [WBRMSystem].[dbo].[Item] where FORMAT([Date_Added], 'MM/dd/yyyy') = FORMAT(GETDATE(), 'MM/dd/yyyy') 
+GO
+/****** Object:  Table [dbo].[Barcode]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Barcode](
+	[Id_Barcode] [int] IDENTITY(1,1) NOT NULL,
+	[Barcode_Content] [varchar](50) NULL,
+	[Url_Img] [varchar](50) NULL,
+ CONSTRAINT [PK_Barcode] PRIMARY KEY CLUSTERED 
+(
+	[Id_Barcode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Condition]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Condition](
+	[Id_Condition] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [varchar](50) NULL,
+ CONSTRAINT [PK_Condition] PRIMARY KEY CLUSTERED 
+(
+	[Id_Condition] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Inventory]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Inventory](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Transaction] [int] NOT NULL,
+	[Id_Category] [int] NOT NULL,
+	[Id_SubCategory] [int] NULL,
+	[No_Of_Stock] [int] NULL,
+	[No_Of_Damaged] [int] NULL,
+	[No_Of_Borrowed] [int] NULL,
+ CONSTRAINT [PK_Inventory] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ItemCategory]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ItemCategory](
+	[Id_Category] [int] IDENTITY(1,1) NOT NULL,
+	[Category_Name] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+ CONSTRAINT [PK_ItemCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id_Category] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ItemSubCategory]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ItemSubCategory](
+	[Id_SubCategory] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Category] [int] NOT NULL,
+	[SubCategory_Name] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+ CONSTRAINT [PK_ItemSubCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id_SubCategory] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Junk_Item]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Junk_Item](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Str_Code] [varchar](500) NULL,
+	[Str_Code_Display] [varchar](50) NULL,
+	[Item_Name] [varchar](50) NULL,
+	[Date_Deleted] [datetime] NULL,
+	[Deleted_By] [varchar](50) NULL,
+	[Description] [varchar](50) NULL,
+	[Reason] [varchar](50) NULL,
+ CONSTRAINT [PK_Junk_Item] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservation]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservation](
+	[Id_Reservation] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Transaction] [int] NOT NULL,
+	[Id_Room_Cart] [int] NOT NULL,
+	[Reservation_Date] [datetime] NULL,
+	[Purpose] [varchar](50) NULL,
+ CONSTRAINT [PK_Reservation] PRIMARY KEY CLUSTERED 
+(
+	[Id_Reservation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservation_Cart]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservation_Cart](
+	[Id_Room_Cart] [int] IDENTITY(1,1) NOT NULL,
+	[Requestor_Name] [varchar](50) NULL,
+ CONSTRAINT [PK_Reservation_Cart] PRIMARY KEY CLUSTERED 
+(
+	[Id_Room_Cart] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservation_Cart_Room]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservation_Cart_Room](
+	[Id] [int] NOT NULL,
+	[Id_Room_Cart] [int] NOT NULL,
+	[Id_Room] [int] NOT NULL,
+	[Start_Date] [datetime] NULL,
+	[End_Date] [datetime] NULL,
+	[Start_Time] [time](7) NULL,
+	[End_Time] [time](7) NULL,
+	[Is_Approved] [bit] NULL,
+	[Date_Approved] [datetime] NULL,
+	[Approved_By] [varchar](50) NULL,
+ CONSTRAINT [PK_Reservation_Cart_Room] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Room]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Room](
+	[Id_Room] [int] IDENTITY(1,1) NOT NULL,
+	[Room_No] [varchar](50) NULL,
+	[Capacity] [int] NULL,
+	[Room_Type] [varchar](50) NULL,
+	[Id_Condition] [int] NOT NULL,
+	[Is_Available] [bit] NULL,
+ CONSTRAINT [PK_Room] PRIMARY KEY CLUSTERED 
+(
+	[Id_Room] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Room_Schedule]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Room_Schedule](
+	[Id_Schedule] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Room] [int] NOT NULL,
+	[ClassName] [varchar](50) NULL,
+	[Teacher] [varchar](50) NULL,
+	[What_Day] [varchar](50) NULL,
+	[Start_Time] [time](7) NULL,
+	[End_Time] [time](7) NULL,
+ CONSTRAINT [PK_Room_Schedule] PRIMARY KEY CLUSTERED 
+(
+	[Id_Schedule] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[Id_Status] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Transaction_Status] [int] NOT NULL,
+	[Description] [varchar](50) NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[Id_Status] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Temp_Signup]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Temp_Signup](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Number] [varchar](50) NOT NULL,
+	[First_Name] [varchar](50) NOT NULL,
+	[Last_Name] [varchar](50) NOT NULL,
+	[Middle_Name] [varchar](50) NULL,
+	[CourseAndYear] [varchar](50) NULL,
+	[Email_Add] [varchar](150) NULL,
+	[Address] [varchar](150) NULL,
+	[Contact_No] [varchar](150) NOT NULL,
+	[Is_Email_Confirm] [bit] NULL,
+	[Is_Contact_No_Confirm] [bit] NULL,
+	[Code_Generated] [varchar](50) NULL,
+	[Password] [varchar](500) NULL,
+	[ConfirmPassword] [varchar](500) NULL,
+	[UserType] [varchar](50) NULL,
+	[Signup_Date] [varchar](50) NULL,
+ CONSTRAINT [PK_Temp_Signup] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Temp_StocksbyFacility]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Temp_StocksbyFacility](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stocks] [int] NULL,
+	[Room_No] [varchar](50) NULL,
+ CONSTRAINT [PK_Temp_StocksbyFacility] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Transaction_Status]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transaction_Status](
+	[Id_Transaction_Status] [int] IDENTITY(1,1) NOT NULL,
+	[Transaction_Type] [varchar](50) NULL,
+ CONSTRAINT [PK_Transaction_Status] PRIMARY KEY CLUSTERED 
+(
+	[Id_Transaction_Status] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[Ass_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE  [dbo].[Ass_sp]
+(@Id_Item int = 0,@Room varchar(50)='',@UpdatedBy varchar(50)='',@Action varchar(50)='')
+  AS
+
+ DECLARE @Str_Code varchar(50)
+ IF EXISTS(SELECT * FROM WBRMSystem.dbo.Item WHERE Id_Item = @Id_Item)
+  BEGIN
+       SELECT @Str_Code = Str_COde From WBRMSystem.dbo.Item where Id_Item = @Id_Item
+      IF @Action = 'ASSIGN'
+	    BEGIN
+		  UPDATE WBRMSystem.dbo.Item
+			   SET 
+				  Room_No = @Room,
+				  Is_Assign = 1
+			 WHERE Id_Item = @Id_Item
+
+			 INSERT INTO [dbo].[Item_History]
+			   ([Id_Item]
+			   ,[Str_Code]
+			   ,[Action_History_Desc]
+			   ,[Action_Date]
+			   ,[Done_By])
+			 VALUES
+				   (@ID_Item
+				   ,@Str_Code
+				   ,'Item is Asssign to '+@Room
+				   ,GETDATE()
+				   ,@UpdatedBy)
+		 END
+	  ELSE IF @Action = 'REASSIGN'
+	     BEGIN
+		   UPDATE WBRMSystem.dbo.Item
+			   SET 
+				  Room_No = @Room
+			 WHERE Id_Item = @Id_Item
+
+			 INSERT INTO [dbo].[Item_History]
+			   ([Id_Item]
+			   ,[Str_Code]
+			   ,[Action_History_Desc]
+			   ,[Action_Date]
+			   ,[Done_By])
+			 VALUES
+				   (@ID_Item
+				   ,@Str_Code
+				   ,'Item is Re-Asssign to '+ @Room
+				   ,GETDATE()
+				   ,@UpdatedBy)
+		 END
+
+	  
+  END
+GO
+/****** Object:  StoredProcedure [dbo].[Cancel_Request_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [dbo].[Cancel_Request_sp]
+(@Id_Request int = 0,@Id_Cart int = 0)
+  AS
+  Update Request Set [Status] = 'Cancelled' where Id_Request = @Id_Request
+  Update Cart_Item set [Status] = 'Cancelled' where Id_Cart = @Id_Cart
+GO
+/****** Object:  StoredProcedure [dbo].[count_Status_CartItem_per_Request_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+  CREATE PROCEDURE [dbo].[count_Status_CartItem_per_Request_sp]
+  (@IdCart int  = 0,@Status varchar(50) ='')
+  AS
+  
+  SELECT Count(*) From WBRMSystem.dbo.Cart_Item where Id_Cart = @IdCart and [Status] = @Status
+  
+GO
+/****** Object:  StoredProcedure [dbo].[damaged_items_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[damaged_items_sp]
+As
+SELECT *
+  FROM [WBRMSystem].[dbo].[Item] 
+  
+  where [Condition] like '%Damaged'
+GO
+/****** Object:  StoredProcedure [dbo].[Delete_Item_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Delete_Item_sp]
+(@id int = 0 ,@Deleted_By varchar(50)='' ,@Description varchar(50) ='' ,@Reason varchar(50) ='')
+  AS
+    IF OBJECT_ID('tempdb..#TempTable') IS NOT NULL DROP Table #TempTable
+    CREATE TABLE #TempTable(Id_Item int ,Str_code varchar(500),Str_Code_Display varchar(50),Item_Name char(20),Deleted datetime)
+	INSERT INTO #TempTable (Id_Item,Str_code, Str_Code_Display, Item_Name,Deleted) SELECT Id_Item, Str_Code,Str_Code_Display,Item_Name, GETDATE() as Deleted FROM  WBRMSystem.dbo.Item where Id_Item = @id
+    DECLARE @Str_code VARCHAR(50)
+	DECLARE @Str_Code_Display VARCHAR(50)
+	DECLARE @Item_Name VARCHAR(50)
+	DECLARE @Deleted DATETIME
+
+	
+	SELECT @Str_code = Str_code FROM #TempTable WHERE  Id_Item = @id
+    SELECT @Str_Code_Display = Str_Code_Display FROM #TempTable WHERE  Id_Item = @id
+    SELECT @Item_Name = Item_Name FROM #TempTable WHERE  Id_Item = @id
+	SELECT @Deleted = Deleted FROM #TempTable WHERE  Id_Item = @id
+	
+	INSERT INTO WBRMSystem.dbo.Junk_Item
+           ([Str_Code]
+           ,[Str_Code_Display]
+           ,[Item_Name]
+           ,[Date_Deleted]
+           ,[Deleted_By]
+           ,[Description]
+           ,[Reason])
+     VALUES
+           (@Str_code,@Str_Code_Display,@Item_Name,@Deleted,@Deleted_By,@Description,@Reason)
+	 Delete FROM WBRMSystem.dbo.Item where Id_Item = @id
+GO
+/****** Object:  StoredProcedure [dbo].[Stocks_Per_Facility_Update_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+
+CREATE PROCEDURE [dbo].[Stocks_Per_Facility_Update_sp]
+AS
+DELETE FROM WBRMSystem.dbo.Temp_StocksbyFacility
+INSERT INTO WBRMSystem.dbo.Temp_StocksbyFacility
+SELECT 
+      count(*),
+	  Room_No
+  FROM [WBRMSystem].[dbo].[Item]
+  WHERE [Status] ='Available' and Condition = 'Functional'
+  GrOUP BY Room_No
+GO
+/****** Object:  StoredProcedure [dbo].[update_Barcode_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[update_Barcode_sp]
+  AS
+   UPDATE WBRMSystem.dbo.Item
+       SET Str_Code =  CONVERT(varchar(12), DATEPART(YYYY,Date_Added))+ CONVERT(varchar(12), REPLACE(STR(DATEPART(MM,Date_Added), 2), SPACE(1), '0'))+CONVERT(varchar(12), REPLACE(STR(DATEPART(DD,Date_Added), 2), SPACE(1), '0'))+ CONVERT(varchar(12), REPLACE(STR(DATEPART(HH,Date_Added), 2), SPACE(1), '0'))
+	     + CONVERT(varchar(12), REPLACE(STR(DATEPART(MI,Date_Added), 2), SPACE(1), '0'))+CONVERT(varchar(12), REPLACE(STR(DATEPART(SS,Date_Added), 2), SPACE(1), '0'))+ CONVERT(varchar(12), REPLACE(STR(DATEPART(MS,Date_Added), 4), SPACE(1), '0')) +  CONVERT(varchar(12),REPLACE(STR(SUBSTRING(CONVERT(varchar(12),Id_Item), 1, 2), 2), SPACE(1), '0'))
+   WHERE Str_Code is null or Str_Code = ''
+GO
+/****** Object:  StoredProcedure [dbo].[Update_IsGenerated_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE  [dbo].[Update_IsGenerated_sp]
+  AS
+   UPDATE WBRMSystem.dbo.Item set [Is_Generated_Barcode] = 1
+
+GO
+/****** Object:  StoredProcedure [dbo].[Update_IsVerifiedField_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE  [dbo].[Update_IsVerifiedField_sp]
+(@Str_Code varchar(50)= '',@UpdatedBy varchar(50)='')
+  AS
+
+ DECLARE @ID_Item int
+ IF EXISTS(SELECT * FROM WBRMSystem.dbo.Item WHERE Str_Code = @Str_Code)
+  BEGIN
+      
+      SELECT @ID_Item = Id_Item FROM WBRMSystem.dbo.Item WHERE  Str_Code = @Str_Code
+	  UPDATE WBRMSystem.dbo.Item
+		   SET 
+			  Is_Verify = 1
+		 WHERE Str_Code = @Str_Code
+
+	  INSERT INTO [dbo].[Item_History]
+			   ([Id_Item]
+			   ,[Str_Code]
+			   ,[Action_History_Desc]
+			   ,[Action_Date]
+			   ,[Done_By])
+		 VALUES
+			   (@ID_Item
+			   ,@Str_Code
+			   ,'Item is verified'
+			   ,GETDATE()
+			   ,@UpdatedBy)
+  END
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Item_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Update_Item_sp]
+(@Id_Item int = 0 ,@Item_Name varchar(50)= '' ,@Serial_Number varchar(500) ='' ,@Category varchar(50) ='',@Brand_Model varchar(50) ='',@Custodian varchar(50) ='',@Price money = 0
+,@Condition varchar(50) = '',@Status varchar(50) ='',@On_Hold_Period int = 0 ,@Date_Acquisition datetime = '',@Remarks varchar(50) = '',@UpdatedBy varchar(50)='')
+  AS
+   
+ DECLARE @StrCode VARCHAR(500)
+ IF EXISTS(SELECT * FROM WBRMSystem.dbo.Item WHERE Id_Item = @Id_Item)
+  BEGIN
+      
+      SELECT @StrCode = Str_code FROM WBRMSystem.dbo.Item WHERE  Id_Item = @Id_Item
+	  UPDATE WBRMSystem.dbo.Item
+		   SET 
+			   [Category] = @Category
+			  ,[Item_Name] = @Item_Name
+			  ,[Brand_Model] = @Brand_Model
+			  ,[Custodian] = @Custodian
+			  ,[Price] = @Price
+			  ,[Serial_Number] = @Serial_Number
+			  ,[On_Hold_Period] = @On_Hold_Period
+			  ,[Remarks] = @Remarks
+			  ,[Condition] = @Condition
+			  ,[Status] = @Status
+			  ,[Date_Acquisition] = @Date_Acquisition
+		 WHERE Id_Item = @Id_Item
+
+	  INSERT INTO [dbo].[Item_History]
+			   ([Id_Item]
+			   ,[Str_Code]
+			   ,[Action_History_Desc]
+			   ,[Action_Date]
+			   ,[Done_By])
+		 VALUES
+			   (@Id_Item
+			   ,@StrCode
+			   ,'Fields are updated'
+			   ,GETDATE()
+			   ,@UpdatedBy)
+  END
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Request_sp]    Script Date: 8/11/2020 8:10:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+
+CREATE PROCEDURE  [dbo].[Update_Request_sp] ( @IdRequest int = 0)
+AS
+  
+  DECLARE @Approved int  = 0
+  DECLARE @Declined int  = 0
+  DECLARE @Released int  = 0
+  DECLARE @Returned int  = 0
+  DECLARE @Discard  int  = 0
+  DECLARE @TotalCartItem  int  = 0
+  DECLARE @NewStatus varchar(50) = '' 
+
+  IF EXISTS(SELECT * FROM WBRMSystem.dbo.Request where Id_Request = @IdRequest)
+  BEGIN
+
+	  Select @Declined = count(c.[Status])
+	  FROM WBRMSystem.dbo.Request r
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE c.[Status] = 'Declined' and  r.Id_Request = @IdRequest
+	  Group By c.[Status]
+
+	  Select @Approved = count(c.[Status])
+	  FROM WBRMSystem.dbo.Request r
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE c.[Status] = 'Approved' and  r.Id_Request = @IdRequest
+	  Group By c.[Status]
+
+	   Select @Released = count(c.[Status])
+	  FROM WBRMSystem.dbo.Request r
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE c.[Status] = 'Released' and  r.Id_Request = @IdRequest
+	  Group By c.[Status]
+
+	   Select @Returned = count(c.[Status]) 
+	  FROM WBRMSystem.dbo.Request r 
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE c.[Status] = 'Returned' and  r.Id_Request = @IdRequest
+	  Group By c.[Status]
+
+	  Select @Discard = count(c.[Status]) 
+	  FROM WBRMSystem.dbo.Request r 
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE c.[Status] = 'Discard' and  r.Id_Request = @IdRequest
+	  Group By c.[Status]
+
+	  Select @TotalCartItem = count(c.[Id_Cart]) 
+	  FROM WBRMSystem.dbo.Request r
+	  LEFT JOIN WBRMSystem.dbo.Cart_Item c on r.Id_Cart = c.Id_Cart
+	  WHERE   r.Id_Request = @IdRequest
+
+	  --SELECT @TotalCartItem
+	  --SELECT @Approved
+	  --SELECT @Declined 
+	  --SELECT @Released 
+	  --SELECT @Returned 
+	  --SELECT @Discard 
+
+	  if(@Approved > 0  and @Approved = @TotalCartItem)
+	   BEGIN
+		 SELECT @NewStatus = 'Approved'
+	   END
+
+	 ELSE IF(@Approved > 0 and @Approved < @TotalCartItem)
+	  BEGIN
+		 SELECT @NewStatus =  'Approved '+CONVERT(varchar(12), @Approved)+'/'+CONVERT(varchar(12), @TotalCartItem)
+	  END
+
+	 ELSE IF(@Approved = 0 and @Declined = @TotalCartItem)
+	  BEGIN 
+		 SELECT @NewStatus = 'Declined'
+	  END
+  
+	  ELSE IF (@Released > 0 and @Released = @TotalCartItem)
+	   BEGIN 
+		  SELECT @NewStatus = 'Released'
+	   END
+
+	  ELSE IF  (@Released > 0)
+	   BEGIN 
+		  SELECT @NewStatus = 'Released'
+	   END
+
+	   ELSE IF (@Discard = @TotalCartItem)
+		BEGIN 
+		  SELECT @NewStatus = 'Discard'
+		END
+
+
+	   IF (@Approved = 0 and @Released = 0 and @Returned > 0)
+		BEGIN
+		 SELECT @NewStatus = 'Closed'
+		END
+
+		IF(@NewStatus = '')
+		BEGIN
+		 SELECT @NewStatus = 'Closed'
+		END
+
+		UPDATE WBRMSystem.dbo.Request SET [Status] = @NewStatus where Id_Request = @IdRequest
+  END
+
+  --EXEC Update_Request_sp 2023
+GO
+USE [master]
+GO
+ALTER DATABASE [WBRMSystem] SET  READ_WRITE 
+GO

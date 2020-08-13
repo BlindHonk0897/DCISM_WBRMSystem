@@ -1,0 +1,174 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Add Items</h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#pills-add"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#pills-add"><spanr><i class="feather icon-minus"></i> collapse</spanr><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#pills-add"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <a id="DownloadFormat" class="btn btn-outline-theme2" title="" data-toggle="tooltip" data-original-title="Download Format"><i class="fa fa-file-excel text-c-green f-24"></i>Download Format</a>
+                <a id="UploadItems" class="btn btn-outline-theme2" title="" data-toggle="tooltip" data-original-title="Upload Items from Excel"><i class="fa fa-file-excel text-c-green f-24"></i>Upload Items/Equipments</a>
+                <hr />
+                <h5>Add item/equipment form</h5>
+                <hr>
+                <form method="#" action="#">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Category</label>
+                                <select class="form-control select2" name="Item_Category" id="Item_Category_Add_Item_Pane" tabindex="-1" style="width: 80%;">
+                                </select>
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Model/Brand Name</label>
+                                <input type="text" class="form-control" name="Item_Brand_Model" id="Item_Brand_Model_Add_Item_Pane" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Item Name</label>
+                                <input type="text" class="form-control" name="Item_Name" id="Item_Name_Add_Item_Pane" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Date Acquisition</label>
+                                <input type="text" readonly class="form-control" name="Date_Acquisition" id="Date_Acquisition_Add_Item_Pane" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-control" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="Quantity" id="Quantity_Add_Item_Pane" aria-label="Small" aria-describedby="inputGroup-sizing-sm" min="1" value="1" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Serial No.</label>
+                                <input type="text" class="form-control" name="Serial_No" id="Serial_No_Add_Item_Pane" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group input-group-sm">
+                                <label class="form-label">Condition</label>
+                                <select class="form-control select2" name="Condition" id="Condition_Add_Item_Pane" style="width: 100%;">
+                                    <option value="Functional">Functional</option>
+                                    <option value="Damaged">Damaged</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="OK_Button_Add_Item_Pane">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Modal *@
+<div class="md-modal md-effect-4" id="modal-Add">
+    <div class="md-content">
+        <h3 class="theme-bg3">Input Serial No.</h3>
+        <div id="">
+            <div class="row">
+                <div class="col-md-12" id="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 table-responsive p-0" style="border:1px dotted gainsboro !important;height: 275px;">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Item No.</th>
+                                <th>Serial No.</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <button class="btn btn-primary" id="" style="display:none">Save</button>
+        <br />
+        <button class="btn btn-primary md-close" id="" hidden>Close me!</button>
+    </div>
+</div>
+
+@*<button class="btn btn-primary md-trigger" data-modal="modal-Add" id="Hidden_But_Add_Item_Pane" hidden></button>*@
+<button type="button" class="btn btn-primary btn-sm" id="Upload-progress" hidden></button>
+<button class="btn btn-primary md-trigger" data-modal="modal-16" id="Modal-Blur" hidden></button>
+<input class="" type="text" value="" id="Hidden_Serials" hidden />
+<input class="" type="text" value="" id="Hidden_Serials_Fixed" hidden />
+<input class="" type="text" value="S" id="Hidden_Type" hidden />
+<button type="button" class="btn btn-primary" data-toggle="modal" id="Hidden_But_Add_Item_Pane" data-target="#Input_Serial_Modal" data-whatever="fat" hidden>Serial Modal</button>
+
+
+<div class="md-modal md-effect-16" id="modal-16">
+    <div class="md-content">
+        @*<h3 class="theme-bg2">Modal Dialog</h3>*@
+        <div class="modal-container">
+            <div class="modal-loader">
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--text"></div>
+            </div>
+            <button class="btn btn-primary md-close" id="Modal-Close" hidden>Close me!</button>
+        </div>
+    </div>
+</div>
+
+@* Modal Input Serial *@
+<div class="modal fade" id="Input_Serial_Modal" tabindex="-1" role="dialog" aria-labelledby="Input_Serial_Modal_Label" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Input Serial Numbers</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" id="Modal_Serial_Add_Item_Pane">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 table-responsive p-0" style="border:1px dotted gainsboro !important;height: 275px;">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Item No.</th>
+                                    <th>Serial No.</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_Serial">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="Modal_Close_Add_Item_Pane" data-dismiss="modal" hidden>Close</button>
+                <button type="button" class="btn btn-primary" id="Serial_Save_Add_Item_Pane" style="display:none">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1768 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <link href="~/Content/footable/jquery-ui.css" />
+    <link href="~/Content/footable/datatables-jquery.min.css" />
+}
+<div class="row">
+    <!-- [ tabs ] start -->
+    <div class="col-sm-12">
+        <h5 class="mt-4"><i class="fa fa-cube"></i> Items/Equipments</h5>
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">ALL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-add-tab" data-toggle="pill" href="#pills-add" role="tab" aria-controls="pills-add" aria-selected="false">Add</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-assign-tab" data-toggle="pill" href="#pills-assign" role="tab" aria-controls="pills-assign" aria-selected="false">Assign</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-verify-tab" data-toggle="pill" href="#pills-verify" role="tab" aria-controls="pills-verify" aria-selected="false">Verify</a>
+            </li>
+            @*<li class="nav-item">
+                    <a class="nav-link" id="pills-update-tab" data-toggle="pill" href="#pills-update" role="tab" aria-controls="pills-update" aria-selected="false">Update</a>
+                </li>*@
+            <li class="nav-item">
+                <a class="nav-link" id="pills-borrowed-tab" data-toggle="pill" href="#pills-borrowed" role="tab" aria-controls="pills-borrowed" aria-selected="false">Borrowed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-damaged-tab" data-toggle="pill" href="#pills-damaged" role="tab" aria-controls="pills-damaged" aria-selected="false">Damaged</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-barcode-printer-tab" data-toggle="pill" href="#pills-barcode-printer" role="tab" aria-controls="pills-barcode-printer" aria-selected="false">Barcode Printer</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                @Html.Partial("_AllItemsTable")
+            </div>
+            <div class="tab-pane fade" id="pills-add" role="tabpanel" aria-labelledby="pills-profile-tab">
+                @Html.Partial("_AddItemPane")
+            </div>
+            <div class="tab-pane fade" id="pills-assign" role="tabpanel" aria-labelledby="pills-assign-tab">
+                @Html.Partial("_AssignPane")
+            </div>
+            <div class="tab-pane fade" id="pills-verify" role="tabpanel" aria-labelledby="pills-verify-tab">
+                @Html.Partial("_VerifyPane")
+            </div>
+            @*<div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
+                    @Html.Partial("_UpdatePane")
+                </div>*@
+            <div class="tab-pane fade" id="pills-borrowed" role="tabpanel" aria-labelledby="pills-contact-tab">
+                @Html.Partial("_BorrowedItems")
+            </div>
+            <div class="tab-pane fade" id="pills-damaged" role="tabpanel" aria-labelledby="pills-damaged-tab">
+                @Html.Partial("_DamagedItems")
+            </div>
+            <div class="tab-pane fade" id="pills-barcode-printer" role="tabpanel" aria-labelledby="pills-barcode-printer-tab">
+                @Html.Partial("_BarcodePrinterPane")
+            </div>
+        </div>
+    </div>
+    <!-- [ tabs ] end -->
+</div>
+
+@section scripts{
+    <script src="~/Content/lightbox/pages/lightbox.js"></script>
+    @*<script src="~/Content/jstree/treeview.js"></script>*@
+    <script src="~/Content/footable/jquery-ui-datatables.min.js"></script>
+    <script src="~/Content/footable/jquery-ui-jquery.datatables.min.js"></script>
+    @*<script src="~/Content/assets/plugins/animation/waterball.js"></script>*@
+    <script src="~/Scripts/scannerdetection/jquery.scannerdetection.js"></script>
+
+    <script>
+        //=========== START of Document.ready function ===========||
+        $(document).ready(function () {
+
+            $('.select2').select2();
+            // To Retain Current Selected Pane ----------------
+            $('#pills-tab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            // store the currently selected tab in the hash value
+            $("ul.nav-pills > li > a").on("shown.bs.tab", function (e) {
+                var id = $(e.target).attr("href").substr(1);
+                window.location.hash = id;
+                if (id === "pills-all") {
+                    pills_All_Function();
+                }else if (id === "pills-add") {
+                    pills_Add_Function();
+                } else if (id === "pills-verify") {
+                    pills_Verify_Function();
+                } else if (id === "pills-assign") {
+                    pills_Assign_Function();
+                }else if (id === "pills-borrowed") {
+                    pills_Borrowed_Function();
+                } else if (id === "pills-damaged") {
+                    pills_Damaged_Function();
+                } else if (id === "pills-barcode-printer") {
+                    pills_BarcodePrinter_Function();
+                }
+            });
+            // on load of the page: switch to the currently selected tab
+            var hash = window.location.hash;
+            $('#pills-tab a[href="' + hash + '"]').tab('show');
+
+            if (hash === "#pills-all" || hash === "") {
+                pills_All_Function();
+            } else if (hash === "#pills-add") {
+                pills_Add_Function();
+            } else if (hash === "#pills-verify") {
+                pills_Verify_Function();
+            } else if (hash === "#pills-assign") {
+                pills_Assign_Function();
+            } else if (hash === "#pills-borrowed") {
+                pills_Borrowed_Function();
+            } else if (hash === "#pills-damaged") {
+                pills_Damaged_Function();
+            } else if (hash === "#pills-barcode-printer") {
+                pills_BarcodePrinter_Function();
+            }
+
+            // END of To Retain Current Selected Pane ----------------
+
+            $('#Date_Acquisition_Add_Item_Pane').bootstrapMaterialDatePicker({
+                format: 'MM/DD/YYYY',
+                time: false
+            });
+
+            $('#Date_Acquisition_modal_Update').bootstrapMaterialDatePicker({
+                format: 'MM/DD/YYYY',
+                time: false
+            }).on('close', function (e, date) {
+                $('body').css('pointer-events', 'none');
+                $('#modal-Update').css('pointer-events', 'auto');
+            });
+        })
+        //=========== END of Document.ready function ===========||
+
+
+        $(function () {
+            $('.PreferredDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "mm/dd/yyyy",
+                language: "tr",
+                autoclose: true,
+                icons: {
+                    time: "now-ui-icons tech_watch-time",
+                    date: "now-ui-icons ui-1_calendar-60",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'now-ui-icons arrows-1_minimal-left',
+                    next: 'now-ui-icons arrows-1_minimal-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                }
+            });
+        });
+
+        function showSwal() {
+            Swal.fire({
+                title: 'Ready for Scan',
+                html: '<div class="form-group">' +
+                    '<input id="input-field" type="text" class="form-control" />' +
+                    '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    var input = $('#input-field').val();
+                    if (input && input != null) {
+                        Swal.fire({
+                            type: 'success',
+                            html: 'Serial No: <strong>' +
+                                $('#input-field').val() +
+                                '</strong>',
+                            confirmButtonClass: 'btn btn-success',
+                            buttonsStyling: false
+                        });
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            html: 'No Item Scanned',
+                            confirmButtonClass: 'btn btn-danger',
+                            buttonsStyling: false
+
+                        });
+                    }
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        html: 'Cancelled',
+                        confirmButtonClass: 'btn btn-danger',
+                        buttonsStyling: false
+                    });
+                }
+            });
+
+        }
+
+        //=========== START Function to Load Item Category ===========||
+        function LoadItemCategory() {
+            var api1 = "/api/Common/Categories";
+            $('#Category_Barcode_Generator_Pane').empty();
+            $('#Item_Category_Add_Item_Pane').empty();
+            $.getJSON(api1).done(function (data) {
+                var toAppendElectronics = '<optgroup label="Electronics">';
+                var toAppendNonElectronics = '<optgroup label="Non-Electronics">';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Description === "Electronics") {
+                        toAppendElectronics += '<option value="' + data[i].Category_Name + '" >' + data[i].Category_Name + '</option>'
+                    }else {
+                        toAppendNonElectronics += '<option value="' + data[i].Category_Name + '">' + data[i].Category_Name + '</option>'
+                    }
+                }
+                toAppendElectronics += ' </optgroup>';
+                toAppendNonElectronics += ' </optgroup>';
+                $('#Category_Barcode_Generator_Pane').append(toAppendElectronics + toAppendNonElectronics);
+               // $('#Category_modal_Update').append(toAppendElectronics + toAppendNonElectronics);
+               // $('#Category_modal_Update').select2();
+                $('#Item_Category_Add_Item_Pane').append(toAppendElectronics + toAppendNonElectronics);
+            })
+        }
+        //=========== END Function to Load Item Category ===========||
+
+        //=========== START Function to Load Rooms ===========||
+        function LoadRooms() {
+            var api = "/api/Common/Rooms";
+            $('#Room_Barcode_Generator_Pane').empty();
+            $.getJSON(api).done(function (data) {
+                var toAppend = '';
+                for (var i = 0; i < data.length; i++) {
+                    toAppend += '<option>' + data[i] + '</option>'
+                }
+                $('#Room_Barcode_Generator_Pane').append(toAppend);
+            })
+        }
+        //=========== END Function to Load Rooms ===========||
+
+        //=========== START for onload function ===========||
+        // window.onload = function () {
+
+        // }
+        //=========== END for onload function ===========||
+
+
+
+        //<<<<=============================== (START) PILLS ALL ===============================>>>>\\
+        function pills_All_Function() {
+            $.getJSON("/api/Common/Items").done(function (data) {
+                var dataset_AllItems_Pane = [];
+                for (var i = 0; i < data.length; i++) {
+                    var arr = [];
+                    arr.push(data[i].Id_Item);
+                    arr.push(data[i].Room_No);
+                    arr.push(data[i].Str_Code);
+                    arr.push(data[i].Item_Name);
+                    arr.push(data[i].Brand_Model);
+                    arr.push(data[i].Date_Acquisition);
+                    arr.push(data[i].Condition);
+                    arr.push(data[i].Status);
+                    var action_AllItems_Pane = '<td class="child" colspan="4">' +
+                        '<span class="dtr-title"></span> <span class="dtr-data">' +
+                        '<a class="dropdown-toggle addon-btn" data-toggle="dropdown" aria-expanded="true">' +
+                        '<i class="fas fa-align-justify"></i>' +
+                        '</a>' +
+                        '<div class="dropdown-menu dropdown-menu-left">' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="showModalUpdate(this)"  data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-attachment"></i>Update</a>' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="deleteItem(this)" data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-ui-edit"></i>Delete</a>' +
+                        '</span>' +
+                        '</td>';
+                    arr.push(action_AllItems_Pane);
+
+                    dataset_AllItems_Pane.push(arr);
+
+                }
+                if ($.fn.DataTable.isDataTable('#Table_AllItems_Pane')) {
+                    $('#Table_AllItems_Pane').DataTable().destroy();
+                }
+                $('#Table_AllItems_Pane').DataTable({
+                    data: dataset_AllItems_Pane,
+                    "columns": [
+                        { title: "Id" },
+                        { title: "Room No" },
+                        { title: "Str_Code" },
+                        { title: "Item Name" },
+                        { title: "Brand/Model" },
+                        { title: "Date Acquisition" },
+                        { title: "Condition" },
+                        { title: "Status" },
+                        { title: "Action" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": true
+                        }
+
+                    ],
+                    "language": {
+                        "emptyTable": "No data. <b>found</b>"
+                    }
+
+                }).order([0, 'desc'])
+                    .draw();
+
+            })
+
+            $('#Filter_Category').empty();
+            $.getJSON("/api/Common/Categories").done(function (data) {
+                var toAppendElectronics = '<optgroup label="Electronics">';
+                var toAppendNonElectronics = '<optgroup label="Non-Electronics">';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Description === "Electronics") {
+                        toAppendElectronics += '<option value="' + data[i].Category_Name + '" >' + data[i].Category_Name + '</option>'
+                    } else {
+                        toAppendNonElectronics += '<option value="' + data[i].Category_Name + '">' + data[i].Category_Name + '</option>'
+                    }
+                }
+                toAppendElectronics += ' </optgroup>';
+                toAppendNonElectronics += ' </optgroup>';
+                $('#Filter_Category').append('<option value="X">-- Category --</option>');
+                $('#Filter_Category').append(toAppendElectronics + toAppendNonElectronics);
+            })
+
+            $('#Filter_Assigned').empty();
+            $.getJSON("/api/Common/Rooms").done(function (data) {
+                var toAppend = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] && data[i] !== null && data[i] !== "") {
+                        toAppend += '<option value="' + data[i] + '">' + data[i] + '</option>'
+                    }
+                }
+                $('#Filter_Assigned').append('<option value="X">-- Assigned --</option>');
+                $('#Filter_Assigned').append(toAppend);
+                $('#Filter_Assigned').append('<option>Not yet assigned</option>');
+            })
+
+            $('#Filter_Condition').empty();
+            $.getJSON("/api/Common/Conditions").done(function (data) {
+                var toAppend = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Description && data[i].Description !== null && data[i].Description !== "") {
+                        toAppend += '<option value="' + data[i].Description + '">' + data[i].Description + '</option>'
+                    }
+                }
+                $('#Filter_Condition').append('<option value="X">-- Condition --</option>');
+                $('#Filter_Condition').append(toAppend);
+            })
+        } 
+
+        $('#Filter_Category').change(function () {
+            //InfoMessage($(this).val());
+            var category = $(this).val();
+            var assign = $('#Filter_Assigned').val();
+            var condition = $('#Filter_Condition').val();
+            var status = $('#Filter_Status').val();
+            var api = '/api/Common/Items/category/' + category + '/assign/' + assign + '/condition' + condition + '/status' + status;
+            $.getJSON(api).done(function (data) {
+                var dataset_AllItems_Pane = [];
+                for (var i = 0; i < data.length; i++) {
+                    var arr = [];
+                    arr.push(data[i].Id_Item);
+                    arr.push(data[i].Room_No);
+                    arr.push(data[i].Str_Code);
+                    arr.push(data[i].Item_Name);
+                    arr.push(data[i].Brand_Model);
+                    arr.push(data[i].Date_Acquisition);
+                    arr.push(data[i].Condition);
+                    arr.push(data[i].Status);
+                    var action_AllItems_Pane = '<td class="child" colspan="4">' +
+                        '<span class="dtr-title"></span> <span class="dtr-data">' +
+                        '<a class="dropdown-toggle addon-btn" data-toggle="dropdown" aria-expanded="true">' +
+                        '<i class="fas fa-align-justify"></i>' +
+                        '</a>' +
+                        '<div class="dropdown-menu dropdown-menu-left">' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="showModalUpdate(this)"  data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-attachment"></i>Update</a>' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="deleteItem(this)" data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-ui-edit"></i>Delete</a>' +
+                        '</span>' +
+                        '</td>';
+                    arr.push(action_AllItems_Pane);
+
+                    dataset_AllItems_Pane.push(arr);
+
+                }
+                if ($.fn.DataTable.isDataTable('#Table_AllItems_Pane')) {
+                    $('#Table_AllItems_Pane').DataTable().destroy();
+                }
+                $('#Table_AllItems_Pane').DataTable({
+                    data: dataset_AllItems_Pane,
+                    "columns": [
+                        { title: "Id" },
+                        { title: "Room No" },
+                        { title: "Str_Code" },
+                        { title: "Item Name" },
+                        { title: "Brand/Model" },
+                        { title: "Date Acquisition" },
+                        { title: "Condition" },
+                        { title: "Status" },
+                        { title: "Action" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": true
+                        }
+
+                    ],
+                    "language": {
+                        "emptyTable": "No data. <b>found</b>"
+                    }
+
+                }).order([0, 'desc'])
+                    .draw();
+            })
+        })
+        $('#Filter_Assigned').change(function () {
+           // InfoMessage($(this).val());
+            var category = $('#Filter_Category').val();
+            var assign = $(this).val();
+            var condition = $('#Filter_Condition').val();
+            var status = $('#Filter_Status').val();
+            var api = '/api/Common/Items/category/' + category + '/assign/' + assign + '/condition' + condition + '/status' + status;
+            $.getJSON(api).done(function (data) {
+                var dataset_AllItems_Pane = [];
+                for (var i = 0; i < data.length; i++) {
+                    var arr = [];
+                    arr.push(data[i].Id_Item);
+                    arr.push(data[i].Room_No);
+                    arr.push(data[i].Str_Code);
+                    arr.push(data[i].Item_Name);
+                    arr.push(data[i].Brand_Model);
+                    arr.push(data[i].Date_Acquisition);
+                    arr.push(data[i].Condition);
+                    arr.push(data[i].Status);
+                    var action_AllItems_Pane = '<td class="child" colspan="4">' +
+                        '<span class="dtr-title"></span> <span class="dtr-data">' +
+                        '<a class="dropdown-toggle addon-btn" data-toggle="dropdown" aria-expanded="true">' +
+                        '<i class="fas fa-align-justify"></i>' +
+                        '</a>' +
+                        '<div class="dropdown-menu dropdown-menu-left">' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="showModalUpdate(this)"  data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-attachment"></i>Update</a>' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="deleteItem(this)" data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-ui-edit"></i>Delete</a>' +
+                        '</span>' +
+                        '</td>';
+                    arr.push(action_AllItems_Pane);
+
+                    dataset_AllItems_Pane.push(arr);
+
+                }
+                if ($.fn.DataTable.isDataTable('#Table_AllItems_Pane')) {
+                    $('#Table_AllItems_Pane').DataTable().destroy();
+                }
+                $('#Table_AllItems_Pane').DataTable({
+                    data: dataset_AllItems_Pane,
+                    "columns": [
+                        { title: "Id" },
+                        { title: "Room No" },
+                        { title: "Str_Code" },
+                        { title: "Item Name" },
+                        { title: "Brand/Model" },
+                        { title: "Date Acquisition" },
+                        { title: "Condition" },
+                        { title: "Status" },
+                        { title: "Action" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": true
+                        }
+
+                    ],
+                    "language": {
+                        "emptyTable": "No data. <b>found</b>"
+                    }
+
+                }).order([0, 'desc'])
+                    .draw();
+            })
+        })
+        $('#Filter_Condition').change(function () {
+            //InfoMessage($(this).val());
+            var category = $('#Filter_Category').val();
+            var assign = $('#Filter_Assigned').val();
+            var condition = $(this).val();
+            var status = $('#Filter_Status').val();
+            var api = '/api/Common/Items/category/' + category + '/assign/' + assign + '/condition' + condition + '/status' + status;
+            $.getJSON(api).done(function (data) {
+                var dataset_AllItems_Pane = [];
+                for (var i = 0; i < data.length; i++) {
+                    var arr = [];
+                    arr.push(data[i].Id_Item);
+                    arr.push(data[i].Room_No);
+                    arr.push(data[i].Str_Code);
+                    arr.push(data[i].Item_Name);
+                    arr.push(data[i].Brand_Model);
+                    arr.push(data[i].Date_Acquisition);
+                    arr.push(data[i].Condition);
+                    arr.push(data[i].Status);
+                    var action_AllItems_Pane = '<td class="child" colspan="4">' +
+                        '<span class="dtr-title"></span> <span class="dtr-data">' +
+                        '<a class="dropdown-toggle addon-btn" data-toggle="dropdown" aria-expanded="true">' +
+                        '<i class="fas fa-align-justify"></i>' +
+                        '</a>' +
+                        '<div class="dropdown-menu dropdown-menu-left">' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="showModalUpdate(this)"  data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-attachment"></i>Update</a>' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="deleteItem(this)" data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-ui-edit"></i>Delete</a>' +
+                        '</span>' +
+                        '</td>';
+                    arr.push(action_AllItems_Pane);
+
+                    dataset_AllItems_Pane.push(arr);
+
+                }
+                if ($.fn.DataTable.isDataTable('#Table_AllItems_Pane')) {
+                    $('#Table_AllItems_Pane').DataTable().destroy();
+                }
+                $('#Table_AllItems_Pane').DataTable({
+                    data: dataset_AllItems_Pane,
+                    "columns": [
+                        { title: "Id" },
+                        { title: "Room No" },
+                        { title: "Str_Code" },
+                        { title: "Item Name" },
+                        { title: "Brand/Model" },
+                        { title: "Date Acquisition" },
+                        { title: "Condition" },
+                        { title: "Status" },
+                        { title: "Action" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": true
+                        }
+
+                    ],
+                    "language": {
+                        "emptyTable": "No data. <b>found</b>"
+                    }
+
+                }).order([0, 'desc'])
+                    .draw();
+            })
+        })
+        $('#Filter_Status').change(function () {
+            //InfoMessage($(this).val());
+            var category = $('#Filter_Category').val();
+            var assign = $('#Filter_Assigned').val();
+            var condition = $('#Filter_Condition').val();
+            var status = $(this).val();
+            var api = '/api/Common/Items/category/' + category + '/assign/' + assign + '/condition' + condition + '/status' + status;
+            $.getJSON(api).done(function (data) {
+                var dataset_AllItems_Pane = [];
+                for (var i = 0; i < data.length; i++) {
+                    var arr = [];
+                    arr.push(data[i].Id_Item);
+                    arr.push(data[i].Room_No);
+                    arr.push(data[i].Str_Code);
+                    arr.push(data[i].Item_Name);
+                    arr.push(data[i].Brand_Model);
+                    arr.push(data[i].Date_Acquisition);
+                    arr.push(data[i].Condition);
+                    arr.push(data[i].Status);
+                    var action_AllItems_Pane = '<td class="child" colspan="4">' +
+                        '<span class="dtr-title"></span> <span class="dtr-data">' +
+                        '<a class="dropdown-toggle addon-btn" data-toggle="dropdown" aria-expanded="true">' +
+                        '<i class="fas fa-align-justify"></i>' +
+                        '</a>' +
+                        '<div class="dropdown-menu dropdown-menu-left">' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="showModalUpdate(this)"  data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-attachment"></i>Update</a>' +
+                        '<a class="dropdown-item" href="#pills-all" onclick="deleteItem(this)" data-itemid="' + (data[i].Id_Item) + '"><i class="icofont icofont-ui-edit"></i>Delete</a>' +
+                        '</span>' +
+                        '</td>';
+                    arr.push(action_AllItems_Pane);
+
+                    dataset_AllItems_Pane.push(arr);
+
+                }
+                if ($.fn.DataTable.isDataTable('#Table_AllItems_Pane')) {
+                    $('#Table_AllItems_Pane').DataTable().destroy();
+                }
+                $('#Table_AllItems_Pane').DataTable({
+                    data: dataset_AllItems_Pane,
+                    "columns": [
+                        { title: "Id" },
+                        { title: "Room No" },
+                        { title: "Str_Code" },
+                        { title: "Item Name" },
+                        { title: "Brand/Model" },
+                        { title: "Date Acquisition" },
+                        { title: "Condition" },
+                        { title: "Status" },
+                        { title: "Action" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": true
+                        }
+
+                    ],
+                    "language": {
+                        "emptyTable": "No data. <b>found</b>"
+                    }
+
+                }).order([0, 'desc'])
+                    .draw();
+            })
+        })
+
+        //=========== START Show Modal for Update ===========||
+        function showModalUpdate(el) {
+            var id = $(el).data('itemid');
+            var api = "/api/Common/GetItem/id/" + id;
+            $.getJSON(api).done(function (data) {
+                $('#Id_Item_modal_Update').val(data.Id_Item);
+                $('#Item_Name_modal_Update').val(data.Item_Name);
+                $('#Serial_Number_modal_Update').val(data.Serial_Number);
+                $('#Serial_Fixed_modal_Update').val(data.Serial_Number);
+                $('#Category_modal_Update').val(data.Category);
+                $('#Brand_Model_modal_Update').val(data.Brand_Model);
+                $('#Custodian_modal_Update').val(data.Custodian);
+                $('#Price_modal_Update').val(data.Price);
+                $('#Condition_modal_Update').val(data.Condition);
+                $('#Status_modal_Update').val(data.Status);
+                $('#On_Hold_Period_modal_Update').val(data.On_Hold_Period);
+                $('#Date_Acquisition_modal_Update').val(data.Date_Acquisition);
+                $('#Remarks_modal_Update').val(data.Remarks);
+                var toAppendImg = '<center><img src="/Barcodes/' + data.Str_Code + '.jpg" height="60" width="260" />' + data.Str_Code + '</center>'
+                $('#Barcode_Image').empty();
+                $('#Barcode_Image').append(toAppendImg);
+                $('body').css('pointer-events', 'none');
+                $('#modal-Update').css('pointer-events', 'auto');
+                $('#but_for_modal_Update').click();
+            });
+        }
+        //=========== END Show Modalfor Update ===========||
+
+        $('#Date_Acquisition_modal_Update').click(function () {
+            $('body').css('pointer-events', 'auto');
+        });
+
+        $('#Save_modal_Update').click(function () {
+            var errors = [];
+            var Id_Item = $('#Id_Item_modal_Update').val();
+            var Item_Name = $('#Item_Name_modal_Update').val();
+            var Serial_Number = $('#Serial_Number_modal_Update').val();
+            var Category = $('#Category_modal_Update').val();
+            var Brand_Model = $('#Brand_Model_modal_Update').val();
+            var Custodian = $('#Custodian_modal_Update').val();
+            var Price = $('#Price_modal_Update').val();
+            var Condition = $('#Condition_modal_Update').val();
+            var Status = $('#Status_modal_Update').val();
+            var On_Hold_Period = $('#On_Hold_Period_modal_Update').val();
+            var Date_Acquisition = $('#Date_Acquisition_modal_Update').val();
+            var Remarks = $('#Remarks_modal_Update').val();
+
+            if (!Item_Name || Item_Name === "" || Item_Name === null) { errors.push("Item Name Required."); }
+            if (!Serial_Number || Serial_Number === "" || Serial_Number === null) { errors.push("Serial Number Required."); }
+            if (!Category || Category === "" || Category === null) { errors.push("Category Required."); }
+            if (!Brand_Model || Brand_Model === "" || Brand_Model === null) { errors.push("Brand_Model Required."); }
+            //if (!Custodian || Custodian === "" || Custodian === null) { errors.push("Custodian Required."); }
+            if (!Date_Acquisition || Date_Acquisition === "" || Date_Acquisition === null) { errors.push("Date Acquisition Required."); }
+            if (!Condition || Condition === "" || Condition === null) { errors.push("Condition Required."); }
+            //if (!Status || Status === "" || Status === null) { errors.push("Status Required."); }
+            if (errors.length === 0) {
+                var param = {
+                    'Id_Item': Id_Item,
+                    'Item_Name': Item_Name,
+                    'Serial_Number': Serial_Number,
+                    'Category': Category,
+                    'Brand_Model': Brand_Model,
+                    'Custodian': Custodian,
+                    'Price': Price,
+                    'Condition': Condition,
+                    'Status': Status,
+                    'On_Hold_Period': On_Hold_Period,
+                    'Date_Acquisition': Date_Acquisition,
+                    'Remarks': Remarks
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Items/UpdateItem",
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.Message == "success") {
+                            SuccessMessage("Item Successfully updated.");
+                            $('#Close_modal_Update').click();
+                            Reloader();
+                        } else {
+                            ErrorMessage(response.Message);
+                        }
+                    },
+                    failure: function (response) {
+                        ErrorMessage(response.responseText);
+                    },
+                    error: function (response) {
+                        ErrorMessage(response.responseText);
+                    }
+                });
+            } else {
+                ErrorMessage(errors[0]);
+            }
+        })
+
+        $('#Condition_modal_Update').change(function () {
+            if ($(this).val() === "Damaged") {
+                $('body').css('pointer-events', 'auto');
+                $('#modal-Update').hide();
+                var notice = new PNotify({
+                    title: 'Input Remark',
+                    text: 'ex. Screen is broken',
+                    hide: false,
+                    confirm: {
+                        prompt: true,
+                        prompt_multi_line: true,
+                        prompt_default: '',
+                        buttons: [{ text: 'Yes', addClass: 'btn btn-sm btn-primary' },
+                        { addClass: 'btn btn-sm btn-link' }]
+                    },
+                    buttons: { closer: false, sticker: false },
+                    history: { history: false }
+                });
+                notice.get().on('pnotify.confirm', function (e, notice, val) {
+
+                    if (val.length > 0) {
+                        $('#Remarks_modal_Update').val(val);
+                        $('body').css('pointer-events', 'none');
+                        $('#modal-Update').show();
+                        $('#modal-Update').css('pointer-events', 'auto');
+                    } else {
+                        toastr.error("Remarks is needed");
+                        notice.cancelRemove();
+                    }
+
+                });
+                notice.get().on('pnotify.cancel', function (e, notice) {
+                    $('body').css('pointer-events', 'none');
+                    $('#modal-Update').show();
+                    $('#modal-Update').css('pointer-events', 'auto');
+                    $('#Condition_modal_Update').val("Functional");
+                });
+            } else {
+                $('#Remarks_modal_Update').val("");
+            }
+        })
+
+        $('#Cancel_modal_Update').click(function () {
+            $('body').css('pointer-events', 'auto');
+            $('#Close_modal_Update').click();
+        })
+
+        $('#Serial_Number_modal_Update').keyup(function () {
+            if ($(this).val() !== $("#Serial_Fixed_modal_Update").val()) {
+                var serial = $(this).val();
+                var param = {
+                    'serial': $(this).val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Items/CheckSerialExist",
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.Message == "yes") {
+                            ErrorMessage("Serial number already in used.");
+                            $("#Serial_Number_modal_Update").val($("#Serial_Fixed_modal_Update").val());
+                        }
+                    },
+                    failure: function (response) {
+                        ErrorMessage(response.responseText);
+                    },
+                    error: function (response) {
+                        ErrorMessage(response.responseText);
+                    }
+                });
+            }
+        });
+
+        //=========== START function to DELETE Item ===========||
+        function deleteItem(el) {
+            var id = $(el).data('itemid');
+            Swal.fire({
+                title: 'Input reason for deleting.',
+                html: '<div class="form-group">' +
+                    '<input id="input-field" type="text" class="form-control" />' +
+                    '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    var input = $('#input-field').val();
+                    if (input && input != null) {
+                        var param = {
+                            'Id': id,
+                            'Deleted_by': '',
+                            'Description': '',
+                            'Reason': input
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/Items/DeleteItem",
+                            data: JSON.stringify(param),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.Message == "success") {
+                                    SuccessMessage("Item Successfully Deleted.");
+                                    Reloader();
+                                }
+                            },
+                            failure: function (response) {
+                                ErrorMessage(response.responseText);
+                            },
+                            error: function (response) {
+                                ErrorMessage(response.responseText);
+                            }
+                        });
+                    } else {
+                        ErrorMessage("reason is required");
+                    }
+                } else {
+                    ErrorMessage("Cancelled Deletion");
+                }
+            });
+        }
+        //=========== END function to DELETE Item ===========||
+
+         //<<<<=============================== (END) PILLS ALL ===============================>>>>\\
+
+
+
+        //<<<<=============================== (START) PILLS ADD ===============================>>>>\\
+        function pills_Add_Function() {
+            $('#Item_Category_Add_Item_Pane').empty();
+            $.getJSON("/api/Common/Categories").done(function (data) {
+                var toAppendElectronics = '<optgroup label="Electronics">';
+                var toAppendNonElectronics = '<optgroup label="Non-Electronics">';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Description === "Electronics") {
+                        toAppendElectronics += '<option value="' + data[i].Category_Name + '" >' + data[i].Category_Name + '</option>'
+                    } else {
+                        toAppendNonElectronics += '<option value="' + data[i].Category_Name + '">' + data[i].Category_Name + '</option>'
+                    }
+                }
+                toAppendElectronics += ' </optgroup>';
+                toAppendNonElectronics += ' </optgroup>';
+                $('#Item_Category_Add_Item_Pane').append(toAppendElectronics + toAppendNonElectronics);
+            })
+        }
+        //=========== START ok button click ===========||
+        $('#OK_Button_Add_Item_Pane').click(function () {
+            var errors = [];
+            var Category = $('#Item_Category_Add_Item_Pane').val();
+            var ItemName = $('#Item_Name_Add_Item_Pane').val();
+            var Model_Brand = $('#Item_Brand_Model_Add_Item_Pane').val();
+            var Date_Acquisition = $('#Date_Acquisition_Add_Item_Pane').val();
+            var Quantity = $('#Quantity_Add_Item_Pane').val();
+            var Serial_No = $('#Serial_No_Add_Item_Pane').val();
+            var Condition = $('#Condition_Add_Item_Pane').val();
+
+            if (!Category || Category === null || Category === "") { errors.push("Choose Category"); }
+            if (!ItemName || ItemName === null || ItemName === "") { errors.push("Put Item Name"); }
+            if (!Model_Brand || Model_Brand === null || Model_Brand === "") { errors.push("Put Model/Brand."); }
+            if (!Date_Acquisition || Date_Acquisition === null || Date_Acquisition === "") { errors.push("Put Date of Acquisition"); }
+            if (!Condition || Condition === null || Condition === "") { errors.push("Put status"); }
+
+            if (Number(Quantity) === 1) {
+                if (!Serial_No || Serial_No === null || Serial_No === "") { errors.push("Put Serial No."); }
+                if (errors.length === 0) {
+                    //SAVE TO DataBase
+                    var param = {
+                        "Category": Category,
+                        "ItemName": ItemName,
+                        "Model_Brand": Model_Brand,
+                        "Date_Acquisition": Date_Acquisition,
+                        "Condition": Condition,
+                        "Serial_No": Serial_No,
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/Items/AjaxSaveItem",
+                        data: JSON.stringify(param),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.Message == "success") {
+                                SuccessMessage("One item successfully added.!")
+                                Swal.fire({
+                                    title: 'Do you want to print Barcode of the newly added item?',
+                                    text: "This is optional.",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    confirmButtonClass: 'btn btn-success',
+                                    cancelButtonClass: 'btn btn-danger',
+                                    confirmButtonText: 'Yes',
+                                    cancelButtonText: 'No',
+                                    buttonsStyling: false
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        $('#pills-barcode-printer-tab').click();
+                                    } else {
+                                        location.reload();
+                                    }
+                                })
+                            } else {
+                                ErrorMessage(response.Message);
+                            }
+                        },
+                        failure: function (response) {
+                            ErrorMessage(response.responseText);
+                        },
+                        error: function (response) {
+                            ErrorMessage(response.responseText);
+                        }
+                    });
+                } else {
+                    ErrorMessage(errors[0]);
+                }
+            } else {
+                // Continue To NEXT Process Input Serial No, Depends on quantity inputted
+                if (errors.length === 0) {
+                    //var Serials = [];
+                    $('#Hidden_Serials').val(Quantity);
+                    $('#Hidden_Serials_Fixed').val(Quantity);
+                    var toAppend = '';
+                    toAppend = '<div class="input-group mb-3">' +
+                        '<input type ="text" id="Serial" class="form-control serials" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder = "Serial" >'
+                        + '<div class="input-group-append" onclick="addSerial(this)" data-serial="S" id="Serial_Add_Div">'
+                        + '<span class="input-group-text">Save</span>'
+                        + '</div></div >'
+
+                    $('#Modal_Serial_Add_Item_Pane').prepend(toAppend);
+                    $("body").css("pointer-events", "none");
+                    $("#modal-Add").css("pointer-events", "auto");
+                    $('#Hidden_But_Add_Item_Pane').click();
+                    InfoMessage("Provide Serial No for the " + Quantity + " items");
+                } else {
+                    ErrorMessage(errors[0]);
+                }
+            }
+        })
+        //=========== END ok button click ===========||
+
+        //=========== START Multiple Serial Save ===========||
+        $('#Serial_Save_Add_Item_Pane').click(function () {
+            var Category = $('#Item_Category_Add_Item_Pane').val();
+            var ItemName = $('#Item_Name_Add_Item_Pane').val();
+            var Model_Brand = $('#Item_Brand_Model_Add_Item_Pane').val();
+            var Date_Acquisition = $('#Date_Acquisition_Add_Item_Pane').val();
+            var Condition = $('#Condition_Add_Item_Pane').val();
+
+            var count = Number($('#Hidden_Serials_Fixed').val());
+            var errors = [];
+            var Serials = [];
+            if (count) {
+                for (var i = 0; i < count; i++) {
+                    Serials.push("");
+                }
+                for (var i = 0; i < count; i++) {
+                    var id = 'serial' + (i + 1);
+                    if (!$('#' + id).text() || $('#' + id).text() === "" || $('#' + id).text() === null) {
+                        errors.push("Put serial no. to item " + (i + 1));
+                    } else {
+                        Serials[i] = $('#' + id).text();
+                    }
+                }
+                if (errors.length === 0) {
+                    var items = [];
+                    for (var i = 0; i < count; i++) {
+                        var param = {
+                            "Category": Category,
+                            "ItemName": ItemName,
+                            "Model_Brand": Model_Brand,
+                            "Date_Acquisition": Date_Acquisition,
+                            "Condition": Condition,
+                            "Serial_No": Serials[i],
+                        };
+                        items.push(param);
+                    }
+                    var Param = {
+                        "Id": 0,
+                        "Items": items
+                    };
+                    // Custom progress saving ----------->>>>>>>>
+                    $.ajax({
+                        type: "POST",
+                        url: "/Items/AjaxSaveMultipleItem",
+                        data: JSON.stringify(Param),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.Message == "success") {
+                                //Custom Success Message ------------------------------------ >>>>>
+                                SuccessMessage(count + " items sucessfully added.");
+                                $("body").css("pointer-events", "auto");
+                                $('#Modal_Close_Add_Item_Pane').click();
+                                Swal.fire({
+                                    title: 'Do you want to print Barcode of the newly added item?',
+                                    text: "This is optional.",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    confirmButtonClass: 'btn btn-success',
+                                    cancelButtonClass: 'btn btn-danger',
+                                    confirmButtonText: 'Yes',
+                                    cancelButtonText: 'No',
+                                    buttonsStyling: false
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        //alert("Printing..")
+                                        //Call faunction to Print Selected Barcode -------------------------------->>>>>>>
+                                        $('#Modal_Close_Add_Item_Pane').click();
+                                        $('#pills-barcode-printer-tab').click();
+                                    } else {
+                                        location.reload();
+                                    }
+                                })
+                            } else {
+                                ErrorMessage("Failed adding Items. It may an server error.")
+                                $('#Modal_Close_Add_Item_Pane').click();
+                                $("body").css("pointer-events", "auto");
+                            }
+                        },
+                        failure: function (response) {
+                            ErrorMessage(response.responseText);
+                            $('#Modal_Close_Add_Item_Pane').click();
+                            $("body").css("pointer-events", "auto");
+                        },
+                        error: function (response) {
+                            ErrorMessage(response.responseText);
+                            $('#Modal_Close_Add_Item_Pane').click();
+                            $("body").css("pointer-events", "auto");
+                        }
+                    });
+                } else {
+                    ErrorMessage(errors[0]);
+                }
+            }
+        })
+        //=========== END Multiple Serial Save ===========||
+
+        //=========== START Function Quantity on change ===========||
+        $('#Quantity_Add_Item_Pane').change(function (ev) {
+            ev.preventDefault();
+            if (Number($(this).val()) > 1) {
+                $('#Serial_No_Add_Item_Pane').val("");
+                $('#Serial_No_Add_Item_Pane').prop('readonly', true);
+            } else {
+                $('#Serial_No_Add_Item_Pane').prop('readonly', false);
+            }
+        })
+        //=========== END Function Quantity on change ===========||
+
+        //=========== START function called when save serial ===========||
+        function addSerial(el) {
+            var idSerial = $('#Hidden_Type').val();
+            if (idSerial === "S") {
+                if ($('#Hidden_Serials').val() > 0) {
+                    if ($('#Serial').val() && $('#Serial').val() != "") {
+                        var serialExist = false;
+                        var count = Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val());
+                        for (var i = 0; i < count; i++) {
+                            var id = 'serial' + (i + 1);
+                            if ($('#' + id).text() === $('#Serial').val()) {
+                                serialExist = true;
+                                break;
+                            }
+                        }
+                        if (!serialExist) {
+                            var param = {
+                                'serial': $('#Serial').val()
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: "/Items/CheckSerialExist",
+                                data: JSON.stringify(param),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.Message == "yes") {
+                                        ErrorMessage("Serial number already in used.");
+                                        $("#Serial").val("");
+                                    } else {
+                                        toAppend = '<tr>' +
+                                            '<td >' + ((Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val())) + 1) + '</td>' +
+                                            '<td id="serial' + ((Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val())) + 1) + '">' + $('#Serial').val() + '</td>' +
+                                            '<td><i class="fa fa-edit" id="editserial' + ((Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val())) + 1) + '" data-serialid="serial' + ((Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val())) + 1) + '" onclick="editSerial(this)"></i></td>' +
+                                            '</tr >'
+                                        $('#table_Serial').append(toAppend);
+                                        $('#Serial').val("");
+                                        $('#Hidden_Serials').val($('#Hidden_Serials').val() - 1);
+                                        if ($('#Hidden_Serials').val() <= 0) {
+                                            $('#Serial_Save_Add_Item_Pane').css('display', 'block');
+                                        }
+                                    }
+                                },
+                                failure: function (response) {
+                                    ErrorMessage(response.responseText);
+                                },
+                                error: function (response) {
+                                    ErrorMessage(response.responseText);
+                                }
+                            });
+
+                        } else {
+                            ErrorMessage("Serial No already added. It must be unique.");
+                            $('#Serial').val("");
+                        }
+                    }
+                }
+            } else {
+                if ($('#Serial').val() && $('#Serial').val() != "") {
+                    var serialExist = false;
+                    var count = Number($('#Hidden_Serials_Fixed').val()) - Number($('#Hidden_Serials').val());
+                    for (var i = 0; i < count; i++) {
+                        var id = 'serial' + (i + 1);
+                        if ($('#' + id).text() === $('#Serial').val() && id !== idSerial) {
+                            serialExist = true;
+                            break;
+                        }
+                    }
+                    if (!serialExist) {
+                        var param = {
+                            'serial': $('#Serial').val()
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "/Items/CheckSerialExist",
+                            data: JSON.stringify(param),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.Message == "yes") {
+                                    ErrorMessage("Serial number already in used.");
+                                    $("#Serial").val("");
+                                } else {
+                                    $('#' + idSerial).text($('#Serial').val());
+                                    $('#Serial').val("");
+                                    $('#Hidden_Type').val("S");
+                                }
+                            },
+                            failure: function (response) {
+                                ErrorMessage(response.responseText);
+                            },
+                            error: function (response) {
+                                ErrorMessage(response.responseText);
+                            }
+                        });
+
+                    } else {
+                        $('#Serial').val("");
+                        ErrorMessage("Serial No already added. It must be unique.");
+                    }
+                }
+            }
+
+        }
+        //=========== END function called when save serial ===========||
+
+        //=========== START function called when edit serial ===========||
+        function editSerial(el) {
+            var id = $(el).data("serialid");
+            $('#Hidden_Type').val(id);
+            $('#Serial').val($('#' + id).text());
+        }
+        //=========== START function called when edit serial ===========||
+        //<<<<=============================== (END) PILLS ADD ===============================>>>>\\
+
+
+
+         //<<<<=============================== (START) PILLS VERIFY ===============================>>>>\\
+        function pills_Verify_Function() {
+            $('#Verify-Item-Scan-Input').focus();
+            $.getJSON("/api/Common/GetUnverifiedItems").done(function (data) {
+                $("#table-Unverify-Items").empty();
+                $("#Label-Count-Unverified-Items").html(data.length + " Unverified items");
+                var toAppend = '';
+                if (data.length > 0){
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Date_Acquisition + '</td><td>' + data[i].Condition + '</td><td>' + data[i].Status + '</td></tr>'
+                    }
+                    $("#table-Unverify-Items").append(toAppend);
+                } else {
+                    $("#table-Unverify-Items").append('<tr><th scope="row"></th><td></td><td></td><td>All Items are already verified.</td><td></td><td></td><td></td></tr>');
+                }
+
+            })
+        }
+
+        $('#Verify-Item-Scan-Input').scannerDetection({
+            timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+            startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+            endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+            avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+            onComplete: function (barcode, qty) {
+                //alert(barcode);
+                var tab_selected = window.location.hash;
+                if (tab_selected === "#pills-verify") {
+                   
+                    var uri = "/api/Common/GetItem/strcode/" + barcode;
+                    $.getJSON(uri).done(function (data) {
+                        if (data) {
+                            if (!data.Is_Verify) {
+                                var dat = JSON.stringify({ "strcode": data.Str_Code });
+                                //$.ajax({
+                                //    type: "POST",
+                                //    url: "/Items/UpdateIsVerifiedField",
+                                //    data: dat,
+                                //    contentType: "application/json; charset=utf-8",
+                                //    dataType: "json",
+                                //    success: function (response) {
+
+                                //        if (response.Message == "success") {
+                                //            SuccessMessage("One item successfully verified.");
+                                //            setTimeout(function () {
+                                //                location.reload();
+                                //            }, 500);
+                                //        } else {
+                                //            ErrorMessage("Something went wrong.Please try again");
+                                //        }
+                                //    },
+                                //    failure: function (response) {
+                                //        ErrorMessage("Failure!.Something went wrong.Please try again");
+                                //    },
+                                //    error: function (response) {
+                                //        ErrorMessage("Error!.Something went wrong.Please try again");
+                                //    }
+                                //});
+                                var toAppendImg = '<center><img src="/Barcodes/' + data.Str_Code + '.jpg" height="60" width="240" /><small>' + data.Str_Code + '</small></center>'
+                                $('#Barcode_Image_Verify').empty();
+                                $('#Barcode_Image_Verify').append(toAppendImg);
+                                $('#Barcode_modal_Verify').val(data.Str_Code);
+                                $('#Item_Name_modal_Verify').val(data.Item_Name);
+                                $('#Brand_Model_modal_Verify').val(data.Brand_Model);
+                                $('#Category_modal_Verify').val(data.Category);
+                                $('#Serial_Number_modal_Verify').val(data.Serial_Number);
+                                $('#Room_modal_Verify').val(data.Room_No);
+                                $('#modal-Verify').modal('show');
+                            } else {
+                                InfoMessage("Item is already verified");
+                                $('#Verify-Item-Scan-Input').val("");
+                            }
+
+                        } else {
+                            ErrorMessage("Barcode not found");
+                            $('#Verify-Item-Scan-Input').val("");
+                        }
+
+                    })
+                }
+            }
+        });
+
+        $('#submit-Verify').click(function () {
+            var dat = JSON.stringify({ "strcode": $('#Barcode_modal_Verify').val() });
+            $.ajax({
+                type: "POST",
+                url: "/Items/UpdateIsVerifiedField",
+                data: dat,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    if (response.Message == "success") {
+                        SuccessMessage("One item successfully verified.");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 500);
+                    } else {
+                        ErrorMessage("Something went wrong.Please try again");
+                    }
+                },
+                failure: function (response) {
+                    ErrorMessage("Failure!.Something went wrong.Please try again");
+                },
+                error: function (response) {
+                    ErrorMessage("Error!.Something went wrong.Please try again");
+                }
+            });
+        })
+         //<<<<=============================== (START) PILLS VERIFY ===============================>>>>\\
+
+
+
+        //<<<<=============================== (START) PILLS ASSIGN ===============================>>>>\\
+        function pills_Assign_Function() {
+            $('#searchInput-Assign-Items').focus();
+            $.getJSON("/api/Common/GetUnAssignedItems").done(function (data) {
+                $("#table-Not-Assigned-Items").empty();
+                $("#label-Not-Assigned-Items").html(data.length + " items not yet assigned");
+                var toAppend = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Date_Acquisition + '</td><td>' + data[i].Condition + '</td><td>' + data[i].Status + '</td><td><button type="button" class="btn btn-outline-success" data-itemid="' + data[i].Id_Item+'" onclick="assignFunc(this)" ><i class="feather icon-check-circle"></i>Assign</button></td></tr>'
+                    }
+                    $("#table-Not-Assigned-Items").append(toAppend);
+                } else {
+                    $("#table-Not-Assigned-Items").append('<tr><th scope="row"></th><td></td><td></td><td>All Items are already assigned.</td><td></td><td></td><td></td></tr>');
+                }
+
+            })
+        }
+
+        function getUnAssignedItems() {
+            $('#Dropdown-Choice-Pill-Assign').html("Not Yet Assigned");
+            $.getJSON("/api/Common/GetUnAssignedItems").done(function (data) {
+                $("#table-Not-Assigned-Items").empty();
+                $("#label-Not-Assigned-Items").html(data.length + " items not yet assigned");
+                var toAppend = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Date_Acquisition + '</td><td>' + data[i].Condition + '</td><td>' + data[i].Status + '</td><td><button type="button" class="btn btn-outline-success" data-itemid="' + data[i].Id_Item +'" onclick="assignFunc(this)"><i class="feather icon-check-circle"></i>Assign</button></td></tr>'
+                    }
+                    $("#table-Not-Assigned-Items").append(toAppend);
+                } else {
+                    $("#table-Not-Assigned-Items").append('<tr><th scope="row"></th><td></td><td></td><td>All Items are already assigned.</td><td></td><td></td><td></td></tr>');
+                }
+            })
+        }
+
+        function getAssignedItems() {
+            $('#Dropdown-Choice-Pill-Assign').html("Assigned Items");
+            $.getJSON("/api/Common/GetAssignedItems").done(function (data) {
+                $("#table-Not-Assigned-Items").empty();
+                $("#label-Not-Assigned-Items").html(data.length + " Assigned Items");
+                var toAppend = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Date_Acquisition + '</td><td>' + data[i].Condition + '</td><td>' + data[i].Status + '</td><td><button type="button" class="btn btn-outline-warning btn-ReAssign" data-itemid="' + data[i].Id_Item +'" onclick="reassignFunc(this)"><i class="fa fa-retweet"></i>Re-Assign</button></td></tr>'
+                    }
+                    $("#table-Not-Assigned-Items").append(toAppend);
+                } else {
+                    $("#table-Not-Assigned-Items").append('<tr><th scope="row"></th><td></td><td></td><td>All Items are already assigned.</td><td></td><td></td><td></td></tr>');
+                }
+            })
+        }
+
+        function assignFunc(el) {
+            $('#type-assignOrReassign').val("ASSIGN");
+            $('#itemid-assign').val($(el).data('itemid'));
+            $('#option-Room-Assign').empty();
+            $.getJSON("/api/Common/Rooms").done(function (data) {
+                var toAppend = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] && data[i] !== null && data[i] !== "") {
+                        toAppend += '<option value="' + data[i] + '">' + data[i] + '</option>'
+                    }
+                }
+                $('#option-Room-Assign').append(toAppend);
+            })
+            $('#optionRoomModal').modal("show");
+        }
+
+        $('#save-assign').click(function () {
+            var idItem = $('#itemid-assign').val();
+            var newRoom = $('#option-Room-Assign').val();
+            var Action = $('#type-assignOrReassign').val();
+            var param = {
+                'id': idItem,
+                'room': newRoom,
+                'action': Action
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Items/AjaxAssignOrReAssignItem",
+                data: JSON.stringify(param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.Message == "success") {
+                        SuccessMessage("Item " + idItem + " successfully assigned to " + newRoom);
+                        Reloader();
+                    } else {
+                        ErrorMessage("Something went wrong.Please try again");
+                    }
+                },
+                failure: function (response) {
+                    ErrorMessage(response.responseText);
+                },
+                error: function (response) {
+                    ErrorMessage(response.responseText);
+                }
+            })
+        });
+
+        function reassignFunc(el) {
+            $('#type-assignOrReassign').val("REASSIGN");
+            $('#itemid-assign').val($(el).data('itemid'));
+            $('#option-Room-Assign').empty();
+            $.getJSON("/api/Common/Rooms").done(function (data) {
+                var toAppend = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] && data[i] !== null && data[i] !== "") {
+                        toAppend += '<option value="' + data[i] + '">' + data[i] + '</option>'
+                    }
+                }
+                $('#option-Room-Assign').append(toAppend);
+            })
+            $('#optionRoomModal').modal("show");
+        }
+
+        $('#searchInput-Assign-Items').keyup(function () {
+            var data = this.value.split(" ");
+            //create a jquery object of the rows
+            var jo = $("#table-Not-Assigned-Items").find("tr");
+            if (this.value == "") {
+                jo.show();
+                return;
+            }
+            //hide all the rows
+            jo.hide();
+
+            //Recusively filter the jquery object to get results.
+            jo.filter(function (i, v) {
+                var $t = $(this);
+                for (var d = 0; d < data.length; ++d) {
+                    if ($t.is(":contains('" + data[d] + "')")) {
+                        return true;
+                    }
+                }
+                return false;
+            })
+            //show the rows that match.
+            .show();
+        })
+
+         //<<<<=============================== (END) PILLS ASSIGN ===============================>>>>\\
+
+
+
+
+        //<<<<=============================== (START) PILLS BORROWED ===============================>>>>\\
+
+        function pills_Borrowed_Function() {
+            $.getJSON("/api/Common/GetBorrowedItems").done(function (data) {
+                $("#table-Borrowed-Items").empty();
+                $("#label-Borrowed-Items").html(data.length + " borrowed items");
+                var toAppend = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Released_To + '</td><td>' + data[i].Released_Date + '</td><td>' + data[i].Expected_Date_Of_Return + '</td></tr>'
+                    }
+                    $("#table-Borrowed-Items").append(toAppend);
+                } else {
+                    $("#table-Borrowed-Items").append('<tr><th scope="row"></th><td></td><td></td><td>No borrowed items.</td><td></td><td></td><td></td></tr>');
+                }
+
+            })
+        }
+
+        //<<<<=============================== (END) PILLS BORROWED ===============================>>>>\\
+
+
+        //<<<<=============================== (START) PILLS DAMAGED ===============================>>>>\\
+
+        function pills_Damaged_Function() {
+            //InfoMessage("Pills Damaged");
+            $.getJSON("/api/Common/GetDamagedItems").done(function (data) {
+                $("#table-Damaged-Items").empty();
+                $("#label-Damaged-Items").html(data.length + " damaged items");
+                var toAppend = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        toAppend += '<tr><th scope="row">' + data[i].Room_No + '</th><td>' + data[i].Category + '</td><td>' + data[i].Item_Name + '</td><td>' + data[i].Brand_Model + '</td><td>' + data[i].Released_To + '</td><td>' + data[i].Released_Date + '</td></tr>'
+                    }
+                    $("#table-Damaged-Items").append(toAppend);
+                } else {
+                    $("#table-Damaged-Items").append('<tr><th scope="row"></th><td></td><td></td><td>No borrowed items.</td><td></td><td></td><td></td></tr>');
+                }
+
+            })
+        }
+
+        //<<<<=============================== (END) PILLS DAMAGED ===============================>>>>\\
+
+        //<<<<=============================== (START) PILLS BARCODEPRINTER ===============================>>>>\\
+
+        function pills_BarcodePrinter_Function() {
+        }
+        function PrintDiv() {
+            var divToPrint = document.getElementById('barcode-wrapper');
+            var popupWin = window.open('', '_blank', 'width=900,height=600,location=no,left=200px');
+            popupWin.document.open();
+            popupWin.document.write('<html><body onload="window.print()"><h1>Hi Danilo Gwapo</h1></html>');
+            popupWin.document.close();
+        }
+        $('#pdfdownloader').click(function () {
+            window.location.href = '@Url.Action("DynamicBarcodePdfGenerator", "Items")';
+            @*var url = '@Url.Action("PartialSlip", "Slip")';
+                                        url += '?badgeno=' + $('#BadgeNo').val() + '&remarks=' + $('#Remarks').val() + '&vendor=' + $('#Vendor').val()
+                                            + '&issuedby=' + $('#Issuer').val() +'&dateissued='+ $('#DateNow').val();
+                                        window.location.href = url;*@
+        })
+
+        function NotVerifiedItems() {
+
+            $.getJSON('/api/Common/GetUnverifiedItems').done(function (data) {
+                $('#barcode-wrapper').empty();
+                if (data != null) {
+                    if (data.length > 0) {
+                        if (data.length > 45) {
+                            var batchNumber = parseInt(data.length / 45 );
+                            var exceed = (data.length - (batchNumber * 45));
+                            for (var i = 1; i <= batchNumber; i++) {
+                                $('#barcode-wrapper').append(
+                                    '<div class="i-block"  data-filter="' + ordinal_suffix_of(i) + ' batch (45 barcodes)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(i) + ' batch (45 barcodes)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + i + '" data-optiondownload="Not Verified Items"></i>&nbsp;<i class="feather icon-printer" onclick="PrintBarcode(this)" data-batch="' + i +'" data-optiondownload="Not Verified Items"></i></div>');
+                            }
+                            if (exceed > 0) {
+                                $('#barcode-wrapper').append(
+                                    '<div class="i-block"  data-filter="' + ordinal_suffix_of(batchNumber + 1) + ' batch (' + exceed + ' barcodes)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(batchNumber + 1) + ' batch (' + exceed + ' barcodes)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + (batchNumber + 1) + '" data-optiondownload="Not Verified Items"></i>&nbsp;<i class="feather icon-printer" ></i></div>');
+                            }
+                           
+                        } else {
+                            $('#barcode-wrapper').append(
+                                '<div class="i-block"  data-filter="' + ordinal_suffix_of(1) + ' batch (' + data.length + ' barcode/s)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(1) + ' batch (' + data.length + ' barcodes)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + (1) + '" data-optiondownload="Not Verified Items"></i>&nbsp;<i class="feather icon-printer" ></i></div>');
+
+                        }
+                        $('body').tooltip({
+                            selector: '.i-block'
+                        });
+                    } else {
+                        InfoMessage("All items are already verified!");
+                    }
+                }
+            });
+        }
+
+       
+        function DowloadPDF(el) {
+            var batch = $(el).data('batch');
+            var optiondownload = $(el).data('optiondownload');
+            InfoMessage("PDF will be downloaded.Just wait..");
+            $(el).parent().remove();
+            var url = '@Url.Action("DownloadPDF", "Items")';
+            url += '?batch=' + batch + '&optiondownload=' + optiondownload 
+            window.location.href = url;
+        }
+
+        function PrintBarcode(el) {
+            var batch = $(el).data('batch');
+            var optiondownload = $(el).data('optiondownload');
+            var param = {
+                'batch': batch,
+                'optiondownload': optiondownload
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Items/AjaxGetBarcodesToPrint",
+                data: JSON.stringify(param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response !== null) {
+                        SuccessMessage(JSON.stringify(response.barcodeDetails[0].Path));
+
+                        var counter = 0;
+                        var rowNum = parseInt( response.barcodeDetails.length / 4);
+                        var rowExist = response.barcodeDetails.length - (rowNum * 4);
+                        var popupWin = window.open('', '_blank', 'width=900,height=600,location=no,left=200px');
+                        var divToPrint = '<div class="container">';
+                        for (var i = 0, count = 0; i < rowNum; i++) {
+
+                            var td = '';
+                            for (var y = 0; y < 4; y++) {
+                                td += '<td><center><small>' + response.barcodeDetails[count].Category.substring(0, 3) + '</small><img src="' + response.barcodeDetails[count].Path.substr(1) + '" height="40" width="320" alt="Not found" /><small>' + response.barcodeDetails[count].Strcode + '</small></center></td>';
+                                count++;
+                                counter = count;
+                            }
+                            var trs = '<div class="row"><table><tbody><tr>' + td + '</tr></tbody></table></div><br />';
+                            divToPrint += trs;
+                        }
+                        divToPrint += '</div>';
+                        popupWin.document.open();
+                        popupWin.document.write('<html><link href="/Content/assets/css/style.css" rel="stylesheet" /><link href="/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" /><body onload="window.print()">' + divToPrint + '</html>');
+                        popupWin.document.close();
+                    } else {
+                        ErrorMessage("Something went wrong.Please try again");
+                    }
+                },
+                failure: function (response) {
+                    ErrorMessage(response.responseText);
+                },
+                error: function (response) {
+                    ErrorMessage(response.responseText);
+                }
+            })
+        }
+
+        function AddedToday() {
+            $.getJSON('/api/Common/AddedToday').done(function (data) {
+                $('#barcode-wrapper').empty();
+                if (data != null) {
+                    if (data.length > 0) {
+                        if (data.length > 45) {
+                            var batchNumber = parseInt(data.length / 45);
+                            var exceed = (data.length - (batchNumber * 45));
+                            for (var i = 1; i <= batchNumber; i++) {
+                                $('#barcode-wrapper').append(
+                                    '<div class="i-block"  data-filter="' + ordinal_suffix_of(i) + ' batch (45 barcodes)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(i) + 'batch (45 barcodes)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + i + '" data-optiondownload="Added Today"></i>&nbsp;<i class="feather icon-printer" ></i></div>');
+                            }
+                            if (exceed > 0) {
+                                $('#barcode-wrapper').append(
+                                    '<div class="i-block"  data-filter="' + ordinal_suffix_of(batchNumber + 1) + 'batch (' + exceed + ' barcodes)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(batchNumber + 1) + ' batch (' + exceed + ' barcodes)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + (batchNumber + 1) + '" data-optiondownload="Added Today"></i>&nbsp;<i class="feather icon-printer" ></i></div>');
+                            }
+
+                        } else {
+                            $('#barcode-wrapper').append(
+                                '<div class="i-block"  data-filter="' + ordinal_suffix_of(1) + ' batch (' + data.length + ' barcode/s)" data-toggle="tooltip" title="" data-original-title="' + ordinal_suffix_of(1) + ' batch (' + data.length + ' barcode/s)"><i class="fa fa-file-pdf" style="color:red" onclick="DowloadPDF(this)" data-batch="' + (1) + '" data-optiondownload="Added Today"></i>&nbsp;<i class="feather icon-printer" ></i></div>');
+
+                        }
+                        $('#barcode-wrapper').tooltip({
+                            selector: '.i-block'
+                        });
+                    } else {
+                        InfoMessage("No items added today.");
+                    }
+                }
+            });
+        }
+
+
+        function ordinal_suffix_of(i) {
+            var j = i % 10,
+                k = i % 100;
+            if (j == 1 && k != 11) {
+                return i + "st";
+            }
+            if (j == 2 && k != 12) {
+                return i + "nd";
+            }
+            if (j == 3 && k != 13) {
+                return i + "rd";
+            }
+            return i + "th";
+        }
+
+
+        //<<<<=============================== (END) PILLS BARCODEPRINTER ===============================>>>>\\
+
+        //---- Scanner Detection to verify Item-----///
+       
+
+        // --------------------------------------- OTHERS ---------------------------------------------//
+
+        function Reloader() {
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
+        }
+
+        //=========== (START) function for show Success message ===========||
+        function SuccessMessage(message) {
+            notify("top", "center", "fa fa-check", "success", "animated bounceIn", "animated bounceOut", " "+message);
+        }
+        //=========== (END) function for show Success message ===========||
+
+        //=========== (START) function for show Info message ===========||
+        function InfoMessage(message) {
+            notify("top", "center", "fa fa-info", "info", "animated bounceIn", "animated bounceOut", " "+message);
+        }
+        //=========== (END) function for show Info message ===========||
+
+        //=========== (START) function for show Erorr message ===========||
+        function ErrorMessage(message) {
+            notify("top", "center", "fa fa-times", "danger", "animated bounceIn", "animated bounceOut"," "+message);
+        }
+        //=========== (END) function for show Erorr message ===========||
+        //=========== (START) function to display Message ===========||
+        function notify(from, align, icon, type, animIn, animOut, mess) {
+            $.growl({
+                icon: icon,
+                title: '',
+                message: mess,
+                url: ''
+            }, {
+                element: 'body',
+                type: type,
+                allow_dismiss: true,
+                placement: {
+                    from: from,
+                    align: align
+                },
+                offset: { x: 30, y: 30 },
+                spacing: 10,
+                z_index: 999999,
+                delay: 2500,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: false,
+                animate: {
+                    enter: animIn,
+                    exit: animOut
+                },
+                icon_type: 'class',
+                template: '<div data-growl="container" class="alert" role="alert">' +
+                    '<button type="button" class="close" data-growl="dismiss">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '<span class="sr-only">Close</span>' +
+                    '</button>' +
+                    '<span data-growl="icon"></span>' +
+                    '<span data-growl="title"></span>' +
+                    '<span data-growl="message"></span>' +
+                    '<a href="#!" data-growl="url"></a>' +
+                    '</div>'
+            });
+        };
+        //=========== (END) function to display Message ===========||
+
+
+
+    </script>
+
+    <script src="~/ViewScripts/Items/_AddItemPane.js"></script>
+    @*<script src="~/ViewScripts/Items/_AllItemPane.js"></script>
+
+        <script src="~/Content/lightbox/pages/lightbox.js"></script>*@
+
+
+
+
+}

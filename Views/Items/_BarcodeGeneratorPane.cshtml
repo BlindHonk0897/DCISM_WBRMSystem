@@ -1,0 +1,58 @@
+﻿<hr />
+<h5>Choose Room and Category to Generate Barcodes</h5>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Room</span>
+            </div>
+            <select class="form-control select2" name="Room_Barcode_Generator_Pane" id="Room_Barcode_Generator_Pane" style="width: 80%;">
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
+            </div>
+            <select class="form-control select2" name="Category_Barcode_Generator_Pane" id="Category_Barcode_Generator_Pane" style="width: 80%;">
+            </select>
+        </div>
+
+    </div>
+    @*<div class="col-md-4">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Room</span>
+            </div>
+            <select class="form-control select2" name="Name_Barcode_Generator_Pane" id="Name_Barcode_Generator_Pane" style="width: 100%;">
+            </select>
+        </div>
+    </div>*@
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Categorized Items/Equipments every Facility</h5>
+            </div>
+            <div class="card-block">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6">
+                        <input type="button" id="icon-generate-barcodes" class="form-control mb-4" value="GENERATE">
+                    </div>
+                </div>
+                <div class="row justify-content-center" id="PrintBarcodesBut">
+                    <div class="col-sm-2">
+                        <input type="button" id="icon-print-barcodes" class="form-control mb-4" value="Printable PDF" style="display:none">
+                    </div>
+                </div>
+                <div class="i-main" id="barcodes-wrapper"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,119 @@
+﻿
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Items</h5>
+                
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#pills-pending-request"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#pills-pending-request"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#pills-pending-request"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-2">
+                       
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <input type="text" id="" class="form-control add_task_todo" placeholder="Search . ..">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Request #</th>
+                                <th>Requestor</th>
+                                <th>Date Requested</th>
+                                <th>Purpose</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-all-pending-request">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<div class="modal fade" id="modal-cart" style="display: none;" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="header-details-request"></h4>
+                <input type="text" id="hidden-request-id" hidden />
+                <input type="text" id="hidden-request-count" value="0" hidden/>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="x-close" hidden>
+                    <span aria-hidden="true">×</span>
+                </button>
+                <button type="button" class="close" aria-label="Close" id="x-close-modal-cart">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4"><h5>Item/Items</h5></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <a class="btn-sm btn-primary" href="#pills-pending-request" id="ApprovedAllItem">Approve All</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Expected Date ( Receive )</th>
+                                    <th>Expected Date ( Return )</th>
+                                    <th>Purpose</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-pending-cart-items">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @*@using (Html.BeginForm("Delete", "OPDReceipts", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="text" id="DynamicIDToForDelete" value="" name="id" hidden />
+                            <input type="submit" id="SubmitDelete" hidden />
+                            <input type="button" value="Delete" id="Delete" class="btn btn-primary" /> |
+                            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
+                        </div>
+                    }*@
+            </div>
+        </div>
+
+    </div>
+</div>

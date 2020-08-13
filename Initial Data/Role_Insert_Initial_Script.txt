@@ -1,0 +1,14 @@
+USE [WBRMSystem]
+GO
+SET IDENTITY_INSERT [dbo].[Role] ON 
+GO
+INSERT [dbo].[Role] ([ID_Role], [Role_Name]) VALUES (1, N'Administrator')
+GO
+INSERT [dbo].[Role] ([ID_Role], [Role_Name]) VALUES (2, N'Chairperson')
+GO
+INSERT [dbo].[Role] ([ID_Role], [Role_Name]) VALUES (3, N'Teacher')
+GO
+INSERT [dbo].[Role] ([ID_Role], [Role_Name]) VALUES (4, N'Student')
+GO
+SET IDENTITY_INSERT [dbo].[Role] OFF
+GO

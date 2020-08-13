@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "ListItems";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href="@Url.Action("Index","Items")"><i class="fa fa-arrow-left f-14"></i></a>
+<hr />
+<div class="row">
+    <div class="col-xl-3 col-md-4">
+        <label>Room:</label>
+        <select class="form-control select2" name="Room" id="Room" style="width: 80%;">
+            <option value="400">LB 400</option>
+            <option value="442">LB 442</option>
+            <option value="443">LB 443</option>
+            <option value="445">LB 445</option>
+            <option value="446">LB 446</option>
+            <option value="447">LB 447</option>
+            <option value="448">LB 448</option>
+            <option value="466">LC 466</option>
+            <option value="467">LB 467</option>
+            <option value="468">LB 468</option>
+            <option value="469">LC 469</option>
+            <option value="483">LC 483</option>
+            <option value="484">LC 484</option>
+            <option value="485">LC 485</option>
+            <option value="486">LC 486</option>
+            <option value="Control Room">Control Room</option>
+            <option value="Functional Unit">Functional Unit</option>
+        </select>
+    </div>
+    <div class="col-xl-3 col-md-4">
+        <label>Category:</label>
+        <select class="form-control select2" name="Items" id="Items" style="width: 80%;">
+            <option value="400">MOUSE</option>
+            <option value="442">KEYBOARD</option>
+            <option value="443">CPU</option>
+            <option value="445">MONITOR</option>
+            <option value="446">AVR</option>
+            <option value="447">Projector Screen</option>
+            <option value="448">LCD Projector</option>
+            <option value="466">Window-Type Airconditioner</option>
+            <option value="467">Steel Chairs</option>
+            <option value="468">Table</option>
+            <option value="469">Demo Table</option>
+            <option value="483">Splitter</option>
+            <option value="484">Speaker</option>
+            <option value="485">Mixer</option>
+            <option value="486">CCTV Cameras</option>
+            <option value="Control Room">Remote</option>
+        </select>
+    </div>
+</div>
+<hr />
+<div class="row">
+    @Html.Partial("_AllItemsTable")
+</div>
+
+@section scripts{
+    <script>
+        $('.select2').select2();
+    </script>
+    
+}
+

@@ -1,0 +1,104 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 id="label-Not-Assigned-Items"></h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#pills-assign"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="##pills-assign"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="##pills-assign"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="btn-group mb-2 mr-2">
+                            <button type="button" class="btn btn-outline-secondary" id="Dropdown-Choice-Pill-Assign">Not Yet Assigned</button>
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(109px, 43px, 0px);">
+                                <a class="dropdown-item" onclick="getUnAssignedItems()">Not Yet Assigned</a>
+                                <a class="dropdown-item" onclick="getAssignedItems()">Assigned Items</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <input type="text" id="searchInput-Assign-Items" class="form-control add_task_todo" placeholder="Scan item barcode/Type manual" required="" autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="new-task">
+                    <div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                        <table class="table table-hover fixedHeader-floating">
+                            <thead>
+                                <tr>
+                                    <th>Room No</th>
+                                    <th>Category</th>
+                                    <th>Item Name</th>
+                                    <th>Brand/Model</th>
+                                    <th>Date Aquisation</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-Not-Assigned-Items">
+                            </tbody>
+                        </table>
+                    </div>
+                    @*<nav aria-label="Page navigation example">
+                            <ul class="pagination" id="unverified-items-pagination">
+                                <li class="page-item"><a class="page-link"  aria-label="Previous"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                                <li class="page-item"><a class="page-link" >1</a></li>
+                                <li class="page-item"><a class="page-link" >2</a></li>
+                                <li class="page-item"><a class="page-link" >3</a></li>
+                                <li class="page-item"><a class="page-link"  aria-label="Next"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                            </ul>
+                        </nav>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<button type="button" class="btn btn-icon btn-outline-primary" data-toggle="tooltip" data-html="true" title="" data-original-title="Click to Assign Item"><i class="feather icon-thumbs-up"></i></button>*@
+
+
+<div class="modal fade" id="optionRoomModal" tabindex="-1" role="dialog" aria-labelledby="optionRoomModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title h4" id="optionRoomModalLabel">Assigning item no. </h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group input-group-sm">
+                    <input type="text" id="type-assignOrReassign" hidden/>
+                    <input type="text" id="itemid-assign" hidden/>
+                    <label class="form-label">Room</label>
+                    <select class="form-control" name="Condition" id="option-Room-Assign" style="width: 100%;">
+                        
+                    </select>
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" id="save-assign"><i class="feather icon-thumbs-up"></i>Save</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="feather icon-slash"></i>Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

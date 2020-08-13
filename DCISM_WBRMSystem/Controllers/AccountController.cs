@@ -103,7 +103,7 @@ namespace DCISM_WBRMSystem.Controllers
             {
 
                 var receipent = "63"+ number.Remove(0, 1);
-                string message = "Your OTP password is: " + code + " ( sent by: DCSIM_WBRMSystem )";
+                string message = "Your One-Time Password (OTP) is:" + code + " ( from: DCSIM_WBRMSystem )\n\nNote: Don't share this to anyone.Reply is not allowed.";
                 string encodedMessage = HttpUtility.UrlEncode(message);
 
                 // Using GoogleSheet & MIT App -> android
@@ -112,7 +112,7 @@ namespace DCISM_WBRMSystem.Controllers
                 {
                     byte[] response = webclient.UploadValues(APIBaseURL, new NameValueCollection()
                     {
-                        {"Phone","09365192469" },
+                        {"Phone",receipent },
                         {"Status","" },
                         {"Message",message },
                         {"action","add" }
@@ -277,48 +277,6 @@ namespace DCISM_WBRMSystem.Controllers
         public ActionResult ProfileInfo()
         {
             return View();
-        }
-
-
-        [HttpPost]
-        public JsonResult TestOTP(string code, string number)
-        {
-            AjaxMessage ajm = new AjaxMessage()
-            {
-                Message = "failed"
-            };
-            var status = "";
-            try
-            {
-
-                var APIBaseURL = "https://script.google.com/macros/s/AKfycbzCfZj0D9moDdiN5bdyWP6Yrw96mV-NSNTdj-OhqAfS32OvVOQ/exec";
-
-                // for textlocal API Only ------------------
-
-                string message = "Your OTP password is:" + code + " ( sent by: DCSIM_WBRMSystem )";
-                string encodedMessage = HttpUtility.UrlEncode(message);
-                using (var webclient = new WebClient())
-                {
-                    byte[] response = webclient.UploadValues(APIBaseURL, new NameValueCollection()
-                    {
-                        {"Phone","09365192469" },
-                        {"Status","" },
-                        {"Message",message },
-                        {"action","add" }
-                    });
-
-                    string result = System.Text.Encoding.UTF8.GetString(response);
-                    var jsonObject = JObject.Parse(result);
-                    status = jsonObject["result"].ToString();
-                    ajm.Message = status;
-                }
-                return Json(ajm);
-            }
-            catch (Exception ex)
-            {
-                ajm.Message = ex.Message;
-            }
-            return Json(ajm);
         }
 
     }

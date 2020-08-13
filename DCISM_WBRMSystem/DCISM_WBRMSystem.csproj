@@ -610,6 +610,7 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="file\Inventory_Format.xls" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
@@ -701,11 +702,11 @@
     <Content Include="Views\Report\_BorrowedItemsPDF.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
+    <Content Include="zipfiles\Inventory.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\BarcodeGenerator\" />
-    <Folder Include="zipfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,6 +1,7 @@
 ﻿using DCISM_WBRMSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -425,14 +426,16 @@ namespace DCISM_WBRMSystem.Controllers
                         string message = "Hi. Good Day. This is notification for your borrowing request:";
                         if (request_Details.Status.Contains("Approved"))
                         {
-                            message += "\n Request ID: " + request_Details.Id_Request + ", Status: " + request_Details.Status;
-                            message += "\n You may now claim your requested item/s to the admin or in the control room ";
-                            message += "\n from: DCSIM_WBRMSystem";
+                            message += "\nRequest ID: " + request_Details.Id_Request + ",\nStatus: " + request_Details.Status;
+                            message += "\nYou may now claim your requested item/s to the admin or in the control room ";
+                            message += "\nfrom: DCSIM_WBRMSystem";
+                            message += "\n\n\nNote: reply is not allowed.";
                         }
                         else
                         {
-                            message += "\n Request ID: " + request_Details.Id_Request + ", Status: " + request_Details.Status;
-                            message += "\n from: DCSIM_WBRMSystem";
+                            message += "\nRequest ID: " + request_Details.Id_Request + ",\nStatus: " + request_Details.Status;
+                            message += "\nfrom: DCSIM_WBRMSystem";
+                            message += "\n\n\nNote: reply is not allowed.";
                         }
                         ajm.Message = SendSMSToUser(message, userDetails.Contact_No);
                     }
@@ -448,55 +451,76 @@ namespace DCISM_WBRMSystem.Controllers
             var status = "failed";
             try
             {
-
+               
                 var receipent = "63" + number.Remove(0, 1);
-                // clickatell API
-                var APIKey = System.Configuration.ConfigurationManager.AppSettings["clickatellKey"];
-                var APIBaseURL = System.Configuration.ConfigurationManager.AppSettings["clickatellURL"];
-
-                // textlocal API
-                // var APIKey = System.Configuration.ConfigurationManager.AppSettings["textlocalKey"];
-                // var APIBaseURL = System.Configuration.ConfigurationManager.AppSettings["textlocalURL"];
-                
                 string encodedMessage = HttpUtility.UrlEncode(message);
 
-                // for clickatell API Only ------------------
+                // Using GoogleSheet & MIT App -> android
+                var APIBaseURL = System.Configuration.ConfigurationManager.AppSettings["googleSheetScript"];
                 using (var webclient = new WebClient())
                 {
-                    webclient.QueryString.Add("apiKey", APIKey);
-                    webclient.QueryString.Add("to", receipent);
-                    webclient.QueryString.Add("content", encodedMessage);
-                    byte[] response = webclient.DownloadData(APIBaseURL);
+                    byte[] response = webclient.UploadValues(APIBaseURL, new NameValueCollection()
+                    {
+                        {"Phone",receipent },
+                        {"Status","" },
+                        {"Message",message },
+                        {"action","add" }
+                    });
 
                     string result = System.Text.Encoding.UTF8.GetString(response);
                     var jsonObject = JObject.Parse(result);
-                    var accepted = jsonObject["messages"][0]["accepted"].ToString();
-                    if (accepted == "True")
-                    {
-                        status = "success";
-                    }
-
+                    status = jsonObject["result"].ToString();
+                    
                 }
 
-                // for textlocal API Only ------------------
+                // Clickatell API -> uncomment lines below to use Clickatell API Gateway
+                /*
+                    var APIKey = System.Configuration.ConfigurationManager.AppSettings["clickatellKey"];
+                    var APIBaseURL = System.Configuration.ConfigurationManager.AppSettings["clickatellURL"];
 
-                //string message = "Your OTP password is:" + code + " ( sent by: DCSIM_WBRMSystem )";
-                //string encodedMessage = HttpUtility.UrlEncode(message);
-                //using ( var webclient = new WebClient())
-                //{
-                //    byte[] response = webclient.UploadValues(APIBaseURL, new NameValueCollection()
-                //    {
-                //        {"apikey",APIKey },
-                //        {"numbers",receipent },
-                //        {"message",encodedMessage },
-                //        {"sender","DCSIM WBRMS" }
-                //    });
+                    using (var webclient = new WebClient())
+                    {
+                        webclient.QueryString.Add("apiKey", APIKey);
+                        webclient.QueryString.Add("to", receipent);
+                        webclient.QueryString.Add("content", encodedMessage);
+                        byte[] response = webclient.DownloadData(APIBaseURL);
 
-                //    string result = System.Text.Encoding.UTF8.GetString(response);
-                //    var jsonObject = JObject.Parse(result);
-                //    status = jsonObject["status"].ToString();
-                //    ajm.Message = status;
-                //}
+                        string result = System.Text.Encoding.UTF8.GetString(response);
+                        var jsonObject = JObject.Parse(result);
+                        var accepted = jsonObject["messages"][0]["accepted"].ToString();
+                        if (accepted == "True")
+                        {
+                            status = "success";
+                            ajm.Message = "success";
+                        }
+                    }
+                */
+                // END Clickatell API
+
+                // textlocal API -> uncomment lines below to use Textlocal API Gateway
+                /* 
+                    var APIKey = System.Configuration.ConfigurationManager.AppSettings["textlocalKey"];
+                    var APIBaseURL = System.Configuration.ConfigurationManager.AppSettings["textlocalURL"];
+
+                    using (var webclient = new WebClient())
+                    {
+                        byte[] response = webclient.UploadValues(APIBaseURL, new NameValueCollection()
+                        {
+                            {"apikey",APIKey },
+                            {"numbers",receipent },
+                            {"message",encodedMessage },
+                            {"sender","DCSIM WBRMS" }
+                        });
+
+                        string result = System.Text.Encoding.UTF8.GetString(response);
+                        var jsonObject = JObject.Parse(result);
+                        status = jsonObject["status"].ToString();
+                        ajm.Message = status;
+                    }
+                */
+                // END Textlocal API
+
+
                 return status;
             }
             catch (Exception ex)

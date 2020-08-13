@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2018 08:56:38</publishTime>
     </File>
     <File Include="bin/DCISM_WBRMSystem.dll">
-      <publishTime>08/13/2020 14:52:09</publishTime>
+      <publishTime>08/13/2020 18:18:49</publishTime>
     </File>
     <File Include="bin/DCISM_WBRMSystem.pdb">
-      <publishTime>08/13/2020 14:52:09</publishTime>
+      <publishTime>08/13/2020 18:18:49</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
       <publishTime>06/06/2017 22:59:22</publishTime>
@@ -927,6 +927,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="favicon.ico">
       <publishTime>11/28/2019 15:13:50</publishTime>
     </File>
+    <File Include="file/Inventory_Format.xls">
+      <publishTime>05/05/2020 22:46:53</publishTime>
+    </File>
     <File Include="file/ItemsToLoadFormat.xlsx">
       <publishTime>02/15/2020 19:53:04</publishTime>
     </File>
@@ -1271,6 +1274,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Web.config">
       <publishTime>08/13/2020 14:52:11</publishTime>
+    </File>
+    <File Include="zipfiles/Inventory.zip">
+      <publishTime>08/13/2020 15:53:05</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2018 08:56:38</publishTime>
     </File>
     <File Include="bin/DCISM_WBRMSystem.dll">
-      <publishTime>08/11/2020 16:52:02</publishTime>
+      <publishTime>08/13/2020 14:52:09</publishTime>
     </File>
     <File Include="bin/DCISM_WBRMSystem.pdb">
-      <publishTime>08/11/2020 16:52:02</publishTime>
+      <publishTime>08/13/2020 14:52:09</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
       <publishTime>06/06/2017 22:59:22</publishTime>
@@ -1036,7 +1036,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/17/2020 21:25:14</publishTime>
     </File>
     <File Include="Views/Account/SignUp.cshtml">
-      <publishTime>06/12/2020 22:14:43</publishTime>
+      <publishTime>08/13/2020 12:58:22</publishTime>
     </File>
     <File Include="Views/Borrowing/AdminPage.cshtml">
       <publishTime>02/14/2020 15:55:50</publishTime>
@@ -1270,7 +1270,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/18/2020 14:30:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/16/2020 14:57:04</publishTime>
+      <publishTime>08/13/2020 14:52:11</publishTime>
     </File>
   </ItemGroup>
 </Project>

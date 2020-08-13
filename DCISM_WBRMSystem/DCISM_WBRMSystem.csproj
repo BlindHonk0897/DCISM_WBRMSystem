@@ -381,7 +381,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="Content\assets\css\DashBoard.css" />
     <Content Include="Content\assets\images\circle-cropped.png" />
     <Content Include="Content\assets\images\DCISM-Circle-Transparent.png" />

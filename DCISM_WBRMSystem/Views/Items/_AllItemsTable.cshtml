@@ -1,0 +1,185 @@
+﻿<div class="row">
+    <div class="col-xl-12 col-lg-12 filter-bar">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card" style="height: auto;">
+                    <div class="card-header">
+                            <div class="btn-group">
+                                <i class="feather icon-more-horizontal" data-toggle="dropdown"></i>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-left" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 5px; transform: translate3d(54px, 41px, 0px);">
+                                    <li class="dropdown-item full-card"><a href="#pills-all"><span style=""><i class="feather icon-maximize"></i> maximize</span><span style="display: none;"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                    <li class="dropdown-item minimize-card"><a href="#pills-all"><span style=""><i class="feather icon-minus"></i> collapse</span><span style="display: none;"><i class="feather icon-plus"></i> expand</span></a></li>
+                                    <li class="dropdown-item reload-card"><a href="#pills-all"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                    @*<li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>*@
+                                </ul>
+                            </div>
+                        <div class="card-header-right">
+                            <div class="btn-group input-group-sm">
+                                @*<ul class="nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-secondary" href="#" id="bystatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-line"></i> By Status</a>
+                                        <div class="dropdown-menu" aria-labelledby="bystatus">
+                                            <a class="dropdown-item" href="#">Show all</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Recently Added</a>
+                                            <a class="dropdown-item" href="#">Functional</a>
+                                            <a class="dropdown-item" href="#">Borrowed</a>
+                                            <a class="dropdown-item" href="#">Damaged</a>
+                                            <a class="dropdown-item" href="#">Lost</a>
+                                        </div>
+                                    </li>
+                                </ul>*@
+                                <select class="form-control" aria-label="Small" id="Filter_Category" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Category --</option>
+                                    <option>Mouse</option>
+                                    <option>Keyboard</option>
+                                    <option>Monitor</option>
+                                    <option>Unit</option>
+                                    <option>Extras</option>
+                                </select>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <select class="form-control" aria-label="Small" id="Filter_Assigned" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Assigned --</option>
+                                    <option>LB 448</option>
+                                    <option>LB 449</option>
+                                    <option>LB 443</option>
+                                    <option>LB 447</option>
+                                    <option>LB 446</option>
+                                    <option>Not yet assigned</option>
+                                </select>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <select class="form-control" aria-label="Small" id="Filter_Condition" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Condition --</option>
+                                    <option>Functional</option>
+                                    <option>Damaged</option>
+                                    
+                                </select>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <select class="form-control" aria-label="Small" id="Filter_Status" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Status --</option>
+                                    <option>Available</option>
+                                    <option>Borrowed</option>
+                                </select>
+                                &nbsp;
+                                &nbsp;
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block" style="">
+                        <table id="Table_AllItems_Pane" class="display" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary md-trigger" data-modal="modal-Update" id="but_for_modal_Update" hidden>Show Update Modal</button>
+
+
+<div class="md-modal md-effect-4" id="modal-Update">
+    <div class="md-content">
+        <h3 class="theme-bg3">Update Item</h3>
+        <div>
+            <form>
+                <input type="text" id="Id_Item_modal_Update" hidden/>             
+                <input type="text" id="Serial_Fixed_modal_Update" hidden />             
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Item_Name_modal_Update">Item Name</label>
+                        <input type="text" class="form-control" id="Item_Name_modal_Update" placeholder="Item Name">
+                    </div>
+                    <div class="form-group col-md-6" id="Barcode_Image">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Brand_Model_modal_Update">Brand/Model</label>
+                        <input type="text" class="form-control" id="Brand_Model_modal_Update" placeholder="Brand/Model">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Serial_Number_modal_Update">Serial Number</label>
+                        <input type="text" class="form-control" id="Serial_Number_modal_Update" placeholder="Serial Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Category_modal_Update">Category</label>
+                        <input type="text" readonly class="form-control" id="Category_modal_Update" placeholder="Category">
+                        @*<select class="form-control select2" name="Category_modal_Update" id="Category_modal_Update" tabindex="-1" style="width: 80%;">
+                </select>*@
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Price_modal_Update">Price</label>
+                        <input type="number" class="form-control" step=".01" id="Price_modal_Update" placeholder="Price" min="1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Custodian_modal_Update">Custodian</label>
+                        <input type="text" class="form-control" id="Custodian_modal_Update" placeholder="Custodian">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Status_modal_Update">Status</label>
+                        <input type="text" readonly class="form-control" id="Status_modal_Update" placeholder="Status">
+                        @*<select class="form-control" name="Status" id="Status_modal_Update" style="width: 100%;">
+                            <option value="Available">Available</option>
+                            <option value="Borrowed">Borrowed</option>
+                            <option value="Reserved">Reserved</option>
+                        </select>*@
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Condition_modal_Update">Condition</label>
+                        @*<input type="text" readonly class="form-control" id="Condition_modal_Update" placeholder="Condition">*@
+                        <select class="form-control" name="Condition" id="Condition_modal_Update" style="width: 100%;">
+                            <option value="Functional">Functional</option>
+                            <option value="Damaged">Damaged</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Custodian_modal_Update">Remarks</label>
+                        <input type="text" readonly class="form-control" id="Remarks_modal_Update" placeholder="Remarks">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="On_Hold_Period_modal_Update">On Hold Period ( in days )</label>
+                        <input type="number" class="form-control" onkeydown="if(event.key==='.'){event.preventDefault();}" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" id="On_Hold_Period_modal_Update" placeholder="On Hold Period" min="1">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Date_Acquisition_modal_Update">Date Acquisition</label>
+                        <input type="text" readonly class="form-control" id="Date_Acquisition_modal_Update" placeholder="Date Acquisition">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-primary btn-sm" id="Save_modal_Update">Save</button>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-danger btn-sm" id="Cancel_modal_Update">Cancel</button>
+                    </div>
+                    <div class="form-group col-md-3">
+                    </div>
+                </div>
+            </form>
+            <button class="btn btn-primary md-close" id="Close_modal_Update" hidden>Close me!</button>
+        </div>
+    </div>
+</div>
+
+
+

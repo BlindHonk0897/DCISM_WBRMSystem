@@ -1,0 +1,36 @@
+Controllers (8):
+	Home ->
+	    :dashboards for all users
+
+	Account ->
+            :login
+	    :signup
+	    :logout 
+
+	Item ->
+	    :inventory of items/equipments
+		:add
+		:delete
+		:update items/equipments
+		:generate barcode
+
+	Facility ->
+	    :Management of facilities
+		:check schedules
+
+	Borrowing -> 
+	    :Fill up Borrowing form
+	    :SMS notification
+
+	Reservation -> 
+	    :Fill up Reservation form
+	    :SMS notification
+
+	Report ->
+            :generate report (excel,pdf)
+
+	User -> User management
+	    :blocked user
+	    :unblocked user
+
+

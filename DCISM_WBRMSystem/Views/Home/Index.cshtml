@@ -1,0 +1,116 @@
+﻿@if (Session["Username"] != null && Session["UserRole"] != null && Session["UserTitleRole"] != null)
+{
+    if (Session["UserTitleRole"].ToString() == "Administrator")
+    {
+        
+        <script>
+           
+            window.onload = function () {   
+                
+                $.getJSON('/api/Common/GetStocksByFacility').done(function (data) {
+                    var colors = [];
+
+                    colors.push({ 'backgrond': 'rgba(0,0,102,0.2)', 'border': 'rgba(0,0,102,1)'})
+                    colors.push({ 'backgrond': 'rgba(51,0,102,0.2)', 'border': 'rgba(51,0,102,1)'})
+                    colors.push({ 'backgrond': 'rgba(102,0,51,0.2)', 'border': 'rgba(102,0,51,1)'})
+                    colors.push({ 'backgrond': 'rgba(102,0,204,0.2)', 'border': 'rgba(102,0,204,1)'})
+                    colors.push({ 'backgrond': 'rgba(0,153,255,0.2)', 'border': 'rgba(0,153,255,1)'})
+                    colors.push({ 'backgrond': 'rgba(102,204,51,0.2)', 'border': 'rgba(102,204,51,1)'})
+                    colors.push({ 'backgrond': 'rgba(153,0,153,0.2)', 'border': 'rgba(153,0,153,1)'})
+                    colors.push({ 'backgrond': 'rgba(204,102,0,0.2)', 'border': 'rgba(204,102,0,1)'})
+                    colors.push({ 'backgrond': 'rgba(255,204,51,0.2)', 'border': 'rgba(255,204,51,1)'})
+                    colors.push({ 'backgrond': 'rgba(153,204,153,0.2)', 'border': 'rgba(153,204,153,1)'})
+                    colors.push({ 'backgrond': 'rgba(255,255,0,0.2)', 'border': 'rgba(255,255,0,1)'})
+                    colors.push({ 'backgrond': 'rgba(153,0,0,0.2)', 'border': 'rgba(153,0,0,1)'})
+                    colors.push({ 'backgrond': 'rgba(51,255,0,0.2)', 'border': 'rgba(51,255,0,1)' })
+
+                    colors.push({ 'backgrond': 'rgba(255, 99, 132, 0.2)', 'border': 'rgba(255, 99, 132, 1)' })
+                    colors.push({ 'backgrond': 'rgba(54, 162, 235, 0.2)', 'border': 'rgba(54, 162, 235, 1)' })
+                    colors.push({ 'backgrond': 'rgba(255, 206, 86, 0.2)', 'border': 'rgba(255, 206, 86, 1)' })
+                    colors.push({ 'backgrond': 'rgba(75, 192, 192, 0.2)', 'border': 'rgba(75, 192, 192, 1)' })
+                    colors.push({ 'backgrond': 'rgba(153, 102, 255, 0.2)', 'border': 'rgba(153, 102, 255, 1)' })
+                    colors.push({ 'backgrond': 'rgba(255, 159, 64, 0.2)', 'border': 'rgba(255, 159, 64, 1)' })
+                    
+                    var labels = [];
+                    var datas = [];
+                    var backG = [];
+                    var borderC = [];
+                    for (var i = 0; i < data.length; i++) {
+                        labels.push(data[i].Room_No);
+                        datas.push(data[i].Stocks);
+                        var index = Math.floor(Math.random() * colors.length);
+                        var elemColor = colors[index];
+                        backG.push(elemColor.backgrond);
+                        borderC.push(elemColor.border);
+                        colors.splice(index, 1);
+                    }
+                    var ctx = document.getElementById('chartContainer').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Stocks',
+                                data: datas,
+                                backgroundColor: backG,
+                                borderColor: borderC,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                })
+
+                
+                $.getJSON('/api/Common/GetAvailableItems').done(function (data) {
+                    $('#Available_Items').html('<i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>' + data.length);
+                })
+                $.getJSON('/api/Common/GetBorrowedItems').done(function (data) {
+                    $('#Borrowed_Items').html('<i class="fa fa-shopping-cart text-c-red f-30 m-r-10"></i>' + data.length);
+                })
+                $.getJSON('/api/Common/GetDamagedItems').done(function (data) {
+                    $('#Damaged_Items').html('<i class="feather icon-arrow-up text-c-red f-30 m-r-10"></i>' + data.length);
+                })
+                $.getJSON('/api/Common/GetUsers').done(function (data) {
+                    $('#Registered_Users').text(data.length);
+                })
+            }
+        </script>
+
+      @Html.Partial("_AdminDashboard");
+    }
+    else if (Session["UserTitleRole"].ToString() == "Chairperson")
+    {
+        <script>
+            window.onload = function () {
+                $.getJSON('/api/Common/GetUsers').done(function (data) {
+                    $('#Registered_Users').append('<i class="fa fa-users f-30 text-c-blue f-30 m-r-10"></i>' + data.length);
+                })
+            }
+        </script>
+        @Html.Partial("_ChairpersonDashboard");
+    }
+    else
+    {
+        @Html.Partial("_UserDashboard");
+    }
+}
+
+@section scripts{
+    <script>
+        $(function () {
+
+
+        });
+    </script>
+
+}

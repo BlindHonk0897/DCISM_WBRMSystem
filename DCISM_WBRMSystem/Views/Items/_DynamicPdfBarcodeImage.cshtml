@@ -1,0 +1,674 @@
+﻿@model DCISM_WBRMSystem.Models.CustomModels.BarcodeToPDFModel
+@{
+    var counter = 0;
+    var rowNum = Model.barcodeDetails.Count() / 4;
+    var rowExist = Model.barcodeDetails.Count() - (rowNum * 4);
+}
+<link href="@Context.Server.MapPath("~/Content/assets/css/style.css")" rel="stylesheet" />
+<link href="@Context.Server.MapPath("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+<div class="container">
+
+    @for (int i = 0, count = 0; i < rowNum; i++)
+    {
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        @for (var y = 0; y < 4; y++)
+                        {
+
+                            <td>
+                                @{
+                                    string path = Model.barcodeDetails.ElementAt(count).Path;
+                                    //string quote = @"Barcodes/"+fname;
+                                }
+                                <center><small>@Model.barcodeDetails.ElementAt(count).Category.Substring(0, 3)</small><img src="@Context.Server.MapPath(path)" height="40" width="320" alt="Not found" /><small>@Model.barcodeDetails.ElementAt(count).Strcode</small></center>
+                            </td>
+                            count++;
+                            counter = count;
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+    }
+    @if (rowExist > 0)
+    {
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        @for (int i = 0; i < 4; i++)
+                        {
+
+                            if (counter < Model.barcodeDetails.Count())
+                            {
+                                <td>
+                                    @{
+                                        string path = Model.barcodeDetails.ElementAt(counter).Path;
+                                        //string quote = @"Barcodes/"+fname;
+                                    }
+                                    <center><small>@Model.barcodeDetails.ElementAt(counter).Category.Substring(0, 3)</small><img src="@Context.Server.MapPath(path)" height="40" width="320" alt="Not found" /><small>@Model.barcodeDetails.ElementAt(counter).Strcode</small></center>
+                                </td>
+                             }else{
+                                            
+                                <td>
+                                   
+                                    <center><small>None</small><img src="" height="50" width="320" alt="" /><small>None</small></center>
+                                </td>        
+                                            
+                             }
+                             counter++;
+
+                         }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+    }
+</div>
+@*
+       <div class="container">
+            <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                        <td>
+                            <center><img src="@Context.Server.MapPath("~/Barcodes/20200219214252035039.jpg")" height="30" width="250" /><small>20200219214252035039</small></center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>*@

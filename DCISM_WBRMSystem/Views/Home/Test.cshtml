@@ -1,0 +1,446 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="row text-center">
+        <div class="col-xl-2 col-lg-3 col-sm-4 col-xs-12">
+            <a href="~/Barcodes/LB 448/MOUSE/4725-MOU-LB 448.png" data-toggle="lightbox" data-title="Datta Image 1" data-footer="Datta Image 1"><img src="~/Barcodes/LB 448/MOUSE/4725-MOU-LB 448.png" class="img-fluid m-b-10" alt=""></a>
+        </div>
+    </div>
+    <div class="card-block">
+
+        <div id="evts1" class="jstree jstree-7 jstree-default" role="tree" tabindex="0" aria-activedescendant="j7_1" aria-busy="false">
+            <ul class="jstree-container-ul jstree-children" role="group">
+                <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j7_1_anchor" aria-expanded="false" id="j7_1" class="jstree-node  jstree-closed jstree-last">
+                    <i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j7_1_anchor">
+                        <i class="jstree-icon jstree-themeicon" role="presentation"></i>LB 447
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+    <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="key-act-button" type="button"><span>Copy</span></button> <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="key-act-button" type="button"><span>Excel</span></button> <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="key-act-button" type="button"><span>CSV</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="key-act-button" type="button"><span>PDF</span></button> </div>
+<input type="button" value="SIGNALR" id="SIGNALR"/>
+<div class="row">
+    <div class="col-xl-3 col-lg-12">
+        <div class="card task-board-left">
+            <div class="card-header">
+                <h5>Facilities tree view</h5>
+            </div>
+            <div class="card-block ">
+                <div class="task-right">
+                    <div class="card-block">
+                        <div id="evts1" class="jstree jstree-7 jstree-default" role="tree" tabindex="0" aria-activedescendant="j7_1" aria-busy="false">
+                            <ul class="jstree-container-ul jstree-children" role="group">
+                                <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j7_1_anchor" aria-expanded="false" id="j7_1" class="jstree-node  jstree-closed jstree-last">
+                                    <i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j7_1_anchor">
+                                        <i class="jstree-icon jstree-themeicon" role="presentation"></i>LB 447
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-9 col-lg-12 filter-bar">
+        <nav class="navbar m-b-30 p-10">
+            <ul class="nav">
+                <li class="nav-item f-text active">
+                    <a class="nav-link text-secondary" href="#">Filter: <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-secondary" href="#" id="bydate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-clock"></i> By Date</a>
+                    <div class="dropdown-menu" aria-labelledby="bydate">
+                        <a class="dropdown-item" href="#">Show all</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Today</a>
+                        <a class="dropdown-item" href="#">Yesterday</a>
+                        <a class="dropdown-item" href="#">This week</a>
+                        <a class="dropdown-item" href="#">This month</a>
+                        <a class="dropdown-item" href="#">This year</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-secondary" href="#" id="bystatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-line"></i> By Status</a>
+                    <div class="dropdown-menu" aria-labelledby="bystatus">
+                        <a class="dropdown-item" href="#">Show all</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Open</a>
+                        <a class="dropdown-item" href="#">On hold</a>
+                        <a class="dropdown-item" href="#">Resolved</a>
+                        <a class="dropdown-item" href="#">Closed</a>
+                        <a class="dropdown-item" href="#">Dublicate</a>
+                        <a class="dropdown-item" href="#">Wontfix</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-secondary" href="#" id="bypriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-list-ol"></i> By Priority</a>
+                    <div class="dropdown-menu" aria-labelledby="bypriority">
+                        <a class="dropdown-item" href="#">Show all</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Highest</a>
+                        <a class="dropdown-item" href="#">High</a>
+                        <a class="dropdown-item" href="#">Normal</a>
+                        <a class="dropdown-item" href="#">Low</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="nav-item nav-grid f-view">
+                <span class="m-r-15">View Mode: </span>
+                <button type="button" class="btn btn-primary btn-icon m-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="list view">
+                    <i class="fas fa-list-ul"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-icon m-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="grid view">
+                    <i class="fas fa-th-large"></i>
+                </button>
+            </div>
+        </nav>
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="card" style="height: auto;">
+                    <div class="card-header">
+                        <h5>Foo Table</h5>
+                        <div class="card-header-right">
+                            <div class="btn-group card-option">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="feather icon-more-horizontal"></i>
+                                </button>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(54px, 41px, 0px);">
+                                    <li class="dropdown-item full-card"><a href="#!"><span style=""><i class="feather icon-maximize"></i> maximize</span><span style="display: none;"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                    <li class="dropdown-item minimize-card"><a href="#!"><span style=""><i class="feather icon-minus"></i> collapse</span><span style="display: none;"><i class="feather icon-plus"></i> expand</span></a></li>
+                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block" style="">
+                        <h5>Filtering</h5>
+                        <hr>
+                        <table id="demo-foo-filtering" class="table table-striped table-hover footable footable-1 footable-paging footable-paging-center breakpoint-lg" style="">
+                            <thead>
+                                <tr class="footable-header">
+                                    <th class="footable-sortable footable-first-visible" style="display: table-cell;">First Name<span class="fooicon fooicon-sort"></span></th>
+                                    <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Last Name<span class="fooicon fooicon-sort"></span></th>
+                                    <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Job Title<span class="fooicon fooicon-sort"></span></th>
+                                    <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">BOB<span class="fooicon fooicon-sort"></span></th>
+                                    <th class="footable-sortable footable-last-visible" style="display: table-cell;">Status<span class="fooicon fooicon-sort"></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Tiger Nixon</td>
+                                    <td style="display: table-cell;">System Architect</td>
+                                    <td style="display: table-cell;">Edinburgh</td>
+                                    <td style="display: table-cell;">61</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-danger"> Suspended</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Garrett</td>
+                                    <td style="display: table-cell;">Accountant</td>
+                                    <td style="display: table-cell;">Tokyo</td>
+                                    <td style="display: table-cell;">63</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-danger"> Active</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Cox</td>
+                                    <td style="display: table-cell;">Author</td>
+                                    <td style="display: table-cell;">San</td>
+                                    <td style="display: table-cell;">66</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-default">Disabled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Kelly</td>
+                                    <td style="display: table-cell;">Brielle</td>
+                                    <td style="display: table-cell;">Edinburgh</td>
+                                    <td style="display: table-cell;">22</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-success">Active</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Airi Satou</td>
+                                    <td style="display: table-cell;">Accountant</td>
+                                    <td style="display: table-cell;">Tokyo</td>
+                                    <td style="display: table-cell;">33</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-success"> Active</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Brielle</td>
+                                    <td style="display: table-cell;">Specialist</td>
+                                    <td style="display: table-cell;">New York</td>
+                                    <td style="display: table-cell;">61</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-default">Disabled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Herrod Chandler</td>
+                                    <td style="display: table-cell;">Sales Assistant</td>
+                                    <td style="display: table-cell;">San</td>
+                                    <td style="display: table-cell;">59</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-danger">Suspended</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Rhona Davidson</td>
+                                    <td style="display: table-cell;">Specialist</td>
+                                    <td style="display: table-cell;">Tokyo</td>
+                                    <td style="display: table-cell;">55</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-success"> Active</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Colleen Hurst</td>
+                                    <td style="display: table-cell;">Javascript Developer</td>
+                                    <td style="display: table-cell;">San</td>
+                                    <td style="display: table-cell;">39</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-default">Disabled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footable-first-visible" style="display: table-cell;">Sonya Frost</td>
+                                    <td style="display: table-cell;">Software</td>
+                                    <td style="display: table-cell;">Edinburgh</td>
+                                    <td style="display: table-cell;">23</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-danger">Suspended</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot><tr class="footable-paging"><td colspan="5"><div class="footable-pagination-wrapper"><ul class="pagination"><li class="footable-page-nav disabled" data-page="first"><a class="footable-page-link" href="#">«</a></li><li class="footable-page-nav disabled" data-page="prev"><a class="footable-page-link" href="#">‹</a></li><li class="footable-page visible active" data-page="1"><a class="footable-page-link" href="#">1</a></li><li class="footable-page visible" data-page="2"><a class="footable-page-link" href="#">2</a></li><li class="footable-page-nav" data-page="next"><a class="footable-page-link" href="#">›</a></li><li class="footable-page-nav" data-page="last"><a class="footable-page-link" href="#">»</a></li></ul><div class="divider"></div><span class="label label-default">1 of 2</span></div></td></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="md-modal md-effect-4" id="modal-4">
+    <div class="md-content">
+        <h3 class="theme-bg3">Input Serial No.</h3>
+        <div>
+            <input type="text" class="form-control" />
+
+            <button class="btn btn-primary md-close">Close me!</button>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary md-trigger" data-modal="modal-4">Newspaper</button>
+<div class="col-xl-2 col-lg-3 col-sm-4 col-xs-12">
+    <a href="../assets/images/light-box/l4.jpg" data-toggle="lightbox" data-title="Datta Image 4" data-footer="Datta Image 4"><img src="../assets/images/light-box/sl4.jpg" class="img-fluid m-b-10" alt="">hey</a>
+</div>
+<select class="js-example-basic-single form-control select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+    <optgroup label="Developer" data-select2-id="75">
+        <option value="AL" data-select2-id="3">Alabama</option>
+        <option value="WY" data-select2-id="76">Wyoming</option>
+    </optgroup>
+    <optgroup label="Designer" data-select2-id="77">
+        <option value="WY" data-select2-id="78">Peter</option>
+        <option value="WY" data-select2-id="79">Hanry Die</option>
+        <option value="WY" data-select2-id="80">John Doe</option>
+    </optgroup>
+</select>
+
+<div class="card-block">
+    <form id="validation-form123" action="#!" novalidate="novalidate">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control" name="validation-email" placeholder="Email">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="validation-password" placeholder="Password">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Confirm password</label>
+                    <input type="password" class="form-control" name="validation-password-confirmation" placeholder="Confirm password">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Required</label>
+                    <input type="text" class="form-control" name="validation-required" placeholder="Required">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">URL</label>
+                    <input type="text" class="form-control" name="validation-url" placeholder="Url">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="validation-phone" placeholder="Phone: (999) 999-9999">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Select</label>
+                    <select class="form-control" name="validation-select">
+                        <option value="">Select gear...</option>
+                        <optgroup label="Climbing">
+                            <option value="pitons">Pitons</option>
+                            <option value="cams">Cams</option>
+                            <option value="nuts">Nuts</option>
+                            <option value="bolts">Bolts</option>
+                            <option value="stoppers">Stoppers</option>
+                            <option value="sling">Sling</option>
+                        </optgroup>
+                        <optgroup label="Skiing">
+                            <option value="skis">Skis</option>
+                            <option value="skins">Skins</option>
+                            <option value="poles">Poles</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Text</label>
+                    <textarea class="form-control" name="validation-text"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">File</label>
+                    <div>
+                        <input type="file" class="validation-file" name="validation-file">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="switch d-inline m-r-10">
+                        <input type="checkbox" class="switcher-input" name="validation-switcher" id="switch-1">
+                        <label for="switch-1" class="cr"></label>
+                    </div>
+                    <label>Check me</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Radios</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="validation-radios"> Option one is this and that—be sure to include why it's great
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="validation-radios"> Option two can be something else and selecting it will deselect option one
+                        </label>
+                    </div>
+                    <div class="form-check disabled">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="validation-radios"> Option three is disabled
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Custom radios</label>
+                    <div class="custom-controls-stacked">
+                        <label class="custom-control custom-radio">
+                            <input name="validation-radios-custom" type="radio" class="custom-control-input">
+                            <span class="custom-control-label">Option one is this and that—be sure to include why it's great</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input name="validation-radios-custom" type="radio" class="custom-control-input">
+                            <span class="custom-control-label">Option two can be something else and selecting it will deselect option one</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input name="validation-radios-custom" type="radio" class="custom-control-input">
+                            <span class="custom-control-label">Option three is disabled</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Checkbox</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="validation-checkbox"> Check me out
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Custom checkbox</label>
+                    <br>
+                    <label class="custom-control custom-checkbox d-block">
+                        <input type="checkbox" class="custom-control-input" name="validation-checkbox-custom">
+                        <span class="custom-control-label">Check me</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            // [ Foo-table ]
+            $('#demo-foo-filtering').footable({
+                "paging": {
+                    "enabled": true
+                },
+                "sorting": {
+                    "enabled": true
+                }
+            });
+            $(".js-example-basic-single").select2();
+            //var prog = $.connection.notificationHub;
+            //prog.client.showNotification = function (message) {
+            //    alert(message);
+            //};
+            //$.connection.hub.start()
+            //    .done(function () {
+            //        console.log("Progess Hub Connected!");
+                    
+            //    })
+            //    .fail(function () {
+            //        console.log("Progess Hub could not Connect!");
+            //    });
+            
+            $('#SIGNALR').click(function () {
+                $('#GeneralNotifyButton').click({ param1: "Hello", param2: "World" }, cool_function);
+            })
+
+        });
+       
+    </script>
+    <script src="~/Content/lightbox/pages/lightbox.js"></script>
+    <script src="~/Content/jstree/treeview.js"></script>
+    <script src="~/Content/footable/footable.min.js"></script>
+}

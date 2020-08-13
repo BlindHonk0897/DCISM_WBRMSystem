@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Rooms/Facilities</h5>
+                <div class="card-block">
+                    <a id="DownloadFormat" class="btn btn-outline-theme2" title="" data-toggle="tooltip" data-original-title="Dowload Excel Format"><i class="fa fa-file-excel text-c-green f-24"></i>Download format</a>
+                    <a id="UploadRoom" class="btn btn-outline-theme2" title="" data-toggle="tooltip" data-original-title="Upload Rooms with Schedules via Excel"><i class="fa fa-file-excel text-c-green f-24"></i>Upload</a>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6">
+                        <input type="text" id="icon-search" class="form-control mb-4" placeholder="search . . ">
+                    </div>
+                </div>
+                <div class="i-main" id="icon-wrapper"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $('#UploadRoom').click(function () {
+            Swal.fire({
+                title: 'Choose file to Upload',
+                html: '<div class="form-group">' +
+                    '<input id="input-field" type="file" class="form-control" />' +
+                    '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                confirmButtonText: 'Upload',
+                cancelButtonClass: 'btn btn-danger',
+                cancelButtonText: 'Cancel',
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    if ($('#input-field').val()) {
+                        Swal.fire({
+                            type: 'success',
+                            html: 'Successfully Loaded.',
+                            confirmButtonClass: 'btn btn-success',
+                            buttonsStyling: false,
+                            timer: 2000
+                        });
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            html: 'No file Choosen',
+                            confirmButtonClass: 'btn btn-danger',
+                            buttonsStyling: false,
+                            timer: 2000
+
+                        });
+                    }
+                    
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        html: 'Cancelled',
+                        confirmButtonClass: 'btn btn-danger',
+                        buttonsStyling: false,
+                        timer:2000
+
+                    });
+                }
+            })
+            //$('#fileExcel').click();
+        })
+    </script>
+
+    <script type="text/javascript">
+       
+        var iconlist = ['LB 400', 'LB 443', 'LB 445', 'LB 446', 'LB 447', 'LB 448', 'LC 469', 'LC 483', 'LC 484',
+            'LC 485', 'LC 486', 'Control Room', 'Functional Unit'
+        ];
+
+        for (var i = 0, l = iconlist.length; i < l; i++) {
+            $('#icon-wrapper').append(
+                '<div class="i-block" data-clipboard-text="feather ' + iconlist[i] + '" data-filter="' + iconlist[i] + '"  data-toggle="tooltip" title="' + iconlist[i] + '">' +
+                '<a href="/Facility/Details/'+i+'">' + iconlist[i] + '</a>' +
+                '</div>');
+        }
+        $(window).on('load', function () {
+            $("#icon-search").on("keyup", function () {
+                var g = $(this).val().toLowerCase();
+                $(".i-main .i-block").each(function () {
+                    var t = $(this).attr('data-filter');
+                    if (t) {
+                        var s = t.toLowerCase();
+                    }
+                    if (s) {
+                        var n = s.indexOf(g);
+                        if (n !== -1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+
+}

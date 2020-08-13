@@ -1,0 +1,16 @@
+USE [WBRMSystem]
+GO
+SET IDENTITY_INSERT [dbo].[ItemCategory] ON 
+GO
+INSERT [dbo].[ItemCategory] ([Id_Category], [Category_Name], [Description]) VALUES (1, N'MOUSE', N'Electronics')
+GO
+INSERT [dbo].[ItemCategory] ([Id_Category], [Category_Name], [Description]) VALUES (2, N'KEYBOARD', N'Electronics')
+GO
+INSERT [dbo].[ItemCategory] ([Id_Category], [Category_Name], [Description]) VALUES (3, N'CPU', N'Electronics')
+GO
+INSERT [dbo].[ItemCategory] ([Id_Category], [Category_Name], [Description]) VALUES (4, N'MONITOR', N'Electronics')
+GO
+INSERT [dbo].[ItemCategory] ([Id_Category], [Category_Name], [Description]) VALUES (5, N'EXTRAS', N'Non-Electronics')
+GO
+SET IDENTITY_INSERT [dbo].[ItemCategory] OFF
+GO

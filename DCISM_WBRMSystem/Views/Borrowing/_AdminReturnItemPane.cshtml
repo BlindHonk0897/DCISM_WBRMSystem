@@ -1,0 +1,324 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Requests</h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#pills-return-item-request"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#pills-return-item-request"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#pills-return-item-request"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-2">
+                        @*<a class="page-link" href="#pills-release-item-request" id="ReleaseAll">Release All</a>*@
+                    </div>
+                    <div class="col-md-2">
+                        @*<a href="#pills-release-item-request" class="page-link text-c-red" id="DiscardAll" style="color:red">Discard All</a>*@
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <input type="text" id="Search-Item-For-Returned" class="form-control add_task_todo" autofocus placeholder="Search / Scan here. ..">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Request #</th>
+                                <th>Requestor</th>
+                                <th>Date Requested</th>
+                                <th>Purpose</th>
+                                <th>Status</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-for-return"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Add Items</h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#pills-add"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#pills-add"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#pills-add"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Released Condition</th>
+                                <th>Release Remarks</th>
+                                <th>Matched</th>
+                                <th>Returned Condition</th>
+                                <th>Returned Remarks</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Mouse
+                                </td>
+
+
+                                <td>Fuctional</td>
+                                <td>Three Scratch in the Back</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="confirmReturned1">
+                                        <label class="custom-control-label" for="confirmReturned1"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control select2" name="Item" id="SelectCondition" style="width: 80%;display:none">
+                                        <option value="400">Select</option>
+                                        <option value="400">Functional</option>
+                                        <option value="442">Damaged</option>
+                                        <option value="443">Broken</option>
+                                        <option value="445">Broken Screen</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="Remarks" style="display:none" />
+                                </td>
+                                <td>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#!" style="display:none" id="ButClose">Close</a></li>
+                                    </ul>
+                                </td>
+
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Mouse
+                                </td>
+
+                                <td>Fuctional</td>
+                                <td>Three Scratch in the Back</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="confirmReturned2">
+                                        <label class="custom-control-label" for="confirmReturned2"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control select2" name="Item" id="Item" style="width: 80%;display:none">
+                                        <option value="400">Select</option>
+                                        <option value="400">Functional</option>
+                                        <option value="442">Damaged</option>
+                                        <option value="443">Broken</option>
+                                        <option value="445">Broken Screen</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" style="display:none" />
+                                </td>
+                                <td>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#!" style="display:none">Close</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Mouse
+                                </td>
+
+                                <td>Fuctional</td>
+                                <td>Three Scratch in the Back</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="confirmReturned3">
+                                        <label class="custom-control-label" for="confirmReturned3"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control select2" name="Item" id="Item" style="width: 80%;display:none">
+                                        <option value="400">Select</option>
+                                        <option value="400">Functional</option>
+                                        <option value="442">Damaged</option>
+                                        <option value="443">Broken</option>
+                                        <option value="445">Broken Screen</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" style="display:none" />
+                                </td>
+                                <td>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#!" style="display:none">Close</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Mouse
+                                </td>
+
+                                <td>Fuctional</td>
+                                <td>Three Scratch in the Back</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="confirmReturned4">
+                                        <label class="custom-control-label" for="confirmReturned4"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control select2" name="Item" id="Item" style="width: 80%;display:none">
+                                        <option value="400">Select</option>
+                                        <option value="400">Functional</option>
+                                        <option value="442">Damaged</option>
+                                        <option value="443">Broken</option>
+                                        <option value="445">Broken Screen</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" style="display:none" />
+                                </td>
+                                <td>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#!" style="display:none">Close</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Mouse
+                                </td>
+
+                                <td>Fuctional</td>
+                                <td>Three Scratch in the Back</td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="confirmReturned5">
+                                        <label class="custom-control-label" for="confirmReturned5"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control select2" name="Item" id="Item" style="width: 80%;display:none">
+                                        <option value="400">Select</option>
+                                        <option value="400">Functional</option>
+                                        <option value="442">Damaged</option>
+                                        <option value="443">Broken</option>
+                                        <option value="445">Broken Screen</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" style="display:none" />
+                                </td>
+                                <td>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#!" style="display:none">Close</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+<div class="modal fade" id="modal-cart-for-return" style="display: none;" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="header-details-return"></h4>
+                <input type="text" id="hiddenRequestorFullNamereturn" hidden />
+                <input type="text" id="hiddenCountForReleaseItemsreturn" hidden />
+                <input type="text" id="hiddenIsDiscardItemClickedreturn" hidden />
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="x-close-return" hidden>
+                    <span aria-hidden="true">×</span>
+                </button>
+                @Html.AntiForgeryToken()
+                <button type="button" class="close" aria-label="Close" id="x-close-modal-return">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        @*<a class="page-link" href="#pills-release-item-request" id="ReleaseAll">Release All</a>*@
+                    </div>
+                    <div class="col-md-2">
+                        @*<a href="#pills-release-item-request" class="page-link text-c-red" id="DiscardAll" style="color:red">Discard All</a>*@
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <input type="text" id="Scan-item-to-return" class="form-control add_task_todo" autofocus placeholder="Scan Here . ..">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Released Condition</th>
+                                    <th>Release Remarks</th>
+                                    <th>Matched</th>
+                                    <th>Returned Condition</th>
+                                    <th>Returned Remarks</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-for-return-cart-items"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+

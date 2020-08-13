@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <!-- [ tabs ] start -->
+    <div class="col-sm-12">
+        <h5 class="mt-4"><i class="fa fa-cube"></i> History </h5>
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-borrowing-history-tab" data-toggle="pill" href="#pills-borrowing-history" role="tab" aria-controls="pills-borrowing-history" aria-selected="true">Borrowing History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-reservation-history-tab" data-toggle="pill" href="#pills-reservation-history" role="tab" aria-controls="pills-reservation-history" aria-selected="false">Reservation History</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-borrowing-history" role="tabpanel" aria-labelledby="pills-borrowing-history-tab">
+                <div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                    <table class="table table-hover fixedHeader-floating">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Date Requested
+                                </th>
+                                <th>
+                                    Purpose
+                                </th>
+                                <th>
+                                    Cart Items
+                                </th>
+                                <th class="">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-request-history"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-reservation-history" role="tabpanel" aria-labelledby="pills-reservation-history-tab">
+
+            </div>
+
+        </div>
+    </div>
+    <!-- [ tabs ] end -->
+</div>
+<input type="text" value="@(Session["Username"]!=null?Session["Username"].ToString():"" )" id="Username" hidden>
+<input type="text" value="@(Session["IDNumber"]!=null?Session["IDNumber"].ToString():"" )" id="IDNumber" hidden>
+
+
+<div class="modal fade modal-View-Cart" tabindex="-1" role="dialog" aria-labelledby="modal-View-CartLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cart Items</h5>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <h5 class="modal-title" id="display-total"><code>Total:</code>  2 items</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-cart-Items"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal" id="">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var Username = $('#Username').val();
+            var IDNumber = $('#IDNumber').val();
+
+            $.getJSON("/api/Common/GetRequest/idnumber/" + IDNumber + "/username/" + Username).done(function (data) {
+                $('#table-request-history').empty();
+                if (data.length > 0) {
+                    for (var i = data.length-1; i >= 0 ; i--) {
+                        if (data[i].Status === "Closed" || data[i].Status === "Cancelled") {
+                            $('#table-request-history').append('<tr><td>' + data[i].Id_Request + '</td><td>' + data[i].formatted_transac_date + '</td><td>' + data[i].Purpose + '</td><td><a href="#" onclick="showCartItems(this)" data-cartid ="' + data[i].Id_Cart + '" >View-Cart</a></td><td>' + data[i].Status + '</td></tr>');
+                        }
+                    }
+                }
+            });
+
+
+        });
+        function showCartItems(el) {
+            var cartid = $(el).data('cartid');
+
+            $('#table-cart-Items').empty();
+            $.getJSON("/api/Common/GetCartItems/cartid" + cartid).done(function (data) {
+                $('#display-total').empty();
+                $('#display-total').append('<code>Total:</code>' + data.length + ' items');
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#table-cart-Items').append('<tr><td>' + data[i].Item_Name + '</td><td>' + data[i].Status + '</td></tr>');
+                    }
+                }
+            });
+            $('.modal-View-Cart').modal('show');
+        }
+    </script>
+    }

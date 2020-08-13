@@ -1,4 +1,4 @@
 ﻿.vs/
 .vscode/
-bin/
-obj/
+/DCISM_WBRMSystem/bin/
+/DCISM_WBRMSystem/obj/

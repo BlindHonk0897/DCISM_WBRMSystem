@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DCISM-WBRMSystem</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Content/assets/images/barcode_icon1.gif" type="image/x-icon">
+    <!-- fontawesome icon -->
+        <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+        <!-- animation css -->
+        <link rel="stylesheet" href="~/Content/assets/plugins/animation/css/animate.min.css">
+        <!-- vendor css -->
+        <link rel="stylesheet" href="~/Content/assets/css/style.css">
+
+        <!-- morris css -->
+        <link rel="stylesheet" href="~/Content/chart-morris/css/morris.css">
+        <link href="~/Content/demo/demo.css" rel="stylesheet" />
+        <!-- Select css -->
+        <link href="~/Content/forSelect2/select2.min.css" rel="stylesheet" />
+        <!-- Datepicker css -->
+        <link href="~/Content/assets/css/datepicker3.css" rel="stylesheet" />
+        <link href="~/Content/forCalendar/assets/css/fullcalendar.css" rel="stylesheet" />
+        <link href="~/Content/forCalendar/assets/css/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+        <!-- Date Range css -->
+        <link href="~/Content/assets/css/daterangepicker.css" rel="stylesheet" />
+
+        <!--Toaster css -->
+        <link href="~/Content/toastr/toastr.min.css" rel="stylesheet" />
+
+        <link href="~/Content/pnotify/pnotify.css" rel="stylesheet" />
+        <link href="~/Content/pnotify/pnotifycustom.min.css" rel="stylesheet" />
+
+        <!--Charts Scripts -->
+        <script src="~/Content/charts/canvas.min.js"></script>
+
+        <link href="~/Content/tour/enjoyhint.css" rel="stylesheet" />
+
+        <link href="~/Content/datepicker/materialdatepicker.css" rel="stylesheet" />
+
+        <link href="~/Content/modal/md-modal.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="~/Content/lightbox/ekko/ekko-lightbox.min.css">
+        <link rel="stylesheet" href="~/Content/lightbox/lightbox2/lightbox2.min.css">
+        <link rel="stylesheet" href="~/Content/wizard/css/smart-wizard.min.css">
+        <link rel="stylesheet" href="~/Content/wizard/css/smart_arrow.min.css">
+
+        <link rel="stylesheet" href="~/Content/jstree/Style.min.css">
+        <link rel="stylesheet" href="~/Content/jstree/32px.png">
+        <link rel="stylesheet" href="~/Content/jstree/throbber.gif">
+        <link rel="stylesheet" href="~/Content/footable/footable.standalone.css">
+        <link rel="stylesheet" href="~/Content/footable/datatable.min.css">
+
+        <link rel="stylesheet" href="~/Content/notification/notification.min.css" />
+        <link rel="stylesheet" href="~/Content/assets/plugins/jquery-scrollbar/css/jquery.scrollbar.min.css" />
+    @*@Styles.Render("~/bundles/AllStyling")*@
+    <style>
+        .badge-notification {
+            padding: 4px 7px 1px;
+            font-size: 11px !important;
+            height: 12px;
+            color: #fff;
+            -webkit-border-radius: 12px !important;
+            -moz-border-radius: 12px !important;
+            border-radius: 18px !important;
+            text-shadow: none !important;
+            text-align: center;
+        }
+
+        .headerBadgeColor1 {
+            background-color: #C46210;
+        }
+    </style>
+    <link href="~/Content/assets/css/DashBoard.css" rel="stylesheet" />
+
+    @RenderSection("styles", required: false);
+
+</head>
+
+<body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+    <!-- [ navigation menu ] start -->
+    @Html.Partial("_Nav")
+    <!-- [ navigation menu ] end -->
+    <!-- [ Header ] start -->
+    @Html.Partial("_Header")
+    <!-- [ Header ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            @RenderBody()
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="button" value="test" id="GeneralNotifyButton" hidden />
+        <input type="text" value="@(Session["UserTitleRole"])" id="UserTitle_Notification" hidden />
+        <input type="text" value="@(Session["Username"])" id="Username_Notification" hidden />
+        <input type="text" value="@(Session["IDNumber"])" id="UserId_Notification" hidden />
+        <input type="text" value="" id="Type_Notification" hidden />
+        @* To the users*@
+        <input type="button" value="test" id="UserNotifyButton" hidden />
+        <input type="text" value="" id="ID_Receiver_Notification" hidden />
+        <input type="text" value="" id="Receivers_Message_Notification" hidden />
+    </div>
+    <!-- [ Main Content ] end -->
+    
+    <!-- Required Js -->
+    <script src="~/Content/assets/js/vendor-all.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/pcoded.min.js"></script>
+    <script src="~/Content/forSelect2/select2.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap-datepicker3.js"></script>
+    <script src="~/Content/assets/js/promise.min.js"></script>
+    <script src="~/Content/assets/js/sweet-alert.js"></script>
+
+    <script src="~/Content/forCalendar/assets/js/fullcalendar.js"></script>
+    <script src="~/Content/assets/js/moment.min.js"></script>
+    <script src="~/Content/assets/js/daterangepicker.js"></script>
+    <!-- Toaster js -->
+    <script src="~/Content/toastr/toastr.min.js"></script>
+
+    <!-- pnotify js -->
+    <script src="~/Content/pnotify/pnotifycustom.min.js"></script>
+    <script src="~/Content/pnotify/notify-event.js"></script>
+
+    <script src="~/Content/datepicker/materialdatepicker.js"></script>
+    <script src="~/Content/datepicker/datepicker.js"></script>
+
+    <!-- modal js -->
+    <script src="~/Content/modal/classie.js"></script>
+    <script src="~/Content/modal/modalEffect.js"></script>
+    <!-- Custom js -->
+    <script src="~/Content/assets/js/pages/custom.js"></script>
+    <script src="~/Content/lightbox/ekko/ekko-lightbox.min.js"></script>
+    <script src="~/Content/lightbox/lightbox2/lightbox2.min.js"></script>
+    <script src="~/Content/jstree/jstree.min.js"></script>
+    <script src="~/Content/wizard/js/jquery.smartWizard.min.js"></script>
+
+    <script src="~/Content/notification/bootstrap-growl.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/perfectScrollbar.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    @*@Scripts.Render("~/bundles/AllScripting")*@
+    <script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
+
+    <!-- tour js-->
+    @*<script src="~/Content/tour/kinetic-v5.1.0.min.js"></script>
+      <script src="~/Content/tour/jquery-enjoyhit.js"></script>
+      <script src="~/Content/tour/ac_tour.js"></script>*@
+
+    <!-- chart-morris Js -->
+    @*<script src="~/Content/chart-morris/js/raphael.min.js"></script>
+        <script src="~/Content/chart-morris/js/morris.min.js"></script>
+        <script src="~/Content/assets/js/pages/chart-morris-custom.js"></script>*@
+    @*<script src="~/Content/forCalendar/assets/js/jquery-1.10.2.js"></script>
+        <script src="~/Content/forCalendar/assets/js/jquery-ui.custom.min.js"></script>*@
+
+    @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $("#icon-colored").click();
+            var notifyCount = 0;
+            $('#notify-admin').empty();
+            $.getJSON("/api/Common/GetRequestNotify").done(function (data) {
+                var adminNotify = '';
+                if (data.length > 0) {
+                    adminNotify += ('<li class="n-title">' +
+                        '<p class="m-b-0">New Borrowing Request</p>' +
+                        '</li>' +
+                        '<li class="notification">' +
+                        '<div class="media">' +
+                        '<i class="fa fa-shopping-cart text-c-blue" style="font-size:25px"></i>&nbsp;' +
+                        '<div class="media-body">' +
+                        '<p>' + data.length + ' Open Request</p>' +
+                        '<a href="/Borrowing" class="m-r-10 text-dark"><u>View All</u></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>')
+                }
+                notifyCount += data.length;
+                $('#Notify-Number').text(notifyCount);
+                $('#notify-admin').append(adminNotify);
+            });
+            //=============================== START for Notification using SiglR ===============================\\
+            var adminNotify = $.connection.adminnotificationHub;
+            var userNotify = $.connection.usernotificationHub;
+
+            adminNotify.client.showNotification = function (message) {
+                if ($('#UserTitle_Notification').val() == "Administrator") {
+                    toastr.info(message);
+                    var notifyCount = 0;
+                    $.getJSON("/api/Common/GetRequestNotify").done(function (data) {
+                        var adminNotify = '';
+                        if (data.length > 0) {
+                            adminNotify += ('<li class="n-title">' +
+                                '<p class="m-b-0">New Borrowing Request</p>' +
+                                '</li>' +
+                                '<li class="notification">' +
+                                '<div class="media">' +
+                                '<i class="fa fa-shopping-cart text-c-blue" style="font-size:25px"></i>&nbsp;' +
+                                '<div class="media-body">' +
+                                '<p>' + data.length + ' Open Request</p>' +
+                                '<a href="/Borrowing" class="m-r-10 text-dark"><u>View All</u></a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>')
+                        }
+                        notifyCount += data.length;
+                        $('#Notify-Number').text(notifyCount);
+                        $('#notify-admin').append(adminNotify);
+                    });
+                }
+            };
+            userNotify.client.showNotification = function (id, message) {
+                if ($('#UserId_Notification').val() == id) {
+                    toastr.info(message);
+                }
+            };
+            $.connection.hub.start()
+                .done(function () {
+                    console.log("Notification Hub Connected!");
+                })
+                .fail(function () {
+                    console.log("Notification Hub could not Connect!");
+                });
+
+            $('#GeneralNotifyButton').click(function () {
+
+                var from = $('#Username_Notification').val();
+                var type = $('#Type_Notification').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/NontificationSender",
+                    data: '{from:"' + from + '",type:"' + type + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.Message == "success") {
+
+                        } else {
+
+                        }
+                    },
+                    failure: function (response) {
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+            })
+
+            $('#UserNotifyButton').click(function () {
+
+                var to = $('#ID_Receiver_Notification').val();
+                var Message = $('#Receivers_Message_Notification').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/NontificationReceiver",
+                    data: '{to:"' + to + '",message:"' + Message + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.Message == "success") {
+
+                        } else {
+
+                        }
+                    },
+                    failure: function (response) {
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+            })
+            //=============================== START for Notification using SiglR ===============================\\
+        })
+
+        //function preventBack() { window.history.forward(); }
+        //setTimeout("preventBack()", 0);
+        //window.onunload = function () { null };
+    </script>
+
+</body>
+</html>

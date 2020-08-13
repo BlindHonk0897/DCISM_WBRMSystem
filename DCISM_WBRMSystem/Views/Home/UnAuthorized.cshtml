@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DCISM-WBRMSystem</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Content/assets/images/barcode_icon1.gif" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="~/Content/assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrapcdn.css">
+    <style>
+        body {
+            /*background-image:url('/Content/assets/images/usc-back.jpg');
+            background-size:cover;*/
+            background-color: #f4f7fa;
+        }
+
+        .card {
+            background: #f4f7fa;
+            opacity: .75;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            @*<div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>*@
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <h3 class="mb-4"><font color="red">Not Authorized</font></h3>
+                    
+                    <a href="@Url.Action("Index","Home")" class="btn btn-primary mb-4 shadow-2">Back to DashBoard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Required Js -->
+    <script src="~/Content/assets/js/vendor-all.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    @*<script>
+            $(function () {
+                $('#user_input_username').click(function())
+            })
+        </script>*@
+</body>
+</html>

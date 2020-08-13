@@ -1,0 +1,25 @@
+
+
+Need to Install :
+   Visual Studio 2019 community - link :https://visualstudio.microsoft.com/vs/
+   MS Sql Server 2016 
+   Git - link : https://git-scm.com/downloads
+   ODBC MS OFFICE 2007 >AccessDatabaseEngine_x64.exe -link: https://download.cnet.com/2007-Office-System-Driver-Data-Connectivity-Components/3000-10254_4-75452798.html
+   
+
+
+
+Deployment Pre-requesite :
+
+
+
+
+
+Nuget Package:
+morelinq
+Swashbuckle
+
+
+   
+   
+   

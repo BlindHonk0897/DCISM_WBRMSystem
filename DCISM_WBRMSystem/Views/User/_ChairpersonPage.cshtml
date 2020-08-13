@@ -1,0 +1,51 @@
+﻿<div class="row">
+    <div class="col-xl-12 col-lg-12 filter-bar">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card" style="height: auto;">
+                    <div class="card-header">
+                        <h5><i class="fa fa-users"></i>&nbsp;Users</h5>
+                        <div class="card-header-right">
+                            <div class="btn-group input-group-sm">
+                                <select class="form-control" aria-label="Small" id="Filter_UserType" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Type --</option>
+                                    <option>Administrator</option>
+                                    <option>Chairperson</option>
+                                    <option>Student</option>
+                                    <option>Teacher</option>
+                                </select>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <select class="form-control" aria-label="Small" id="Filter_UserStatus" aria-describedby="inputGroup-sizing-sm">
+                                    <option value="X">-- Status --</option>
+                                    <option>Active</option>
+                                    <option>Blocked</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block" style="">
+                        @*<div class="table-responsive" style="border:1px dotted gainsboro !important;height: 275px;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Number</th>
+                                            <th>Name</th>
+                                            <th>Course&yr</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th class="text-md-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-users"></tbody>
+                                </table>
+                            </div>*@
+                        <table id="Table_Users" class="display" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

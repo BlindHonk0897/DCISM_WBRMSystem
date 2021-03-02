@@ -4,9 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d2536b6439134ecba94cb7afd98f7938" Name="Diagram1">
+      <Diagram DiagramId="32b65b949307450fb21dc10c3533a379" Name="Diagram1">
         <EntityTypeShape EntityType="WBRMSystemModel.Barcode" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Cart" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Cart_Item" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Condition" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Faculty" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Inventory" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
@@ -25,20 +26,19 @@
         <EntityTypeShape EntityType="WBRMSystemModel.Status" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Student" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WBRMSystemModel.Temp_Signup" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Transaction" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Transaction_Status" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Item_Name_vw" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Request_vw" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.rooms_vw" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WBRMSystemModel.User" Width="1.5" PointX="3.375" PointY="17.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.User_Details_vw" Width="1.5" PointX="17.375" PointY="11.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Cart_Item" Width="1.5" PointX="5.375" PointY="13.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Cart_Items_vw" Width="1.5" PointX="7.375" PointY="17.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.item_vw" Width="1.5" PointX="13.375" PointY="15.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.added_today_vw" Width="1.5" PointX="15.375" PointY="16.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.borrowed_items_vw" Width="1.5" PointX="17.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.damaged_items_vw" Width="1.5" PointX="0.75" PointY="17.75" />
-        <EntityTypeShape EntityType="WBRMSystemModel.Temp_StocksbyFacility" Width="1.5" PointX="17.375" PointY="16.75" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Temp_StocksbyFacility" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Transaction" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Transaction_Status" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.User" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.added_today_vw" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.borrowed_items_vw" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Cart_Items_vw" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.damaged_items_vw" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Item_Name_vw" Width="1.5" PointX="14.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.item_vw" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.Request_vw" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.rooms_vw" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WBRMSystemModel.User_Details_vw" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

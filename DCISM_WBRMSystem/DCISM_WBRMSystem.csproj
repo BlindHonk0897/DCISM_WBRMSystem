@@ -602,6 +602,8 @@
     <Content Include="file\ItemsToLoadFormat.xlsx" />
     <Content Include="Content\footable\jquery-ui-datatables.min.js" />
     <Content Include="Content\assets\woff\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="file\Inventory_Format.xls" />
     <EntityDeploy Include="Models\DatabaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
@@ -609,8 +611,6 @@
     <Content Include="Models\DatabaseModel.edmx.diagram">
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Browsers\qt.browser" />
-    <Content Include="file\Inventory_Format.xls" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />

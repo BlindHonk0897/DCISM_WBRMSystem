@@ -252,7 +252,7 @@
 
             //=============================== START function for clicking signup button ===============================\\
             $('#SignUp_Button').click(function () {
-
+               
                 var IdNumber = $('#input_IDNumber').val();
                 var Usertype = $('#user_type_hidden').val();
                 var LastName = $('#input_LastName').val();
@@ -291,7 +291,7 @@
                 if (!Password || Password == null || Password == "") { errors.push("Put Password!"); }
                 if (!ConfirmPassword || ConfirmPassword == null || ConfirmPassword == "") { errors.push("Put Confirm Password!"); }
                 if (!EmailPattern.test(Email)) { errors.push("Invalid Email."); }
-
+               
                 if (errors.length == 0) {
                     var param = {
                         "IdNumber": IdNumber,
@@ -305,6 +305,7 @@
                         "Password": Password,
                         "ConfirmPassword": ConfirmPassword
                     };
+                  
                     $.ajax({
                         type: "POST",
                         url: "/Account/AjaxSignUpsave",
@@ -337,7 +338,7 @@
                     var index2 = errors.indexOf("Put Mobile no!");
                     var index3 = errors.indexOf("Invalid mobile no.");
                     var index4 = errors.indexOf("Enter minimum 8 chars with atleast 1 number, lower, upper & special(@@#$%&) char.");
-                    if (index == -1 && index1 == -1 && index2 == -1 && index3 == -1) {
+                    if (index == -1 && index1 == -1 && index2 == -1 && index3 == -1 && index4 == -1) {
                         errors = [];
                         $('#SignUp_Submit_Button').click();
                     }

@@ -305,7 +305,7 @@ namespace DCISM_WBRMSystem.Controllers.Api
         {
             using (WBRMSystemEntities database = new WBRMSystemEntities())
             {
-                return database.item_vw.Where(i => i.Is_Verify == false).ToList();
+                return database.item_vw.Where(i => i.Is_Verify == false || i.Is_Verify == null).ToList();
             }
         }
 

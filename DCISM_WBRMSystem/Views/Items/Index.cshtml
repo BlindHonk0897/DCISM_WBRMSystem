@@ -1325,7 +1325,7 @@
                 }
             });
         })
-         //<<<<=============================== (START) PILLS VERIFY ===============================>>>>\\
+         //<<<<=============================== (END) PILLS VERIFY ===============================>>>>\\
 
 
 
@@ -1446,6 +1446,16 @@
             $('#optionRoomModal').modal("show");
         }
 
+        $('#searchInput-Assign-Items').scannerDetection({
+            timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+            startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+            endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+            avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+            onComplete: function (barcode, qty) {
+                $('#searchInput-Assign-Items').val(barcode);
+            }
+        });
+
         $('#searchInput-Assign-Items').keyup(function () {
             var data = this.value.split(" ");
             //create a jquery object of the rows
@@ -1479,6 +1489,7 @@
         //<<<<=============================== (START) PILLS BORROWED ===============================>>>>\\
 
         function pills_Borrowed_Function() {
+            $('#searchInput-Borrowed-Items').focus();
             $.getJSON("/api/Common/GetBorrowedItems").done(function (data) {
                 $("#table-Borrowed-Items").empty();
                 $("#label-Borrowed-Items").html(data.length + " borrowed items");
@@ -1493,6 +1504,16 @@
                 }
 
             })
+
+            $('#searchInput-Borrowed-Items').scannerDetection({
+                timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+                startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+                endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+                avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+                onComplete: function (barcode, qty) {
+                    $('#searchInput-Borrowed-Items').val(barcode);
+                }
+            });
         }
 
         //<<<<=============================== (END) PILLS BORROWED ===============================>>>>\\
@@ -1502,6 +1523,7 @@
 
         function pills_Damaged_Function() {
             //InfoMessage("Pills Damaged");
+            $('#searchInput-Damaged-Items').focus();
             $.getJSON("/api/Common/GetDamagedItems").done(function (data) {
                 $("#table-Damaged-Items").empty();
                 $("#label-Damaged-Items").html(data.length + " damaged items");
@@ -1516,6 +1538,16 @@
                 }
 
             })
+
+            $('#searchInput-Damaged-Items').scannerDetection({
+                timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+                startChar: [120], // Prefix character for the cabled scanner (OPL6845R)
+                endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+                avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+                onComplete: function (barcode, qty) {
+                    $('#searchInput-Damaged-Items').val(barcode);
+                }
+            });
         }
 
         //<<<<=============================== (END) PILLS DAMAGED ===============================>>>>\\

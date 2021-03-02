@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WBRMSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WBRMSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Barcode">
           <Key>
             <PropertyRef Name="Id_Barcode" />
@@ -483,6 +483,11 @@ warning 6002: The table/view 'WBRMSystem.dbo.damaged_items_vw' does not have a p
           <Property Name="Is_Current_Returned_Trans" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'WBRMSystem.dbo.Ids_Item_His_vw' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Ids_Item_His_vw">
+          <Property Name="Id_Item" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'WBRMSystem.dbo.Item_Name_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Item_Name_vw">
           <Key>
@@ -523,6 +528,98 @@ warning 6002: The table/view 'WBRMSystem.dbo.item_vw' does not have a primary ke
           <Property Name="Is_Assign" Type="bit" />
           <Property Name="Is_Verify" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WBRMSystem.dbo.Last_Borrow_Item_Hist' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Last_Borrow_Item_Hist">
+          <Property Name="Id_Item" Type="int" />
+          <Property Name="Str_Code" Type="varchar" MaxLength="500" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Action_History_Desc" Type="varchar" MaxLength="50" />
+          <Property Name="Action_Date" Type="datetime" />
+          <Property Name="Done_By" Type="varchar" MaxLength="50" />
+          <Property Name="Borrowed_Date" Type="datetime" />
+          <Property Name="Borrowed_By" Type="varchar" MaxLength="50" />
+          <Property Name="Released_Date" Type="datetime" />
+          <Property Name="Released_To" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_Before_Released" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_Before_Released" Type="varchar" MaxLength="150" />
+          <Property Name="Expected_Date_Of_Return" Type="datetime" />
+          <Property Name="Returned_Date" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_After_Returned" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_After_Returned" Type="varchar" MaxLength="150" />
+          <Property Name="Is_Current_Borrowed_Trans" Type="bit" />
+          <Property Name="Is_Current_Released_Trans" Type="bit" />
+          <Property Name="Is_Current_Returned_Trans" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WBRMSystem.dbo.Last_Release_Item_Hist' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Last_Release_Item_Hist">
+          <Property Name="Id_Item" Type="int" />
+          <Property Name="Str_Code" Type="varchar" MaxLength="500" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Action_History_Desc" Type="varchar" MaxLength="50" />
+          <Property Name="Action_Date" Type="datetime" />
+          <Property Name="Done_By" Type="varchar" MaxLength="50" />
+          <Property Name="Borrowed_Date" Type="datetime" />
+          <Property Name="Borrowed_By" Type="varchar" MaxLength="50" />
+          <Property Name="Released_Date" Type="datetime" />
+          <Property Name="Released_To" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_Before_Released" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_Before_Released" Type="varchar" MaxLength="150" />
+          <Property Name="Expected_Date_Of_Return" Type="datetime" />
+          <Property Name="Returned_Date" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_After_Returned" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_After_Returned" Type="varchar" MaxLength="150" />
+          <Property Name="Is_Current_Borrowed_Trans" Type="bit" />
+          <Property Name="Is_Current_Released_Trans" Type="bit" />
+          <Property Name="Is_Current_Returned_Trans" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WBRMSystem.dbo.Last_Return_Item_Hist' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Last_Return_Item_Hist">
+          <Property Name="Id_Item" Type="int" />
+          <Property Name="Str_Code" Type="varchar" MaxLength="500" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Action_History_Desc" Type="varchar" MaxLength="50" />
+          <Property Name="Action_Date" Type="datetime" />
+          <Property Name="Done_By" Type="varchar" MaxLength="50" />
+          <Property Name="Borrowed_Date" Type="datetime" />
+          <Property Name="Borrowed_By" Type="varchar" MaxLength="50" />
+          <Property Name="Released_Date" Type="datetime" />
+          <Property Name="Released_To" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_Before_Released" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_Before_Released" Type="varchar" MaxLength="150" />
+          <Property Name="Expected_Date_Of_Return" Type="datetime" />
+          <Property Name="Returned_Date" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_After_Returned" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_After_Returned" Type="varchar" MaxLength="150" />
+          <Property Name="Is_Current_Borrowed_Trans" Type="bit" />
+          <Property Name="Is_Current_Released_Trans" Type="bit" />
+          <Property Name="Is_Current_Returned_Trans" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WBRMSystem.dbo.Last_Verify_Item_Hist' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Last_Verify_Item_Hist">
+          <Property Name="Id_Item" Type="int" />
+          <Property Name="Str_Code" Type="varchar" MaxLength="500" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Action_History_Desc" Type="varchar" MaxLength="50" />
+          <Property Name="Action_Date" Type="datetime" />
+          <Property Name="Done_By" Type="varchar" MaxLength="50" />
+          <Property Name="Borrowed_Date" Type="datetime" />
+          <Property Name="Borrowed_By" Type="varchar" MaxLength="50" />
+          <Property Name="Released_Date" Type="datetime" />
+          <Property Name="Released_To" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_Before_Released" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_Before_Released" Type="varchar" MaxLength="150" />
+          <Property Name="Expected_Date_Of_Return" Type="datetime" />
+          <Property Name="Returned_Date" Type="varchar" MaxLength="50" />
+          <Property Name="Condition_After_Returned" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks_After_Returned" Type="varchar" MaxLength="150" />
+          <Property Name="Is_Current_Borrowed_Trans" Type="bit" />
+          <Property Name="Is_Current_Released_Trans" Type="bit" />
+          <Property Name="Is_Current_Returned_Trans" Type="bit" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WBRMSystem.dbo.Request_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Request_vw">
@@ -883,7 +980,8 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
     FROM [dbo].[User_Details_vw] AS [User_Details_vw]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WBRMSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -903,6 +1001,27 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="Requestor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Id_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Secret_Code" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Cart_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Item" Type="Int32" />
+          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codition_Before_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Released" Type="DateTime" Precision="3" />
+          <Property Name="Is_Returned" Type="Boolean" />
+          <Property Name="Date_Returned" Type="DateTime" Precision="3" />
+          <Property Name="Codition_After_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Retrun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Declined" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Declined" Type="DateTime" Precision="3" />
+          <Property Name="Date_Approved" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Condition">
           <Key>
@@ -984,13 +1103,13 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="Released_To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Condition_Before_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Remarks_Before_Released" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Expected_Date_Of_Return" Type="DateTime" Precision="3" />
           <Property Name="Returned_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Condition_After_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Remarks_After_Returned" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Is_Current_Borrowed_Trans" Type="Boolean" />
           <Property Name="Is_Current_Released_Trans" Type="Boolean" />
           <Property Name="Is_Current_Returned_Trans" Type="Boolean" />
-          <Property Name="Expected_Date_Of_Return" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ItemCategory">
           <Key>
@@ -1139,6 +1258,14 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Signup_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Temp_StocksbyFacility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stocks" Type="Int32" />
+          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="Id_Transaction" />
@@ -1163,266 +1290,18 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="Id_Transaction_Status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Transaction_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Item_Name_vw">
-          <Key>
-            <PropertyRef Name="Id_Item" />
-          </Key>
-          <Property Name="Id_Item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Request_vw">
-          <Key>
-            <PropertyRef Name="Id_Request" />
-            <PropertyRef Name="Id_Transaction" />
-            <PropertyRef Name="Id_Cart" />
-          </Key>
-          <Property Name="Id_Request" Type="Int32" Nullable="false" />
-          <Property Name="Id_Transaction" Type="Int32" Nullable="false" />
-          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
-          <Property Name="Date_Want_To_Receive" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Expected_Return" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Purpose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
-          <Property Name="formatted_transac_date" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Requestor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Secret_Code" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Requestor_Full_Name" Type="String" MaxLength="102" FixedLength="false" Unicode="false" />
-          <Property Name="User_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="rooms_vw">
-          <Key>
-            <PropertyRef Name="MyPrimaryID" />
-          </Key>
-          <Property Name="MyPrimaryID" Type="Int32" Nullable="false" />
-          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RowNum" Type="Int64" />
-        </EntityType>
-        <EntityContainer Name="WBRMSystemEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Barcodes" EntityType="Self.Barcode" />
-          <EntitySet Name="Carts" EntityType="Self.Cart" />
-          <EntitySet Name="Conditions" EntityType="Self.Condition" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
-          <EntitySet Name="Inventories" EntityType="Self.Inventory" />
-          <EntitySet Name="Items" EntityType="Self.Item" />
-          <EntitySet Name="Item_History" EntityType="Self.Item_History" />
-          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
-          <EntitySet Name="ItemSubCategories" EntityType="Self.ItemSubCategory" />
-          <EntitySet Name="Junk_Item" EntityType="Self.Junk_Item" />
-          <EntitySet Name="Requests" EntityType="Self.Request" />
-          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
-          <EntitySet Name="Reservation_Cart" EntityType="Self.Reservation_Cart" />
-          <EntitySet Name="Reservation_Cart_Room" EntityType="Self.Reservation_Cart_Room" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="Rooms" EntityType="Self.Room" />
-          <EntitySet Name="Room_Schedule" EntityType="Self.Room_Schedule" />
-          <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Temp_Signup" EntityType="Self.Temp_Signup" />
-          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
-          <EntitySet Name="Transaction_Status" EntityType="Self.Transaction_Status" />
-          <EntitySet Name="Item_Name_vw" EntityType="Self.Item_Name_vw" />
-          <EntitySet Name="Request_vw" EntityType="Self.Request_vw" />
-          <EntitySet Name="rooms_vw" EntityType="Self.rooms_vw" />
-          <FunctionImport Name="Ass_sp">
-            <Parameter Name="Id_Item" Mode="In" Type="Int32" />
-            <Parameter Name="Room" Mode="In" Type="String" />
-            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
-            <Parameter Name="Action" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Cancel_Request_sp">
-            <Parameter Name="Id_Request" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Cart" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="count_Status_CartItem_per_Request_sp" ReturnType="Collection(Int32)">
-            <Parameter Name="IdCart" Mode="In" Type="Int32" />
-            <Parameter Name="Status" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="damaged_items_sp" ReturnType="Collection(WBRMSystemModel.damaged_items_sp_Result)" />
-          <FunctionImport Name="Delete_Item_sp">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="Deleted_By" Mode="In" Type="String" />
-            <Parameter Name="Description" Mode="In" Type="String" />
-            <Parameter Name="Reason" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="update_Barcode_sp" />
-          <FunctionImport Name="Update_IsGenerated_sp" />
-          <FunctionImport Name="Update_IsVerifiedField_sp">
-            <Parameter Name="Str_Code" Mode="In" Type="String" />
-            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Update_Item_sp">
-            <Parameter Name="Id_Item" Mode="In" Type="Int32" />
-            <Parameter Name="Item_Name" Mode="In" Type="String" />
-            <Parameter Name="Serial_Number" Mode="In" Type="String" />
-            <Parameter Name="Category" Mode="In" Type="String" />
-            <Parameter Name="Brand_Model" Mode="In" Type="String" />
-            <Parameter Name="Custodian" Mode="In" Type="String" />
-            <Parameter Name="Price" Mode="In" Type="Decimal" />
-            <Parameter Name="Condition" Mode="In" Type="String" />
-            <Parameter Name="Status" Mode="In" Type="String" />
-            <Parameter Name="On_Hold_Period" Mode="In" Type="Int32" />
-            <Parameter Name="Date_Acquisition" Mode="In" Type="DateTime" />
-            <Parameter Name="Remarks" Mode="In" Type="String" />
-            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Users" EntityType="WBRMSystemModel.User" />
-          <EntitySet Name="User_Details_vw" EntityType="WBRMSystemModel.User_Details_vw" />
-          <EntitySet Name="Cart_Item" EntityType="WBRMSystemModel.Cart_Item" />
-          <EntitySet Name="Cart_Items_vw" EntityType="WBRMSystemModel.Cart_Items_vw" />
-          <FunctionImport Name="Update_Request_sp">
-          <Parameter Name="IdRequest" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="item_vw" EntityType="WBRMSystemModel.item_vw" />
-          <EntitySet Name="added_today_vw" EntityType="WBRMSystemModel.added_today_vw" />
-          <EntitySet Name="borrowed_items_vw" EntityType="WBRMSystemModel.borrowed_items_vw" />
-          <EntitySet Name="damaged_items_vw" EntityType="WBRMSystemModel.damaged_items_vw" />
-          <EntitySet Name="Temp_StocksbyFacility" EntityType="WBRMSystemModel.Temp_StocksbyFacility" />
-          <FunctionImport Name="Stocks_Per_Facility_Update_sp" />
-        </EntityContainer>
-        <ComplexType Name="damaged_items_sp_Result">
-          <Property Type="Int32" Name="Id_Item" Nullable="false" />
-          <Property Type="Int32" Name="Id_Category" Nullable="true" />
-          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Id_SubCategory" Nullable="true" />
-          <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Id_Barcode" Nullable="true" />
-          <Property Type="String" Name="Str_Code" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Str_Code_Display" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Item_Name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Brand_Model" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Year_Acquired" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Custodian" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
-          <Property Type="String" Name="Serial_Number" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="On_Hold_Period" Nullable="true" />
-          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Room_No" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Id_Condition" Nullable="true" />
-          <Property Type="String" Name="Condition" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Id_Status" Nullable="true" />
-          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Date_Added" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="Date_Acquisition" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="Is_Assign" Nullable="true" />
-          <Property Type="Boolean" Name="Is_Verify" Nullable="true" />
-          <Property Type="Boolean" Name="Is_Generated_Barcode" Nullable="true" />
-        </ComplexType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Is_Active" Type="Boolean" Nullable="false" />
           <Property Name="ID_Role" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RF" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User_Details_vw">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="ID_Number" />
-            <PropertyRef Name="Username" />
-            <PropertyRef Name="Password" />
-            <PropertyRef Name="Is_Active" />
-            <PropertyRef Name="ID_Role" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ID_Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Is_Active" Type="Boolean" Nullable="false" />
-          <Property Name="ID_Role" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RF" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CourseAndYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email_Add" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Contact_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Cart_Item">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Item" Type="Int32" />
-          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
-          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Codition_Before_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Date_Released" Type="DateTime" Precision="3" />
-          <Property Name="Is_Returned" Type="Boolean" />
-          <Property Name="Date_Returned" Type="DateTime" Precision="3" />
-          <Property Name="Codition_After_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Retrun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Declined" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Date_Declined" Type="DateTime" Precision="3" />
-          <Property Name="Date_Approved" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Cart_Items_vw">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Id_Cart" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Id_Item" Type="Int32" />
-          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
-          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Codition_Before_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Is_Returned" Type="Boolean" />
-          <Property Name="Date_Returned" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Codition_After_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Retrun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks_for_Declined" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Date_Released" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Declined" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Approved" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Want_To_Receive" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Expected_Return" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Purpose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="item_vw">
-          <Key>
-            <PropertyRef Name="Id_Item" />
-          </Key>
-          <Property Name="Id_Item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Category" Type="Int32" />
-          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Id_SubCategory" Type="Int32" />
-          <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Barcode" Type="Int32" />
-          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Str_Code_Display" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Brand_Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Year_Acquired" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Custodian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Serial_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="On_Hold_Period" Type="Int32" />
-          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Condition" Type="Int32" />
-          <Property Name="Condition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Status" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Date_Added" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Acquisition" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Is_Assign" Type="Boolean" />
-          <Property Name="Is_Verify" Type="Boolean" />
         </EntityType>
         <EntityType Name="added_today_vw">
           <Key>
@@ -1502,6 +1381,31 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="Is_Current_Released_Trans" Type="Boolean" />
           <Property Name="Is_Current_Returned_Trans" Type="Boolean" />
         </EntityType>
+        <EntityType Name="Cart_Items_vw">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_Cart" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_Item" Type="Int32" />
+          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codition_Before_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Released" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Returned" Type="Boolean" />
+          <Property Name="Date_Returned" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Codition_After_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Retrun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks_for_Declined" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Released" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Declined" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Approved" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Want_To_Receive" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Expected_Return" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Purpose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="damaged_items_vw">
           <Key>
             <PropertyRef Name="Id_Item" />
@@ -1550,14 +1454,208 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <Property Name="Is_Current_Released_Trans" Type="Boolean" />
           <Property Name="Is_Current_Returned_Trans" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Temp_StocksbyFacility">
+        <EntityType Name="Item_Name_vw">
+          <Key>
+            <PropertyRef Name="Id_Item" />
+          </Key>
+          <Property Name="Id_Item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="item_vw">
+          <Key>
+            <PropertyRef Name="Id_Item" />
+          </Key>
+          <Property Name="Id_Item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Category" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_SubCategory" Type="Int32" />
+          <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Barcode" Type="Int32" />
+          <Property Name="Str_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Str_Code_Display" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Item_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Brand_Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year_Acquired" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Custodian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Serial_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="On_Hold_Period" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Condition" Type="Int32" />
+          <Property Name="Condition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Status" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Added" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Acquisition" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Assign" Type="Boolean" />
+          <Property Name="Is_Verify" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Request_vw">
+          <Key>
+            <PropertyRef Name="Id_Request" />
+            <PropertyRef Name="Id_Transaction" />
+            <PropertyRef Name="Id_Cart" />
+          </Key>
+          <Property Name="Id_Request" Type="Int32" Nullable="false" />
+          <Property Name="Id_Transaction" Type="Int32" Nullable="false" />
+          <Property Name="Id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Date_Want_To_Receive" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Expected_Return" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Purpose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="formatted_transac_date" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Requestor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Secret_Code" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Requestor_Full_Name" Type="String" MaxLength="102" FixedLength="false" Unicode="false" />
+          <Property Name="User_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="rooms_vw">
+          <Key>
+            <PropertyRef Name="MyPrimaryID" />
+          </Key>
+          <Property Name="MyPrimaryID" Type="Int32" Nullable="false" />
+          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowNum" Type="Int64" />
+        </EntityType>
+        <EntityType Name="User_Details_vw">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Number" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Is_Active" />
+            <PropertyRef Name="ID_Role" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Stocks" Type="Int32" />
-          <Property Name="Room_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Role" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RF" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CourseAndYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Add" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityContainer Name="WBRMSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Barcodes" EntityType="Self.Barcode" />
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="Cart_Item" EntityType="Self.Cart_Item" />
+          <EntitySet Name="Conditions" EntityType="Self.Condition" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Inventories" EntityType="Self.Inventory" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Item_History" EntityType="Self.Item_History" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
+          <EntitySet Name="ItemSubCategories" EntityType="Self.ItemSubCategory" />
+          <EntitySet Name="Junk_Item" EntityType="Self.Junk_Item" />
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Reservation_Cart" EntityType="Self.Reservation_Cart" />
+          <EntitySet Name="Reservation_Cart_Room" EntityType="Self.Reservation_Cart_Room" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Room_Schedule" EntityType="Self.Room_Schedule" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Temp_Signup" EntityType="Self.Temp_Signup" />
+          <EntitySet Name="Temp_StocksbyFacility" EntityType="Self.Temp_StocksbyFacility" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Transaction_Status" EntityType="Self.Transaction_Status" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="added_today_vw" EntityType="Self.added_today_vw" />
+          <EntitySet Name="borrowed_items_vw" EntityType="Self.borrowed_items_vw" />
+          <EntitySet Name="Cart_Items_vw" EntityType="Self.Cart_Items_vw" />
+          <EntitySet Name="damaged_items_vw" EntityType="Self.damaged_items_vw" />
+          <EntitySet Name="Item_Name_vw" EntityType="Self.Item_Name_vw" />
+          <EntitySet Name="item_vw" EntityType="Self.item_vw" />
+          <EntitySet Name="Request_vw" EntityType="Self.Request_vw" />
+          <EntitySet Name="rooms_vw" EntityType="Self.rooms_vw" />
+          <EntitySet Name="User_Details_vw" EntityType="Self.User_Details_vw" />
+          <FunctionImport Name="Ass_sp">
+            <Parameter Name="Id_Item" Mode="In" Type="Int32" />
+            <Parameter Name="Room" Mode="In" Type="String" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
+            <Parameter Name="Action" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Cancel_Request_sp">
+            <Parameter Name="Id_Request" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Cart" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="count_Status_CartItem_per_Request_sp" ReturnType="Collection(Int32)">
+            <Parameter Name="IdCart" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="damaged_items_sp" ReturnType="Collection(WBRMSystemModel.damaged_items_sp_Result)" />
+          <FunctionImport Name="Delete_Item_sp">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="Deleted_By" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Reason" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Stocks_Per_Facility_Update_sp" />
+          <FunctionImport Name="update_Barcode_sp" />
+          <FunctionImport Name="Update_IsGenerated_sp" />
+          <FunctionImport Name="Update_IsVerifiedField_sp">
+            <Parameter Name="Str_Code" Mode="In" Type="String" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Item_sp">
+            <Parameter Name="Id_Item" Mode="In" Type="Int32" />
+            <Parameter Name="Item_Name" Mode="In" Type="String" />
+            <Parameter Name="Serial_Number" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="Brand_Model" Mode="In" Type="String" />
+            <Parameter Name="Custodian" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="Condition" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="On_Hold_Period" Mode="In" Type="Int32" />
+            <Parameter Name="Date_Acquisition" Mode="In" Type="DateTime" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Request_sp">
+            <Parameter Name="IdRequest" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="damaged_items_sp_Result">
+          <Property Type="Int32" Name="Id_Item" Nullable="false" />
+          <Property Type="Int32" Name="Id_Category" Nullable="true" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_SubCategory" Nullable="true" />
+          <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Barcode" Nullable="true" />
+          <Property Type="String" Name="Str_Code" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Str_Code_Display" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Item_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Brand_Model" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Year_Acquired" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Custodian" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+          <Property Type="String" Name="Serial_Number" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="On_Hold_Period" Nullable="true" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Room_No" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Condition" Nullable="true" />
+          <Property Type="String" Name="Condition" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Status" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Date_Added" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Date_Acquisition" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Is_Assign" Nullable="true" />
+          <Property Type="Boolean" Name="Is_Verify" Nullable="true" />
+          <Property Type="Boolean" Name="Is_Generated_Barcode" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1580,6 +1678,28 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
                 <ScalarProperty Name="Requestor_Name" ColumnName="Requestor_Name" />
                 <ScalarProperty Name="Id_Number" ColumnName="Id_Number" />
                 <ScalarProperty Name="Secret_Code" ColumnName="Secret_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_Item">
+            <EntityTypeMapping TypeName="WBRMSystemModel.Cart_Item">
+              <MappingFragment StoreEntitySet="Cart_Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Codition_Before_Released" ColumnName="Codition_Before_Released" />
+                <ScalarProperty Name="Remarks_for_Released" ColumnName="Remarks_for_Released" />
+                <ScalarProperty Name="Date_Released" ColumnName="Date_Released" />
+                <ScalarProperty Name="Is_Returned" ColumnName="Is_Returned" />
+                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
+                <ScalarProperty Name="Codition_After_Returned" ColumnName="Codition_After_Returned" />
+                <ScalarProperty Name="Remarks_for_Retrun" ColumnName="Remarks_for_Retrun" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remarks_for_Declined" ColumnName="Remarks_for_Declined" />
+                <ScalarProperty Name="Date_Declined" ColumnName="Date_Declined" />
+                <ScalarProperty Name="Date_Approved" ColumnName="Date_Approved" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1653,7 +1773,6 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
           <EntitySetMapping Name="Item_History">
             <EntityTypeMapping TypeName="WBRMSystemModel.Item_History">
               <MappingFragment StoreEntitySet="Item_History">
-                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
                 <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
@@ -1667,6 +1786,7 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
                 <ScalarProperty Name="Released_To" ColumnName="Released_To" />
                 <ScalarProperty Name="Condition_Before_Released" ColumnName="Condition_Before_Released" />
                 <ScalarProperty Name="Remarks_Before_Released" ColumnName="Remarks_Before_Released" />
+                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
                 <ScalarProperty Name="Returned_Date" ColumnName="Returned_Date" />
                 <ScalarProperty Name="Condition_After_Returned" ColumnName="Condition_After_Returned" />
                 <ScalarProperty Name="Remarks_After_Returned" ColumnName="Remarks_After_Returned" />
@@ -1836,6 +1956,15 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Temp_StocksbyFacility">
+            <EntityTypeMapping TypeName="WBRMSystemModel.Temp_StocksbyFacility">
+              <MappingFragment StoreEntitySet="Temp_StocksbyFacility">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Stocks" ColumnName="Stocks" />
+                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="WBRMSystemModel.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
@@ -1862,11 +1991,210 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WBRMSystemModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RF" ColumnName="RF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="added_today_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.added_today_vw">
+              <MappingFragment StoreEntitySet="added_today_vw">
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
+                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
+                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
+                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
+                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
+                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="borrowed_items_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.borrowed_items_vw">
+              <MappingFragment StoreEntitySet="borrowed_items_vw">
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
+                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
+                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
+                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
+                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
+                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
+                <ScalarProperty Name="Is_Generated_Barcode" ColumnName="Is_Generated_Barcode" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Action_History_Desc" ColumnName="Action_History_Desc" />
+                <ScalarProperty Name="Action_Date" ColumnName="Action_Date" />
+                <ScalarProperty Name="Done_By" ColumnName="Done_By" />
+                <ScalarProperty Name="Borrowed_Date" ColumnName="Borrowed_Date" />
+                <ScalarProperty Name="Borrowed_By" ColumnName="Borrowed_By" />
+                <ScalarProperty Name="Released_Date" ColumnName="Released_Date" />
+                <ScalarProperty Name="Released_To" ColumnName="Released_To" />
+                <ScalarProperty Name="Condition_Before_Released" ColumnName="Condition_Before_Released" />
+                <ScalarProperty Name="Remarks_Before_Released" ColumnName="Remarks_Before_Released" />
+                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
+                <ScalarProperty Name="Returned_Date" ColumnName="Returned_Date" />
+                <ScalarProperty Name="Condition_After_Returned" ColumnName="Condition_After_Returned" />
+                <ScalarProperty Name="Remarks_After_Returned" ColumnName="Remarks_After_Returned" />
+                <ScalarProperty Name="Is_Current_Borrowed_Trans" ColumnName="Is_Current_Borrowed_Trans" />
+                <ScalarProperty Name="Is_Current_Released_Trans" ColumnName="Is_Current_Released_Trans" />
+                <ScalarProperty Name="Is_Current_Returned_Trans" ColumnName="Is_Current_Returned_Trans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_Items_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.Cart_Items_vw">
+              <MappingFragment StoreEntitySet="Cart_Items_vw">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Codition_Before_Released" ColumnName="Codition_Before_Released" />
+                <ScalarProperty Name="Remarks_for_Released" ColumnName="Remarks_for_Released" />
+                <ScalarProperty Name="Is_Returned" ColumnName="Is_Returned" />
+                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
+                <ScalarProperty Name="Codition_After_Returned" ColumnName="Codition_After_Returned" />
+                <ScalarProperty Name="Remarks_for_Retrun" ColumnName="Remarks_for_Retrun" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remarks_for_Declined" ColumnName="Remarks_for_Declined" />
+                <ScalarProperty Name="Date_Released" ColumnName="Date_Released" />
+                <ScalarProperty Name="Date_Declined" ColumnName="Date_Declined" />
+                <ScalarProperty Name="Date_Approved" ColumnName="Date_Approved" />
+                <ScalarProperty Name="Date_Want_To_Receive" ColumnName="Date_Want_To_Receive" />
+                <ScalarProperty Name="Date_Expected_Return" ColumnName="Date_Expected_Return" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="damaged_items_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.damaged_items_vw">
+              <MappingFragment StoreEntitySet="damaged_items_vw">
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
+                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
+                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
+                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
+                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
+                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
+                <ScalarProperty Name="Is_Generated_Barcode" ColumnName="Is_Generated_Barcode" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Action_History_Desc" ColumnName="Action_History_Desc" />
+                <ScalarProperty Name="Action_Date" ColumnName="Action_Date" />
+                <ScalarProperty Name="Done_By" ColumnName="Done_By" />
+                <ScalarProperty Name="Borrowed_Date" ColumnName="Borrowed_Date" />
+                <ScalarProperty Name="Borrowed_By" ColumnName="Borrowed_By" />
+                <ScalarProperty Name="Released_Date" ColumnName="Released_Date" />
+                <ScalarProperty Name="Released_To" ColumnName="Released_To" />
+                <ScalarProperty Name="Condition_Before_Released" ColumnName="Condition_Before_Released" />
+                <ScalarProperty Name="Remarks_Before_Released" ColumnName="Remarks_Before_Released" />
+                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
+                <ScalarProperty Name="Returned_Date" ColumnName="Returned_Date" />
+                <ScalarProperty Name="Condition_After_Returned" ColumnName="Condition_After_Returned" />
+                <ScalarProperty Name="Remarks_After_Returned" ColumnName="Remarks_After_Returned" />
+                <ScalarProperty Name="Is_Current_Borrowed_Trans" ColumnName="Is_Current_Borrowed_Trans" />
+                <ScalarProperty Name="Is_Current_Released_Trans" ColumnName="Is_Current_Released_Trans" />
+                <ScalarProperty Name="Is_Current_Returned_Trans" ColumnName="Is_Current_Returned_Trans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Item_Name_vw">
             <EntityTypeMapping TypeName="WBRMSystemModel.Item_Name_vw">
               <MappingFragment StoreEntitySet="Item_Name_vw">
                 <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
                 <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.item_vw">
+              <MappingFragment StoreEntitySet="item_vw">
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
+                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
+                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
+                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
+                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
+                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
+                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
+                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
+                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1896,6 +2224,28 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
                 <ScalarProperty Name="MyPrimaryID" ColumnName="MyPrimaryID" />
                 <ScalarProperty Name="Room_No" ColumnName="Room_No" />
                 <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Details_vw">
+            <EntityTypeMapping TypeName="WBRMSystemModel.User_Details_vw">
+              <MappingFragment StoreEntitySet="User_Details_vw">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RF" ColumnName="RF" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="CourseAndYear" ColumnName="CourseAndYear" />
+                <ScalarProperty Name="Email_Add" ColumnName="Email_Add" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1935,264 +2285,12 @@ warning 6002: The table/view 'WBRMSystem.dbo.User_Details_vw' does not have a pr
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Delete_Item_sp" FunctionName="WBRMSystemModel.Store.Delete_Item_sp" />
+          <FunctionImportMapping FunctionImportName="Stocks_Per_Facility_Update_sp" FunctionName="WBRMSystemModel.Store.Stocks_Per_Facility_Update_sp" />
           <FunctionImportMapping FunctionImportName="update_Barcode_sp" FunctionName="WBRMSystemModel.Store.update_Barcode_sp" />
           <FunctionImportMapping FunctionImportName="Update_IsGenerated_sp" FunctionName="WBRMSystemModel.Store.Update_IsGenerated_sp" />
           <FunctionImportMapping FunctionImportName="Update_IsVerifiedField_sp" FunctionName="WBRMSystemModel.Store.Update_IsVerifiedField_sp" />
           <FunctionImportMapping FunctionImportName="Update_Item_sp" FunctionName="WBRMSystemModel.Store.Update_Item_sp" />
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="WBRMSystemModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="RF" ColumnName="RF" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
-                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User_Details_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.User_Details_vw">
-              <MappingFragment StoreEntitySet="User_Details_vw">
-                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
-                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email_Add" ColumnName="Email_Add" />
-                <ScalarProperty Name="CourseAndYear" ColumnName="CourseAndYear" />
-                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="RF" ColumnName="RF" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
-                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cart_Item">
-            <EntityTypeMapping TypeName="WBRMSystemModel.Cart_Item">
-              <MappingFragment StoreEntitySet="Cart_Item">
-                <ScalarProperty Name="Date_Approved" ColumnName="Date_Approved" />
-                <ScalarProperty Name="Date_Declined" ColumnName="Date_Declined" />
-                <ScalarProperty Name="Remarks_for_Declined" ColumnName="Remarks_for_Declined" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remarks_for_Retrun" ColumnName="Remarks_for_Retrun" />
-                <ScalarProperty Name="Codition_After_Returned" ColumnName="Codition_After_Returned" />
-                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
-                <ScalarProperty Name="Is_Returned" ColumnName="Is_Returned" />
-                <ScalarProperty Name="Date_Released" ColumnName="Date_Released" />
-                <ScalarProperty Name="Remarks_for_Released" ColumnName="Remarks_for_Released" />
-                <ScalarProperty Name="Codition_Before_Released" ColumnName="Codition_Before_Released" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cart_Items_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.Cart_Items_vw">
-              <MappingFragment StoreEntitySet="Cart_Items_vw">
-                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
-                <ScalarProperty Name="Date_Expected_Return" ColumnName="Date_Expected_Return" />
-                <ScalarProperty Name="Date_Want_To_Receive" ColumnName="Date_Want_To_Receive" />
-                <ScalarProperty Name="Date_Approved" ColumnName="Date_Approved" />
-                <ScalarProperty Name="Date_Declined" ColumnName="Date_Declined" />
-                <ScalarProperty Name="Date_Released" ColumnName="Date_Released" />
-                <ScalarProperty Name="Remarks_for_Declined" ColumnName="Remarks_for_Declined" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remarks_for_Retrun" ColumnName="Remarks_for_Retrun" />
-                <ScalarProperty Name="Codition_After_Returned" ColumnName="Codition_After_Returned" />
-                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
-                <ScalarProperty Name="Is_Returned" ColumnName="Is_Returned" />
-                <ScalarProperty Name="Remarks_for_Released" ColumnName="Remarks_for_Released" />
-                <ScalarProperty Name="Codition_Before_Released" ColumnName="Codition_Before_Released" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Update_Request_sp" FunctionName="WBRMSystemModel.Store.Update_Request_sp" />
-          <EntitySetMapping Name="item_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.item_vw">
-              <MappingFragment StoreEntitySet="item_vw">
-                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
-                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
-                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
-                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
-                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
-                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
-                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
-                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="added_today_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.added_today_vw">
-              <MappingFragment StoreEntitySet="added_today_vw">
-                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
-                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
-                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
-                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
-                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
-                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
-                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
-                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="borrowed_items_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.borrowed_items_vw">
-              <MappingFragment StoreEntitySet="borrowed_items_vw">
-                <ScalarProperty Name="Is_Current_Returned_Trans" ColumnName="Is_Current_Returned_Trans" />
-                <ScalarProperty Name="Is_Current_Released_Trans" ColumnName="Is_Current_Released_Trans" />
-                <ScalarProperty Name="Is_Current_Borrowed_Trans" ColumnName="Is_Current_Borrowed_Trans" />
-                <ScalarProperty Name="Remarks_After_Returned" ColumnName="Remarks_After_Returned" />
-                <ScalarProperty Name="Condition_After_Returned" ColumnName="Condition_After_Returned" />
-                <ScalarProperty Name="Returned_Date" ColumnName="Returned_Date" />
-                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
-                <ScalarProperty Name="Remarks_Before_Released" ColumnName="Remarks_Before_Released" />
-                <ScalarProperty Name="Condition_Before_Released" ColumnName="Condition_Before_Released" />
-                <ScalarProperty Name="Released_To" ColumnName="Released_To" />
-                <ScalarProperty Name="Released_Date" ColumnName="Released_Date" />
-                <ScalarProperty Name="Borrowed_By" ColumnName="Borrowed_By" />
-                <ScalarProperty Name="Borrowed_Date" ColumnName="Borrowed_Date" />
-                <ScalarProperty Name="Done_By" ColumnName="Done_By" />
-                <ScalarProperty Name="Action_Date" ColumnName="Action_Date" />
-                <ScalarProperty Name="Action_History_Desc" ColumnName="Action_History_Desc" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="Is_Generated_Barcode" ColumnName="Is_Generated_Barcode" />
-                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
-                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
-                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
-                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
-                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
-                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
-                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
-                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="damaged_items_vw">
-            <EntityTypeMapping TypeName="WBRMSystemModel.damaged_items_vw">
-              <MappingFragment StoreEntitySet="damaged_items_vw">
-                <ScalarProperty Name="Is_Current_Returned_Trans" ColumnName="Is_Current_Returned_Trans" />
-                <ScalarProperty Name="Is_Current_Released_Trans" ColumnName="Is_Current_Released_Trans" />
-                <ScalarProperty Name="Is_Current_Borrowed_Trans" ColumnName="Is_Current_Borrowed_Trans" />
-                <ScalarProperty Name="Remarks_After_Returned" ColumnName="Remarks_After_Returned" />
-                <ScalarProperty Name="Condition_After_Returned" ColumnName="Condition_After_Returned" />
-                <ScalarProperty Name="Returned_Date" ColumnName="Returned_Date" />
-                <ScalarProperty Name="Expected_Date_Of_Return" ColumnName="Expected_Date_Of_Return" />
-                <ScalarProperty Name="Remarks_Before_Released" ColumnName="Remarks_Before_Released" />
-                <ScalarProperty Name="Condition_Before_Released" ColumnName="Condition_Before_Released" />
-                <ScalarProperty Name="Released_To" ColumnName="Released_To" />
-                <ScalarProperty Name="Released_Date" ColumnName="Released_Date" />
-                <ScalarProperty Name="Borrowed_By" ColumnName="Borrowed_By" />
-                <ScalarProperty Name="Borrowed_Date" ColumnName="Borrowed_Date" />
-                <ScalarProperty Name="Done_By" ColumnName="Done_By" />
-                <ScalarProperty Name="Action_Date" ColumnName="Action_Date" />
-                <ScalarProperty Name="Action_History_Desc" ColumnName="Action_History_Desc" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="Is_Generated_Barcode" ColumnName="Is_Generated_Barcode" />
-                <ScalarProperty Name="Is_Verify" ColumnName="Is_Verify" />
-                <ScalarProperty Name="Is_Assign" ColumnName="Is_Assign" />
-                <ScalarProperty Name="Date_Acquisition" ColumnName="Date_Acquisition" />
-                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="Id_Condition" ColumnName="Id_Condition" />
-                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="On_Hold_Period" ColumnName="On_Hold_Period" />
-                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Custodian" ColumnName="Custodian" />
-                <ScalarProperty Name="Year_Acquired" ColumnName="Year_Acquired" />
-                <ScalarProperty Name="Brand_Model" ColumnName="Brand_Model" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Str_Code_Display" ColumnName="Str_Code_Display" />
-                <ScalarProperty Name="Str_Code" ColumnName="Str_Code" />
-                <ScalarProperty Name="Id_Barcode" ColumnName="Id_Barcode" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
-                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Temp_StocksbyFacility">
-            <EntityTypeMapping TypeName="WBRMSystemModel.Temp_StocksbyFacility">
-              <MappingFragment StoreEntitySet="Temp_StocksbyFacility">
-                <ScalarProperty Name="Room_No" ColumnName="Room_No" />
-                <ScalarProperty Name="Stocks" ColumnName="Stocks" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Stocks_Per_Facility_Update_sp" FunctionName="WBRMSystemModel.Store.Stocks_Per_Facility_Update_sp" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

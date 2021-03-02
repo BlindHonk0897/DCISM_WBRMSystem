@@ -29,6 +29,7 @@ namespace DCISM_WBRMSystem.Models
     
         public virtual DbSet<Barcode> Barcodes { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Cart_Item> Cart_Item { get; set; }
         public virtual DbSet<Condition> Conditions { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
@@ -47,20 +48,19 @@ namespace DCISM_WBRMSystem.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Temp_Signup> Temp_Signup { get; set; }
+        public virtual DbSet<Temp_StocksbyFacility> Temp_StocksbyFacility { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Transaction_Status> Transaction_Status { get; set; }
-        public virtual DbSet<Item_Name_vw> Item_Name_vw { get; set; }
-        public virtual DbSet<Request_vw> Request_vw { get; set; }
-        public virtual DbSet<rooms_vw> rooms_vw { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<User_Details_vw> User_Details_vw { get; set; }
-        public virtual DbSet<Cart_Item> Cart_Item { get; set; }
-        public virtual DbSet<Cart_Items_vw> Cart_Items_vw { get; set; }
-        public virtual DbSet<item_vw> item_vw { get; set; }
         public virtual DbSet<added_today_vw> added_today_vw { get; set; }
         public virtual DbSet<borrowed_items_vw> borrowed_items_vw { get; set; }
+        public virtual DbSet<Cart_Items_vw> Cart_Items_vw { get; set; }
         public virtual DbSet<damaged_items_vw> damaged_items_vw { get; set; }
-        public virtual DbSet<Temp_StocksbyFacility> Temp_StocksbyFacility { get; set; }
+        public virtual DbSet<Item_Name_vw> Item_Name_vw { get; set; }
+        public virtual DbSet<item_vw> item_vw { get; set; }
+        public virtual DbSet<Request_vw> Request_vw { get; set; }
+        public virtual DbSet<rooms_vw> rooms_vw { get; set; }
+        public virtual DbSet<User_Details_vw> User_Details_vw { get; set; }
     
         public virtual int Ass_sp(Nullable<int> id_Item, string room, string updatedBy, string action)
         {
@@ -133,6 +133,11 @@ namespace DCISM_WBRMSystem.Models
                 new ObjectParameter("Reason", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Delete_Item_sp", idParameter, deleted_ByParameter, descriptionParameter, reasonParameter);
+        }
+    
+        public virtual int Stocks_Per_Facility_Update_sp()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Stocks_Per_Facility_Update_sp");
         }
     
         public virtual int update_Barcode_sp()
@@ -222,11 +227,6 @@ namespace DCISM_WBRMSystem.Models
                 new ObjectParameter("IdRequest", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Request_sp", idRequestParameter);
-        }
-    
-        public virtual int Stocks_Per_Facility_Update_sp()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Stocks_Per_Facility_Update_sp");
         }
     }
 }

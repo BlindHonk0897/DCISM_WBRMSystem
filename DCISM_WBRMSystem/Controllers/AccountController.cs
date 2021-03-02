@@ -36,7 +36,7 @@ namespace DCISM_WBRMSystem.Controllers
                     var userDetails = database.User_Details_vw.FirstOrDefault(u => (u.Username == model.Username || u.ID_Number == model.Username) && u.Password == EncryptedPass);
                     if (userDetails != null)
                     {
-                        if (userDetails.Status == "Active" || userDetails.Status == "") {
+                        if (userDetails.Status == "Active" || userDetails.Status == "" || userDetails.Status == null) {
                             Session["UserRole"] = userDetails.ID_Role;
                             Session["UserTitleRole"] = userDetails.Role_Name;
                             Session["Username"] = userDetails.Username;

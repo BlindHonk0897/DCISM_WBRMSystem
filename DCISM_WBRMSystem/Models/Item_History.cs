@@ -27,12 +27,12 @@ namespace DCISM_WBRMSystem.Models
         public string Released_To { get; set; }
         public string Condition_Before_Released { get; set; }
         public string Remarks_Before_Released { get; set; }
+        public Nullable<System.DateTime> Expected_Date_Of_Return { get; set; }
         public string Returned_Date { get; set; }
         public string Condition_After_Returned { get; set; }
         public string Remarks_After_Returned { get; set; }
         public Nullable<bool> Is_Current_Borrowed_Trans { get; set; }
         public Nullable<bool> Is_Current_Released_Trans { get; set; }
         public Nullable<bool> Is_Current_Returned_Trans { get; set; }
-        public Nullable<System.DateTime> Expected_Date_Of_Return { get; set; }
     }
 }
